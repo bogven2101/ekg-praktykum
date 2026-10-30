@@ -8,6 +8,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
+<script src="config.js"></script>
 <script>window.EKG_NATIVE=!!(window.Capacitor||/EkgPraktykum/.test(navigator.userAgent));</script>
 <style>
 @font-face{font-family:Manrope;font-weight:400;font-display:swap;src:url(fonts/manrope-cyrillic-400-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
@@ -248,6 +249,7 @@ textarea{min-height:70px;resize:vertical}
       </div>
       <p class="hint" id="ph-count"></p>
       <button class="btn full" id="ph-ai" style="margin-top:8px;display:none">✨ Розібрати все з ШІ і заповнити форму</button>
+      <a class="btn sec full" id="ph-claude" href="https://claude.ai/artifact/2sponh6AAyHQDLkHdr3h1s" target="_blank" rel="noopener" style="margin-top:8px;display:none;text-decoration:none">✨ Розбір ШІ у версії Claude ↗</a>
       <div id="ph-ai-out"></div>
     </div>
   </div>
@@ -1074,6 +1076,25 @@ async function collectImages(status){
   return imgs;
 }
 
+let aiProxy=null;
+function initExternalAI(){
+  if(window.claude)return;
+  $("ph-claude").style.display="flex";
+  const u=(window.EKG_AI_URL||"").trim();
+  if(u){aiProxy=u;maxImg=10;$("ph-ai").style.display="flex";$("ph-claude").textContent="Відкрити версію в Claude ↗";}
+}
+function parseJSONLoose(t){try{return JSON.parse(t)}catch(e){}const m=String(t).match(/```(?:json)?\s*([\s\S]*?)```/);if(m){try{return JSON.parse(m[1])}catch(e){}}const a=t.indexOf("{"),b=t.lastIndexOf("}");if(a>=0&&b>a)return JSON.parse(t.slice(a,b+1));throw{code:"invalid_json"}}
+async function blobToB64(b){const buf=new Uint8Array(await b.arrayBuffer());let s="";for(let i=0;i<buf.length;i+=0x8000)s+=String.fromCharCode.apply(null,buf.subarray(i,i+0x8000));return btoa(s)}
+async function aiAnalyze(prompt,imgs){
+  if(sampleFn)return await sampleFn.json(prompt,{images:imgs,modelTier:"complex"});
+  const small=[];for(const b of imgs.slice(0,10)){try{small.push(await toJpeg(b,1568))}catch(e){small.push(b)}}
+  const body={prompt,token:window.EKG_AI_TOKEN||"",images:await Promise.all(small.map(blobToB64))};
+  let r;try{r=await fetch(aiProxy,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)})}catch(e){throw{code:"network"}}
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok)throw{code:r.status===429?"rate_limited":r.status===401?"not_granted":"upstream_error",message:d.error};
+  return parseJSONLoose(d.text||"");
+}
+setTimeout(initExternalAI,0);
 (async()=>{try{
   if(!window.claude||!claude.use)return;
   const s=await claude.use("sample");if(!s)return;
@@ -1123,14 +1144,14 @@ function fillForm(r){
   if(r.free){$("a-free").value=r.free;$("a-free").classList.add("ai-fill")}
 }
 $("ph-ai").onclick=async()=>{
-  if(!sampleFn||!media.length)return;const btn=$("ph-ai"),out=$("ph-ai-out");
+  if((!sampleFn&&!aiProxy)||!media.length)return;const btn=$("ph-ai"),out=$("ph-ai-out");
   btn.disabled=true;const st=t=>btn.innerHTML=`<span class="spin"></span> ${t}`;st("Готую зображення…");out.innerHTML="";
   try{
     const imgs=await collectImages(st);
     if(!imgs.length)throw{code:"no_images"};
     st(`Аналізую ${imgs.length} зображ. — це може тривати до 1–2 хв…`);
     const H={stable:"стабільна",unstable:"нестабільна (шок, синкопе, ішемія, тяжка СН)",arrest:"пульс відсутній"}[$("a-hemo").value]||"не вказано (якщо тактика залежить від неї — дай варіант для стабільного і коротко для нестабільного)";
-    const r=await sampleFn.json(AI_PROMPT(imgs.length,H),{images:imgs,modelTier:"complex"});
+    const r=await aiAnalyze(AI_PROMPT(Math.min(imgs.length,sampleFn?imgs.length:10),H),imgs);
     if(!r||r.readable===false){out.innerHTML=`<div class="box warn" style="margin-top:10px"><h4>Не вдалося прочитати</h4><p style="margin:0">${esc(r&&r.quality||"Сфотографуйте ЕКГ рівніше, ближче і при кращому освітленні.")}</p></div>`;}
     else{
       fillForm(r);
@@ -1143,7 +1164,7 @@ $("ph-ai").onclick=async()=>{
        <div class="box warn"><p style="margin:0;font-size:13px">Поля, заповнені ШІ, підсвічені фіолетовим. <b>Перевірте кожне по фото</b>, виправте за потреби і натисніть «Сформувати висновок».</p></div>`;
     }
   }catch(e){
-    out.innerHTML=`<div class="box warn" style="margin-top:10px"><p style="margin:0">${e&&e.code==="rate_limited"?"Забагато запитів — спробуйте за хвилину.":e&&e.code==="not_granted"?"Доступ до ШІ не надано.":e&&e.code==="image_rejected"?"Один із файлів не підходить (формат або розмір). Видаліть його і спробуйте ще раз.":e&&e.code==="no_images"?"Не вдалося отримати зображення з відео. Поставте відео на паузу в потрібному місці й натисніть «📸 Кадр».":"Не вдалося виконати аналіз. Спробуйте ще раз."}</p></div>`;
+    out.innerHTML=`<div class="box warn" style="margin-top:10px"><p style="margin:0">${e&&e.code==="rate_limited"?"Забагато запитів — спробуйте за хвилину.":e&&e.code==="not_granted"?"Доступ до ШІ не надано.":e&&e.code==="image_rejected"?"Один із файлів не підходить (формат або розмір). Видаліть його і спробуйте ще раз.":e&&e.code==="network"?"Немає з'єднання з сервером ШІ. Перевірте інтернет.":e&&e.code==="invalid_json"?"ШІ відповів у неочікуваному форматі. Спробуйте ще раз.":e&&e.code==="no_images"?"Не вдалося отримати зображення з відео. Поставте відео на паузу в потрібному місці й натисніть «📸 Кадр».":"Не вдалося виконати аналіз. Спробуйте ще раз."}</p></div>`;
     if(e&&e.code==="not_granted")btn.style.display="none";
   }
   btn.disabled=false;btn.innerHTML="✨ Розібрати все з ШІ ще раз";

@@ -1,5 +1,5 @@
-const C="ekg-v3";
-const FILES=["./","index.html","privacy.html","manifest.webmanifest","icon-192.png","icon-512.png",
+const C="ekg-v4";
+const FILES=["./","index.html","privacy.html","config.js","manifest.webmanifest","icon-192.png","icon-512.png",
 "fonts/manrope-cyrillic-400-normal.woff2","fonts/manrope-cyrillic-500-normal.woff2","fonts/manrope-cyrillic-600-normal.woff2","fonts/manrope-cyrillic-700-normal.woff2","fonts/manrope-cyrillic-800-normal.woff2",
 "fonts/manrope-latin-400-normal.woff2","fonts/manrope-latin-500-normal.woff2","fonts/manrope-latin-600-normal.woff2","fonts/manrope-latin-700-normal.woff2","fonts/manrope-latin-800-normal.woff2",
 "fonts/jetbrains-mono-cyrillic-500-normal.woff2","fonts/jetbrains-mono-cyrillic-700-normal.woff2","fonts/jetbrains-mono-latin-500-normal.woff2","fonts/jetbrains-mono-latin-700-normal.woff2"];
