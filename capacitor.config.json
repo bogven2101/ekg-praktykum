@@ -1,0 +1,9 @@
+{
+  "appId": "ua.bogven.ekgpraktykum",
+  "appName": "ЕКГ Практикум",
+  "webDir": "www",
+  "android": {
+    "appendUserAgent": "EkgPraktykum",
+    "backgroundColor": "#f6f3f1"
+  }
+}

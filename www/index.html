@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ЕКГ Практикум</title>
+<meta name="theme-color" content="#c21f32">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<script>window.EKG_NATIVE=!!(window.Capacitor||/EkgPraktykum/.test(navigator.userAgent));</script>
+<style>
+@font-face{font-family:Manrope;font-weight:400;font-display:swap;src:url(fonts/manrope-cyrillic-400-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Manrope;font-weight:500;font-display:swap;src:url(fonts/manrope-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Manrope;font-weight:600;font-display:swap;src:url(fonts/manrope-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Manrope;font-weight:700;font-display:swap;src:url(fonts/manrope-cyrillic-700-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Manrope;font-weight:800;font-display:swap;src:url(fonts/manrope-cyrillic-800-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'JetBrains Mono';font-weight:500;font-display:swap;src:url(fonts/jetbrains-mono-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'JetBrains Mono';font-weight:700;font-display:swap;src:url(fonts/jetbrains-mono-cyrillic-700-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Manrope;font-weight:400;font-display:swap;src:url(fonts/manrope-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Manrope;font-weight:500;font-display:swap;src:url(fonts/manrope-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Manrope;font-weight:600;font-display:swap;src:url(fonts/manrope-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Manrope;font-weight:700;font-display:swap;src:url(fonts/manrope-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Manrope;font-weight:800;font-display:swap;src:url(fonts/manrope-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-weight:500;font-display:swap;src:url(fonts/jetbrains-mono-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-weight:700;font-display:swap;src:url(fonts/jetbrains-mono-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{
+  --bg:#f6f3f1; --card:#ffffff; --ink:#1d1b1a; --mute:#6f6865; --line:#e7e0dc;
+  --red:#c21f32; --red-soft:#fbe9eb; --trace:#1a1a1a; --ok:#1f7a4d; --ok-soft:#e5f4ec;
+  --warn:#a35b00; --warn-soft:#fdf1df; --blue:#24508f; --blue-soft:#e8eef8;
+  --r:16px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Manrope,system-ui,sans-serif;font-size:15px;line-height:1.5}
+body{padding-top:env(safe-area-inset-top);padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+header{position:sticky;top:0;z-index:20;background:rgba(246,243,241,.94);backdrop-filter:blur(10px);padding:12px 18px 10px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+header .logo{width:34px;height:34px;border-radius:10px;background:var(--red);display:grid;place-items:center;flex:none}
+header h1{font-size:18px;margin:0;font-weight:800;letter-spacing:-.2px}
+header small{display:block;color:var(--mute);font-size:12px;font-weight:500;margin-top:-2px}
+main{max-width:620px;margin:0 auto;padding:14px 14px 30px}
+.view{display:none}.view.on{display:block}
+h2{font-size:22px;margin:6px 4px 4px;font-weight:800;letter-spacing:-.3px}
+h3{font-size:16px;margin:0 0 8px;font-weight:700}
+.lead{color:var(--mute);margin:0 4px 14px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:12px}
+.card p{margin:0 0 8px}.card p:last-child{margin-bottom:0}
+ul.clean{margin:0;padding-left:18px}ul.clean li{margin:3px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td,th{padding:7px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:12px;color:var(--mute);font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+td.mono,.mono{font-family:"JetBrains Mono",monospace;font-size:13px}
+tr:last-child td{border-bottom:none}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+nav.tabs a{flex:1;text-decoration:none;color:var(--mute);display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:600;padding:4px 0;border-radius:10px}
+nav.tabs a svg{width:23px;height:23px}
+nav.tabs a.on{color:var(--red)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 13px;font:600 13px Manrope,system-ui,sans-serif;color:var(--ink)}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.search{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);font:500 15px Manrope,system-ui,sans-serif;margin-bottom:10px;background:#fff}
+.rcard{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:10px;cursor:pointer;transition:transform .1s}
+.rcard:active{transform:scale(.985)}
+.rcard .meta{padding:10px 14px 12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.rcard .meta b{font-size:15px}
+.rcard .meta span{font-size:12px;color:var(--mute)}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;background:var(--red-soft);color:var(--red);white-space:nowrap}
+.strip{display:block;width:100%;height:auto;background:#fff7f7}
+.scroll{overflow-x:auto;border-radius:12px;border:1px solid #f0d4d7;background:#fff7f7;-webkit-overflow-scrolling:touch}
+.scroll .strip{width:auto;max-width:none}
+.hint{font-size:12px;color:var(--mute);margin:6px 2px 0}
+.sheet{position:fixed;inset:0;z-index:50;background:var(--bg);overflow-y:auto;transform:translateY(100%);transition:transform .25s ease;padding-top:env(safe-area-inset-top);padding-bottom:calc(20px + env(safe-area-inset-bottom))}
+.sheet.on{transform:none}
+.sheet .bar{position:sticky;top:0;background:rgba(246,243,241,.95);backdrop-filter:blur(8px);display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line);z-index:2}
+.sheet .bar b{flex:1;font-size:16px}
+.ibtn{border:1px solid var(--line);background:#fff;border-radius:10px;width:40px;height:40px;display:grid;place-items:center;font-size:18px;cursor:pointer;color:var(--ink)}
+.sheet .inner{max-width:620px;margin:0 auto;padding:14px}
+.box{border-radius:12px;padding:12px 14px;margin-bottom:12px}
+.box.red{background:var(--red-soft)}.box.blue{background:var(--blue-soft)}.box.ok{background:var(--ok-soft)}.box.warn{background:var(--warn-soft)}
+.box h4{margin:0 0 6px;font-size:13px;text-transform:uppercase;letter-spacing:.5px}
+.box.red h4{color:var(--red)}.box.blue h4{color:var(--blue)}.box.ok h4{color:var(--ok)}.box.warn h4{color:var(--warn)}
+label.f{display:block;font-size:13px;font-weight:600;color:var(--mute);margin:10px 0 4px}
+input[type=number],select,textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;font:500 15px Manrope,system-ui,sans-serif;background:#fff;color:var(--ink)}
+textarea{min-height:70px;resize:vertical}
+.row{display:flex;gap:10px}.row>*{flex:1;min-width:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:none;background:var(--red);color:#fff;font:700 15px Manrope,system-ui,sans-serif;border-radius:12px;padding:12px 16px;cursor:pointer}
+.btn.sec{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn.full{width:100%}
+.res{margin-top:12px;background:var(--bg);border-radius:12px;padding:12px 14px}
+.res .big{font:700 26px "JetBrains Mono",monospace;letter-spacing:-.5px}
+.res .sub{font-size:13px;color:var(--mute)}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.checks label{display:flex;gap:8px;align-items:flex-start;font-size:14px;background:var(--bg);padding:9px 10px;border-radius:10px;cursor:pointer}
+.checks input{margin-top:3px;accent-color:var(--red)}
+.step{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.step:last-child{border-bottom:none}
+.step .n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font:600 15px Manrope,system-ui,sans-serif;margin-bottom:8px;cursor:pointer;color:var(--ink)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--red);background:var(--red-soft)}
+.progress{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin:4px 0 12px}
+.progress i{display:block;height:100%;background:var(--red);transition:width .3s}
+.stat{display:flex;justify-content:space-between;font-size:13px;color:var(--mute);margin-bottom:6px}
+.out{white-space:pre-wrap;font-size:14px;line-height:1.55}
+.alert{background:var(--red);color:#fff;border-radius:12px;padding:12px 14px;font-weight:600;margin-bottom:10px}
+.foot{font-size:12px;color:var(--mute);text-align:center;margin:18px 10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mini{background:var(--bg);border-radius:12px;padding:10px 12px}
+.mini b{display:block;font-size:13px}.mini span{font-size:12px;color:var(--mute)}
+#ph-card.pin{position:sticky;top:calc(62px + env(safe-area-inset-top));z-index:15;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.fbtn{position:relative;overflow:hidden;padding:12px 6px;font-size:14px;white-space:nowrap}
+.fbtn input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:100px;z-index:2}
+#ph-card.pin #ph-help,#ph-card.pin #ph-paste,#ph-card.pin h3,#ph-card.pin>.hint,#ph-card.pin>.row,#ph-card.pin #ph-ai,#ph-card.pin #ph-ai-out{display:none!important}
+#ph-card.pin #ph-wrap{margin-top:0!important}
+#ph-wrap .row .btn{padding:9px 8px;font-size:14px;white-space:nowrap}
+#ph-card.pin #ph-scroll{max-height:30vh!important}
+.thumbs{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px}
+.th{position:relative;flex:none;width:76px;height:58px;border-radius:10px;overflow:hidden;border:2px solid var(--line);background:#000;cursor:pointer}
+.th.on{border-color:var(--red)}
+.th img,.th video{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.th .x{position:absolute;top:2px;right:2px;width:22px;height:22px;border-radius:50%;border:none;background:rgba(0,0,0,.6);color:#fff;font-size:11px;line-height:22px;padding:0;cursor:pointer}
+.th .n{position:absolute;left:4px;bottom:2px;color:#fff;font:700 11px Manrope,sans-serif;text-shadow:0 1px 2px #000}
+.th .vb{position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:18px;text-shadow:0 1px 3px #000;pointer-events:none}
+#ph-card.pin #ph-thumbs,#ph-card.pin #ph-count{display:none!important}
+#ph-img.z{width:260%!important;max-width:none}
+.ai-fill{outline:2px solid #7c5cd6;outline-offset:1px;background:#f4f0ff!important}
+.spin{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:sp 0.8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="gs" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M4 0H0V4" fill="none" stroke="#f5c9ce" stroke-width=".35"/></pattern>
+    <pattern id="gl" width="20" height="20" patternUnits="userSpaceOnUse"><rect width="20" height="20" fill="url(#gs)"/><path d="M20 0H0V20" fill="none" stroke="#e9959f" stroke-width=".75"/></pattern>
+  </defs>
+</svg>
+
+<header>
+  <div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2-5 3 11 3-14 2 8h6"/></svg></div>
+  <div><h1>ЕКГ Практикум</h1><small>Вивчення та інтерпретація електрокардіограми</small></div>
+</header>
+
+<main>
+<!-- ОСНОВИ -->
+<section class="view" id="v-basics">
+  <h2>Основи ЕКГ</h2>
+  <p class="lead">Елементи кардіограми, норми, відведення і систематичний розбір.</p>
+
+  <div class="card">
+    <h3>Нормальний комплекс PQRST</h3>
+    <div id="anatomy"></div>
+    <p class="hint">Відведення II · 25 мм/с · 10 мм/мВ. Мала клітинка = 1 мм = 0,04 с = 0,1 мВ; велика = 5 мм = 0,2 с = 0,5 мВ.</p>
+  </div>
+
+  <div class="card">
+    <h3>Норми інтервалів і зубців</h3>
+    <table>
+      <tr><th>Параметр</th><th>Норма</th></tr>
+      <tr><td>ЧСС</td><td class="mono">60–100 /хв</td></tr>
+      <tr><td>Зубець P</td><td class="mono">≤ 120 мс; ≤ 2,5 мм (II)</td></tr>
+      <tr><td>Інтервал PR (PQ)</td><td class="mono">120–200 мс</td></tr>
+      <tr><td>Комплекс QRS</td><td class="mono">≤ 100–110 мс</td></tr>
+      <tr><td>QTc (чоловіки)</td><td class="mono">≤ 450 мс</td></tr>
+      <tr><td>QTc (жінки)</td><td class="mono">≤ 460 мс</td></tr>
+      <tr><td>Патологічний Q</td><td class="mono">≥ 40 мс або ≥ ¼ R</td></tr>
+      <tr><td>Електрична вісь</td><td class="mono">від −30° до +90°</td></tr>
+      <tr><td>Перехідна зона</td><td class="mono">V3–V4</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Відведення і коронарні басейни</h3>
+    <table>
+      <tr><th>Стінка</th><th>Відведення</th><th>Артерія</th></tr>
+      <tr><td>Нижня</td><td class="mono">II, III, aVF</td><td>ПКА (≈80%), ОГ</td></tr>
+      <tr><td>Перегородка</td><td class="mono">V1–V2</td><td>ПМШГ</td></tr>
+      <tr><td>Передня</td><td class="mono">V3–V4</td><td>ПМШГ</td></tr>
+      <tr><td>Бічна</td><td class="mono">I, aVL, V5–V6</td><td>ОГ, діагональні</td></tr>
+      <tr><td>Задня</td><td class="mono">V7–V9 (дзеркально V1–V3)</td><td>ОГ / ПКА</td></tr>
+      <tr><td>Правий шлуночок</td><td class="mono">V3R–V4R</td><td>Проксимальна ПКА</td></tr>
+    </table>
+    <p class="hint">ПКА — права коронарна артерія; ПМШГ — передня міжшлуночкова гілка ЛКА; ОГ — огинаюча гілка.</p>
+  </div>
+
+  <div class="card">
+    <h3>Електрична вісь за I та aVF</h3>
+    <table>
+      <tr><th>I</th><th>aVF</th><th>Вісь</th></tr>
+      <tr><td>＋</td><td>＋</td><td>Нормальна (0…+90°)</td></tr>
+      <tr><td>＋</td><td>−</td><td>Дивись II: якщо ＋ — норма (0…−30°), якщо − — відхилення вліво</td></tr>
+      <tr><td>−</td><td>＋</td><td>Відхилення вправо (+90…+180°)</td></tr>
+      <tr><td>−</td><td>−</td><td>Різке відхилення (−90…±180°)</td></tr>
+    </table>
+    <p class="hint">Точний кут — у вкладці «Калькулятори».</p>
+  </div>
+
+  <div class="card">
+    <h3>Систематичний розбір: 9 кроків</h3>
+    <div id="steps"></div>
+  </div>
+
+  <div class="card">
+    <h3>Розрахунок ЧСС по стрічці</h3>
+    <ul class="clean">
+      <li><b>Правильний ритм:</b> 300 ÷ кількість великих клітинок між R–R, або 1500 ÷ кількість малих.</li>
+      <li><b>Неправильний ритм:</b> кількість QRS за 6 с (30 великих клітинок) × 10.</li>
+      <li>Послідовність «300 – 150 – 100 – 75 – 60 – 50» для швидкої оцінки.</li>
+    </ul>
+  </div>
+
+  <p class="foot">Навчальний застосунок. Криві схематичні й не замінюють клінічного рішення, повного 12-канального запису та актуальних протоколів (ESC, ERC, AHA, МОЗ України).<br><a href="privacy.html" style="color:var(--mute)">Політика конфіденційності</a></p>
+</section>
+
+<!-- АТЛАС -->
+<section class="view" id="v-atlas">
+  <h2>Атлас ритмів</h2>
+  <p class="lead">Натисніть на картку — побачите збільшену стрічку, критерії та тактику.</p>
+  <input class="search" id="q" placeholder="Пошук: ФП, блокада, гіперкаліємія…">
+  <div class="chips" id="cats"></div>
+  <div id="list"></div>
+</section>
+
+<!-- РОЗБІР -->
+<section class="view" id="v-analyze">
+  <h2>Інтерпретація ЕКГ</h2>
+  <p class="lead">Завантажте одне чи кілька фото або відео ЕКГ і розбирайте, дивлячись на них, або доручіть первинний розбір ШІ. Застосунок підрахує QTc, підкаже відхилення від норми і сформує висновок.</p>
+
+  <div class="card" id="ph-card">
+    <h3>Фото і відео ЕКГ</h3>
+    <p class="hint" style="margin:0 0 10px">Можна додати кілька фото (різні відведення, довгу стрічку частинами) і відео з монітора. Знімайте рівно, при гарному освітленні, щоб було видно сітку й підписи відведень.</p>
+    <div class="row">
+      <div class="btn sec fbtn">📷 Фото<input type="file" id="ph-cam" accept="image/*" capture="environment" aria-label="Зробити фото"></div>
+      <div class="btn sec fbtn">🎥 Відео<input type="file" id="ph-vcam" accept="video/*" capture="environment" aria-label="Зняти відео"></div>
+      <div class="btn sec fbtn">🖼 Галерея<input type="file" id="ph-file" accept="image/*,video/*" multiple aria-label="Вибрати фото або відео"></div>
+    </div>
+    <p class="hint" id="ph-help">У галереї можна вибрати одразу кілька файлів. Якщо вибір не відкривається у застосунку Claude — відкрийте сторінку в Chrome або скопіюйте фото і вставте в поле нижче.</p>
+    <div id="ph-paste" contenteditable="true" style="margin-top:6px;border:1.5px dashed var(--line);border-radius:10px;padding:10px;font-size:13px;color:var(--mute);text-align:center;min-height:42px">📋 Вставити фото сюди</div>
+    <div id="ph-wrap" style="display:none;margin-top:12px">
+      <div id="ph-thumbs" class="thumbs"></div>
+      <div class="scroll" id="ph-scroll" style="max-height:42vh;overflow:auto;background:#fff"><div id="ph-view"></div></div>
+      <div class="row" style="margin-top:8px">
+        <button class="btn sec" id="ph-zoom">🔍 Збільшити</button>
+        <button class="btn sec" id="ph-frame" style="display:none">📸 Кадр</button>
+        <button class="btn sec" id="ph-pin">📌 Закріпити</button>
+        <button class="btn sec" id="ph-del" style="flex:0 0 52px" aria-label="Видалити все">🗑</button>
+      </div>
+      <p class="hint" id="ph-count"></p>
+      <button class="btn full" id="ph-ai" style="margin-top:8px;display:none">✨ Розібрати все з ШІ і заповнити форму</button>
+      <div id="ph-ai-out"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>1. Ритм і частота</h3>
+    <label class="f">Ритм</label>
+    <select id="a-rhythm">
+      <option value="sinus">Синусовий</option>
+      <option value="af">Фібриляція передсердь</option>
+      <option value="afl">Тріпотіння передсердь</option>
+      <option value="svt">Надшлуночкова тахікардія</option>
+      <option value="junc">Вузловий (з АВ-з'єднання)</option>
+      <option value="vt">Шлуночкова тахікардія</option>
+      <option value="idio">Ідіовентрикулярний</option>
+      <option value="pace">Ритм ЕКС</option>
+    </select>
+    <div class="row">
+      <div><label class="f">Регулярність</label>
+        <select id="a-reg"><option value="reg">Правильний</option><option value="irr">Неправильний</option></select></div>
+      <div><label class="f">ЧСС, /хв</label><input type="number" id="a-hr" placeholder="напр. 72" inputmode="numeric"></div>
+    </div>
+    <label class="f">Гемодинаміка пацієнта</label>
+    <select id="a-hemo">
+      <option value="">Не вказано</option>
+      <option value="stable">Стабільна</option>
+      <option value="unstable">Нестабільна (шок, синкопе, ішемія міокарда, тяжка СН)</option>
+      <option value="arrest">Без пульсу (зупинка кровообігу)</option>
+    </select>
+    <label class="f">Екстрасистолія</label>
+    <select id="a-ext">
+      <option value="">Немає</option>
+      <option value="pac">Передсердна (надшлуночкова)</option>
+      <option value="pvc">Шлуночкова, поодинока</option>
+      <option value="pvcf">Шлуночкова, часта / бігемінія</option>
+    </select>
+  </div>
+
+  <div class="card">
+    <h3>2. Інтервали</h3>
+    <div class="row">
+      <div><label class="f">PR, мс</label><input type="number" id="a-pr" placeholder="160" inputmode="numeric"></div>
+      <div><label class="f">QRS, мс</label><input type="number" id="a-qrs" placeholder="90" inputmode="numeric"></div>
+      <div><label class="f">QT, мс</label><input type="number" id="a-qt" placeholder="380" inputmode="numeric"></div>
+    </div>
+    <label class="f">Стать (для норми QTc)</label>
+    <select id="a-sex"><option value="m">Чоловік</option><option value="f">Жінка</option></select>
+  </div>
+
+  <div class="card">
+    <h3>3. Електрична вісь</h3>
+    <div class="row">
+      <div><label class="f">Положення</label>
+        <select id="a-axis">
+          <option value="">Не визначено</option>
+          <option value="norm">Нормальне</option>
+          <option value="left">Відхилення вліво</option>
+          <option value="right">Відхилення вправо</option>
+          <option value="ext">Різке відхилення</option>
+        </select></div>
+      <div><label class="f">Кут, ° (необов.)</label><input type="number" id="a-deg" placeholder="+60" inputmode="numeric"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>4. Провідність</h3>
+    <label class="f">АВ-провідність</label>
+    <select id="a-av">
+      <option value="">Без порушень</option>
+      <option value="1">АВ-блокада I ступеня</option>
+      <option value="2a">АВ-блокада II ст., Мобітц I (Венкебах)</option>
+      <option value="2b">АВ-блокада II ст., Мобітц II</option>
+      <option value="21">АВ-блокада II ст., 2:1</option>
+      <option value="3">АВ-блокада III ступеня (повна)</option>
+    </select>
+    <label class="f">Внутрішньошлуночкова</label>
+    <div class="checks" id="a-cond">
+      <label><input type="checkbox" value="Повна блокада правої ніжки пучка Гіса (БПНПГ)">Повна БПНПГ</label>
+      <label><input type="checkbox" value="Неповна блокада правої ніжки пучка Гіса">Неповна БПНПГ</label>
+      <label><input type="checkbox" value="Повна блокада лівої ніжки пучка Гіса (БЛНПГ)">Повна БЛНПГ</label>
+      <label><input type="checkbox" value="Блокада передньої гілки лівої ніжки пучка Гіса">Передня гілка ЛНПГ</label>
+      <label><input type="checkbox" value="Блокада задньої гілки лівої ніжки пучка Гіса">Задня гілка ЛНПГ</label>
+      <label><input type="checkbox" value="Феномен / синдром WPW (передзбудження шлуночків)">WPW</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>5. Сегмент ST і зубець T</h3>
+    <div class="row">
+      <div><label class="f">Сегмент ST</label>
+        <select id="a-st">
+          <option value="">Ізолінія</option>
+          <option value="up">Елевація</option>
+          <option value="down">Депресія</option>
+          <option value="diff">Дифузна увігнута елевація</option>
+        </select></div>
+      <div><label class="f">Локалізація</label>
+        <select id="a-loc">
+          <option value="ant">Передня (V1–V4)</option>
+          <option value="sept">Перегородка (V1–V2)</option>
+          <option value="antlat">Передньобічна (V3–V6, I, aVL)</option>
+          <option value="inf">Нижня (II, III, aVF)</option>
+          <option value="lat">Бічна (I, aVL, V5–V6)</option>
+          <option value="post">Задня (депресія V1–V3)</option>
+          <option value="avr">Дифузна депресія + елевація в aVR</option>
+        </select></div>
+    </div>
+    <label class="f">Зубець T</label>
+    <select id="a-t">
+      <option value="">Без змін</option>
+      <option value="inv">Інверсія T</option>
+      <option value="peak">Високі загострені T</option>
+      <option value="flat">Сплощені T, хвиля U</option>
+      <option value="hyper">Гострі «надгострі» T</option>
+    </select>
+    <div class="checks" style="margin-top:8px">
+      <label><input type="checkbox" id="a-q">Патологічні зубці Q</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>6. Гіпертрофія і передсердя</h3>
+    <div class="checks" id="a-hyp">
+      <label><input type="checkbox" value="Ознаки гіпертрофії лівого шлуночка">ГЛШ</label>
+      <label><input type="checkbox" value="Ознаки гіпертрофії правого шлуночка">ГПШ</label>
+      <label><input type="checkbox" value="Ознаки збільшення лівого передсердя (P mitrale)">Ліве передсердя</label>
+      <label><input type="checkbox" value="Ознаки збільшення правого передсердя (P pulmonale)">Праве передсердя</label>
+    </div>
+    <label class="f">Додатково (вільний текст)</label>
+    <textarea id="a-free" placeholder="напр. низький вольтаж QRS у стандартних відведеннях"></textarea>
+  </div>
+
+  <button class="btn full" id="a-go">Сформувати висновок</button>
+  <div id="a-out" style="margin-top:12px"></div>
+</section>
+
+<!-- КАЛЬКУЛЯТОРИ -->
+<section class="view" id="v-calc">
+  <h2>Калькулятори</h2>
+  <p class="lead">Швидкість стрічки 25 мм/с, калібрування 10 мм/мВ.</p>
+
+  <div class="card">
+    <h3>ЧСС за інтервалом RR</h3>
+    <div class="row">
+      <div><label class="f">Одиниці</label>
+        <select id="c-unit"><option value="mm">мм (малі клітинки)</option><option value="big">великі клітинки</option><option value="ms">мс</option><option value="cnt">QRS за 6 с</option></select></div>
+      <div><label class="f">Значення</label><input type="number" id="c-rr" step="any" placeholder="20" inputmode="decimal"></div>
+    </div>
+    <div class="res" id="c-hr-res"><div class="big">—</div><div class="sub">уд/хв</div></div>
+  </div>
+
+  <div class="card">
+    <h3>Коригований QT (QTc)</h3>
+    <div class="row">
+      <div><label class="f">QT, мс</label><input type="number" id="c-qt" placeholder="400" inputmode="numeric"></div>
+      <div><label class="f">ЧСС, /хв</label><input type="number" id="c-hr" placeholder="75" inputmode="numeric"></div>
+    </div>
+    <label class="f">Стать</label>
+    <select id="c-sex"><option value="m">Чоловік</option><option value="f">Жінка</option></select>
+    <div class="res" id="c-qt-res"><div class="sub">Введіть QT та ЧСС</div></div>
+  </div>
+
+  <div class="card">
+    <h3>Електрична вісь серця</h3>
+    <p class="hint" style="margin-top:0">Чиста амплітуда QRS = R − (Q + S), мм. Від'ємне значення — комплекс переважно негативний.</p>
+    <div class="row">
+      <div><label class="f">Відведення I, мм</label><input type="number" id="c-i" step="any" placeholder="6" inputmode="decimal"></div>
+      <div><label class="f">aVF, мм</label><input type="number" id="c-avf" step="any" placeholder="8" inputmode="decimal"></div>
+    </div>
+    <div class="res" id="c-ax-res"><div class="sub">Введіть амплітуди</div></div>
+    <div id="c-ax-svg" style="margin-top:10px"></div>
+  </div>
+
+  <div class="card">
+    <h3>Гіпертрофія лівого шлуночка</h3>
+    <div class="row">
+      <div><label class="f">S у V1, мм</label><input type="number" id="c-sv1" step="any" inputmode="decimal"></div>
+      <div><label class="f">R у V5/V6, мм</label><input type="number" id="c-rv5" step="any" inputmode="decimal"></div>
+    </div>
+    <div class="row">
+      <div><label class="f">R у aVL, мм</label><input type="number" id="c-ravl" step="any" inputmode="decimal"></div>
+      <div><label class="f">S у V3, мм</label><input type="number" id="c-sv3" step="any" inputmode="decimal"></div>
+    </div>
+    <label class="f">Стать</label>
+    <select id="c-sex2"><option value="m">Чоловік</option><option value="f">Жінка</option></select>
+    <div class="res" id="c-lvh-res"><div class="sub">Sokolow-Lyon: SV1 + RV5/V6 ≥ 35 мм · Cornell: RaVL + SV3 &gt; 28 мм (ч) / &gt; 20 мм (ж)</div></div>
+  </div>
+
+  <div class="card">
+    <h3>Критерії STEMI (4-те універсальне визначення ІМ)</h3>
+    <p>Нова елевація ST у точці J у ≥ 2 суміжних відведеннях:</p>
+    <ul class="clean">
+      <li>≥ 1 мм — у всіх відведеннях, крім V2–V3;</li>
+      <li>V2–V3: ≥ 2 мм — чоловіки ≥ 40 р.; ≥ 2,5 мм — чоловіки &lt; 40 р.; ≥ 1,5 мм — жінки;</li>
+      <li>задній ІМ: V7–V9 ≥ 0,5 мм; правий шлуночок: V3R–V4R ≥ 0,5 мм (≥ 1 мм у чоловіків &lt; 30 р.).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ТЕСТ -->
+<section class="view" id="v-quiz">
+  <h2>Тест</h2>
+  <p class="lead">10, 20 або 30 випадкових питань: стрічки ЕКГ і теорія. Після кожної відповіді — пояснення, в кінці — розбір помилок.</p>
+  <div id="quiz"></div>
+</section>
+</main>
+
+<div class="sheet" id="sheet">
+  <div class="bar">
+    <button class="ibtn" id="sh-close" aria-label="Закрити">✕</button>
+    <b id="sh-title"></b>
+    <button class="ibtn" id="sh-prev" aria-label="Попередній">‹</button>
+    <button class="ibtn" id="sh-next" aria-label="Наступний">›</button>
+  </div>
+  <div class="inner" id="sh-body"></div>
+</div>
+
+<nav class="tabs">
+  <a href="#basics" data-v="basics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2"/><path d="M8 7h7M8 11h5"/></svg>Основи</a>
+  <a href="#atlas" data-v="atlas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2-5 3 11 3-14 2 8h6"/></svg>Атлас</a>
+  <a href="#analyze" data-v="analyze"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>Розбір</a>
+  <a href="#calc" data-v="calc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h8"/></svg>Калькулятори</a>
+  <a href="#quiz" data-v="quiz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7M12 17h.01"/></svg>Тест</a>
+</nav>
+
+<script>
+/* ===================== Генератор ЕКГ ===================== */
+const G=(t,c,w,a)=>a*Math.exp(-((t-c)*(t-c))/(2*w*w));
+const sg=(x,k)=>1/(1+Math.exp(-x/k));
+const B={p:0.15,pr:0.16,qrs:0.08,q:0.08,r:1.2,s:0.25,t:0.3,tw:0.045};
+
+function beatV(t,b){
+  let v=0;
+  if(b.p && !b.noP){
+    const pc=b.on-b.pr+0.05;
+    v+=G(t,pc,0.022*(b.pw||1),b.p);
+    if(b.prd) v+=b.prd*sg(t-(pc+0.05),0.008)*(1-sg(t-b.on,0.004));
+  }
+  if(b.noQRS) return v;
+  const o=b.on,d=b.qrs;
+  const cx=b.cx||[[0.18,0.08,-b.q],[0.45,0.11,b.r],[0.75,0.09,-b.s]];
+  for(const c of cx) v+=G(t,o+c[0]*d,c[1]*d,c[2]);
+  const j=o+d, tc=j+b.tOff;
+  if(b.st) v+=b.st*sg(t-j,0.006)*(1-sg(t-tc,0.025));
+  if(b.cove) v+=b.cove*Math.exp(-Math.max(0,t-j)/0.07)*sg(t-j,0.004);
+  if(b.osb) v+=G(t,j+0.012,0.022,b.osb);
+  v+=G(t,tc,b.tw,b.t);
+  if(b.u) v+=G(t,tc+0.17,0.035,b.u);
+  return v;
+}
+function regular(hr,dur,mod={}){
+  const rr=60/hr, pr=mod.pr??0.16;
+  const tOff=mod.tOff??0.2*Math.sqrt(rr/0.8);
+  const out=[];
+  for(let tp=0.12;tp+pr<dur+0.3;tp+=rr) out.push({...B,...mod,pr,tOff,on:tp+pr});
+  return out;
+}
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+
+function renderStrip(entry,dur,opt={}){
+  const {beats=[],extra,spikes=[]}=entry.gen(dur);
+  const dt=0.004,pts=[];let mx=1,mn=0;
+  for(let t=0;t<=dur;t+=dt){
+    let v=extra?extra(t):0;
+    for(const b of beats){ if(t>b.on-0.45&&t<b.on+0.95) v+=beatV(t,b); }
+    pts.push(v); if(v>mx)mx=v; if(v<mn)mn=v;
+  }
+  const up=Math.max(60,Math.ceil((mx*40+14)/20)*20), down=Math.max(20,Math.ceil((-mn*40+14)/20)*20);
+  const H=up+down, W=Math.ceil((24+dur*100)/20)*20, base=up;
+  let d=`M24 ${(base-pts[0]*40).toFixed(1)}`;
+  for(let i=1;i<pts.length;i++) d+=`L${(24+i*dt*100).toFixed(1)} ${(base-pts[i]*40).toFixed(1)}`;
+  for(const sp of spikes){if(sp<dur){const xs=(24+sp*100).toFixed(1);d+=`M${xs} ${base}V${base-48}M${xs} ${base}`;}}
+  const cal=`M0 ${base}H5V${base-40}H17V${base}H24`;
+  const sc=opt.scale, style=sc?`style="width:${(W*sc).toFixed(0)}px"`:'';
+  const lead=entry.lead?`<text x="30" y="14" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#8a1c28">${entry.lead}</text>`:'';
+  return `<svg class="strip" ${style} viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMinYMin meet" role="img" aria-label="${entry.name}"><rect width="${W}" height="${H}" fill="url(#gl)"/>${lead}<path d="${cal}" fill="none" stroke="#1a1a1a" stroke-width="1"/><path d="${d}" fill="none" stroke="#1a1a1a" stroke-width="1.15" stroke-linejoin="round"/></svg>`;
+}
+
+/* ===================== Атлас ===================== */
+const CATS=["Усі","Синусові","Надшлуночкові","Шлуночкові","Блокади","Ішемія","Інше"];
+const A=[
+{id:"nsr",cat:"Синусові",name:"Нормальний синусовий ритм",lead:"II",
+ gen:d=>({beats:regular(75,d)}),
+ crit:["Зубець P перед кожним QRS; позитивний у I, II, aVF, негативний в aVR","PR 120–200 мс і постійний","ЧСС 60–100/хв","Інтервали RR однакові"],
+ clin:"Норма. Еталон для порівняння з будь-якою патологією."},
+{id:"stach",cat:"Синусові",name:"Синусова тахікардія",lead:"II",
+ gen:d=>({beats:regular(125,d)}),
+ crit:["Синусові P перед кожним QRS","ЧСС > 100/хв (зазвичай до 150–160 у спокої)","При високій ЧСС P може зливатися з попереднім T","Поступовий початок і кінець"],
+ clin:"Майже завжди вторинна: біль, лихоманка, гіповолемія, анемія, гіпоксія, ТЕЛА, тиреотоксикоз, симпатоміметики. Лікують причину, а не частоту."},
+{id:"sbrady",cat:"Синусові",name:"Синусова брадикардія",lead:"II",
+ gen:d=>({beats:regular(45,d)}),
+ crit:["Синусові P перед кожним QRS","ЧСС < 60/хв","PR і QRS у нормі"],
+ clin:"Фізіологічна у спортсменів і уві сні. Причини: β-блокатори, БКК, дигоксин, гіпотиреоз, нижній ІМ, гіпотермія, підвищений ВЧТ. При ознаках нестабільності — атропін в/в (0,5–1 мг, до 3 мг — залежно від протоколу ERC/AHA), далі адреналін/ізопреналін або транскутанна стимуляція."},
+{id:"sarr",cat:"Синусові",name:"Синусова аритмія",lead:"II",
+ gen:d=>{const out=[];let tp=0.12,i=0;while(tp+0.16<d+0.3){out.push({...B,pr:0.16,tOff:0.2,on:tp+0.16});tp+=0.85+0.25*Math.sin(i*0.85);i++}return{beats:out}},
+ crit:["Синусові P однакової морфології","Різниця RR > 120 мс (або > 10%)","Часто циклічна, пов'язана з диханням (на вдиху частішає)"],
+ clin:"Варіант норми, особливо у дітей і молоді. Нереспіраторна форма у літніх може свідчити про дисфункцію синусового вузла."},
+
+{id:"af",cat:"Надшлуночкові",name:"Фібриляція передсердь",lead:"II",
+ gen:d=>{const r=rng(7),out=[];let t=0.3;while(t<d+0.3){out.push({...B,p:0,tOff:0.18,on:t});t+=0.42+r()*0.5}
+   return{beats:out,extra:t=>0.045*Math.sin(2*Math.PI*6.3*t)+0.035*Math.sin(2*Math.PI*8.7*t+1.3)+0.03*Math.sin(2*Math.PI*5.1*t+2.1)}},
+ crit:["Відсутні зубці P","Хвилі f (дрібні або великі) на ізолінії","Абсолютно нерегулярні інтервали RR","QRS зазвичай вузькі (якщо немає аберації чи блокади)"],
+ clin:"Оцінити тромбоемболічний ризик (CHA₂DS₂-VA за ESC 2024) і ризик кровотечі для антикоагуляції; контроль частоти або ритму. При гемодинамічній нестабільності — синхронізована кардіоверсія."},
+{id:"afl",cat:"Надшлуночкові",name:"Тріпотіння передсердь 4:1",lead:"II",
+ gen:d=>({beats:(()=>{const o=[];for(let t=0.36;t<d+0.3;t+=0.8)o.push({...B,p:0,tOff:0.2,on:t});return o})(),
+   extra:t=>{const f=((t*5)%1+1)%1;return (f<0.75?-0.24*f/0.75:-0.24*(1-(f-0.75)/0.25))+0.12}}),
+ crit:["Пилкоподібні хвилі F із частотою ≈ 250–350/хв (типово 300)","Найкраще видно в II, III, aVF і V1","Проведення 2:1 (ЧСС ≈ 150), 3:1 або 4:1 (≈ 75)","Ізолінії між хвилями F немає"],
+ clin:"Регулярна вузькокомплексна тахікардія з ЧСС рівно ~150/хв — завжди подумайте про тріпотіння 2:1. Тромбоемболічний ризик і антикоагуляція — як при ФП. Типове тріпотіння добре лікується абляцією кавотрикуспідального перешийка."},
+{id:"svt",cat:"Надшлуночкові",name:"Пароксизмальна НШТ (AVNRT)",lead:"II",
+ gen:d=>({beats:regular(185,d,{p:0,tOff:0.12,t:0.25})}),
+ crit:["Регулярна тахікардія 150–250/хв","Вузькі QRS (< 120 мс)","P не видно або ретроградні: псевдо-r' у V1, псевдо-S у II, III, aVF","Раптовий початок і кінець"],
+ clin:"Стабільний пацієнт — вагусні проби (модифікований прийом Вальсальви), далі аденозин 6 мг в/в швидким болюсом, за потреби 12 мг. Нестабільний — синхронізована кардіоверсія."},
+{id:"pac",cat:"Надшлуночкові",name:"Передсердна екстрасистола",lead:"II",
+ gen:d=>{const T=[0.4,1.2,2.0,2.55,3.4,4.2,5.0,5.8,6.6,7.4];return{beats:T.filter(x=>x<d+0.3).map((x,i)=>i===3?{...B,on:x,pr:0.14,p:-0.09,pw:0.85,tOff:0.19}:{...B,on:x,pr:0.16,tOff:0.2})}},
+ crit:["Передчасний QRS, зазвичай вузький","Перед ним P іншої морфології (може ховатися в T попереднього комплексу)","Неповна компенсаторна пауза (синусовий вузол «перезапускається»)"],
+ clin:"Найчастіше доброякісна: кава, стрес, алкоголь, недосипання, ХОЗЛ. Часті ПЕС можуть запускати ФП."},
+{id:"junc",cat:"Надшлуночкові",name:"Вузловий ритм",lead:"II",
+ gen:d=>({beats:regular(50,d,{p:-0.1,pr:0.1,pw:0.85})}),
+ crit:["ЧСС 40–60/хв (прискорений — 60–100)","P відсутні або ретроградні: негативні в II, III, aVF","Ретроградний P безпосередньо перед QRS (PR < 120 мс), всередині або після нього","QRS вузькі"],
+ clin:"Заміщувальний ритм при дисфункції синусового вузла, ваготонії, інтоксикації дигоксином, нижньому ІМ, після кардіохірургії."},
+
+{id:"pvc",cat:"Шлуночкові",name:"Шлуночкова екстрасистола",lead:"II",
+ gen:d=>{const T=[0.4,1.2,2.0,2.5,3.6,4.4,5.2,6.0,6.8,7.6];return{beats:T.filter(x=>x<d+0.3).map((x,i)=>i===3?{...B,on:x,p:0,qrs:0.16,cx:[[0.35,0.22,1.45],[0.8,0.12,-0.3]],t:-0.5,tw:0.07,tOff:0.22}:{...B,on:x,pr:0.16,tOff:0.2})}},
+ crit:["Передчасний широкий (≥ 120 мс), деформований QRS","Перед ним немає P","ST і T дискордантні (протилежні основному зубцю QRS)","Повна компенсаторна пауза: інтервал навколо ШЕС = 2 × RR"],
+ clin:"Поодинокі ШЕС у здорових — зазвичай доброякісні. Потребують обстеження (ехоКГ, Холтер, електроліти): частота > 10% комплексів, поліморфні, парні, «R на T», наявність структурного ураження серця або симптомів."},
+{id:"vt",cat:"Шлуночкові",name:"Шлуночкова тахікардія",lead:"II",
+ gen:d=>({beats:regular(170,d,{p:0,qrs:0.16,cx:[[0.3,0.2,1.3],[0.78,0.14,-0.7]],t:-0.5,tw:0.05,tOff:0.12})}),
+ crit:["≥ 3 широких комплекси (≥ 120 мс) з ЧСС > 100/хв (зазвичай 120–250)","АВ-дисоціація: P «живуть своїм життям»","Комплекси захоплення та зливні комплекси","Конкордантність QRS у грудних відведеннях, різке відхилення осі"],
+ clin:"Ширококомплексна тахікардія — це ШТ, доки не доведено інше. Без пульсу — дефібриляція за алгоритмом СЛР. З пульсом і нестабільністю — синхронізована кардіоверсія. Стабільна — аміодарон 300 мг в/в за 10–20 хв (ERC) та консультація кардіолога."},
+{id:"tdp",cat:"Шлуночкові",name:"Torsades de pointes",lead:"II",
+ gen:d=>({beats:[{...B,on:0.35,pr:0.16,tOff:0.42,tw:0.06,t:0.32}],
+   extra:t=>{const s=0.95;if(t<s)return 0;const x=t-s,env=(0.2+1.15*Math.abs(Math.sin(Math.PI*x/2.3)))*sg(x,0.05);return env*Math.sin(2*Math.PI*4.3*x)}}),
+ crit:["Поліморфна ШТ: амплітуда QRS ритмічно наростає і спадає, «закручуючись» навколо ізолінії","ЧСС 200–250/хв","Виникає на тлі подовженого QT, часто після паузи («коротка–довга–коротка»)"],
+ clin:"Магнію сульфат 2 г в/в; відмінити препарати, що подовжують QT; корекція K⁺ і Mg²⁺. Без пульсу — дефібриляція. При рецидивах — прискорення ЧСС (ізопреналін, овердрайв-стимуляція)."},
+{id:"vf",cat:"Шлуночкові",name:"Фібриляція шлуночків",lead:"II",
+ gen:d=>({beats:[],extra:t=>(0.75+0.3*Math.sin(2*Math.PI*0.37*t))*(0.4*Math.sin(2*Math.PI*5.2*t)+0.25*Math.sin(2*Math.PI*3.6*t+1)+0.17*Math.sin(2*Math.PI*7.4*t+2.2))}),
+ crit:["Хаотичні хвилі різної амплітуди, форми та частоти","Немає ідентифікованих QRS, P і T","Велико- або дрібнохвильова (дрібнохвильову легко сплутати з асистолією)"],
+ clin:"Зупинка кровообігу, дефібриляційний ритм: негайна дефібриляція, СЛР 30:2 з мінімальними паузами; адреналін 1 мг і аміодарон 300 мг в/в — після 3-го розряду (ERC)."},
+{id:"asys",cat:"Шлуночкові",name:"Асистолія",lead:"II",
+ gen:d=>({beats:[],extra:t=>0.02*Math.sin(2*Math.PI*0.31*t)+0.008*Math.sin(2*Math.PI*1.7*t)}),
+ crit:["Майже рівна лінія без комплексів","Можуть зберігатися лише зубці P («P-хвильова» асистолія)","Обов'язково перевірити електроди, підсилення і інше відведення"],
+ clin:"Недефібриляційний ритм: СЛР 30:2, адреналін 1 мг в/в якомога швидше, далі кожні 3–5 хв; шукати й усувати оборотні причини (4Г/4Т: гіпоксія, гіповолемія, гіпо-/гіперкаліємія, гіпотермія; тромбоз, тампонада, токсини, напружений пневмоторакс)."},
+
+{id:"av1",cat:"Блокади",name:"АВ-блокада I ступеня",lead:"II",
+ gen:d=>({beats:regular(68,d,{pr:0.32})}),
+ crit:["PR > 200 мс","PR постійний","Кожен P проводиться на шлуночки (1:1)"],
+ clin:"Зазвичай доброякісна: ваготонія, β-блокатори, БКК, дигоксин, ішемія, міокардит. Специфічного лікування не потребує."},
+{id:"mob1",cat:"Блокади",name:"АВ-блокада II ст., Мобітц I",lead:"II",
+ gen:d=>{const prs=[0.16,0.26,0.32,null],o=[];let i=0;for(let tp=0.15;tp<d+0.2;tp+=0.8,i++){const pr=prs[i%4];o.push(pr?{...B,pr,tOff:0.2,on:tp+pr}:{...B,pr:0.16,on:tp+0.16,noQRS:true})}return{beats:o}},
+ crit:["Прогресивне подовження PR від комплексу до комплексу","Потім P без QRS (випадіння)","PR після паузи найкоротший","Пауза < 2 × PP"],
+ clin:"Періодика Самойлова–Венкебаха. Блок зазвичай на рівні АВ-вузла, прогноз сприятливий. Причини: ваготонія, ліки, нижній ІМ, міокардит."},
+{id:"mob2",cat:"Блокади",name:"АВ-блокада II ст., Мобітц II",lead:"II",
+ gen:d=>{const o=[];let i=0;for(let tp=0.15;tp<d+0.2;tp+=0.75,i++){o.push(i%3===2?{...B,pr:0.18,on:tp+0.18,noQRS:true}:{...B,pr:0.18,qrs:0.12,cx:[[0.3,0.14,1.1],[0.72,0.13,-0.4]],t:-0.2,tOff:0.2,on:tp+0.18})}return{beats:o}},
+ crit:["PR постійний (норма або подовжений) у проведених комплексах","Раптове випадіння QRS без попереднього подовження PR","Часто широкі QRS (блок нижче пучка Гіса)"],
+ clin:"Інфрагісальна блокада з високим ризиком переходу в повну. Моніторинг, транскутанна стимуляція в готовності; показана постійна ЕКС."},
+{id:"av3",cat:"Блокади",name:"АВ-блокада III ступеня",lead:"II",
+ gen:d=>{const o=[];for(let tp=0.1;tp<d+0.2;tp+=0.72)o.push({...B,pr:0.16,on:tp+0.16,noQRS:true});
+   for(let t=0.6;t<d+0.3;t+=1.7)o.push({...B,p:0,qrs:0.14,cx:[[0.35,0.2,1.2],[0.78,0.14,-0.4]],t:-0.35,tw:0.06,tOff:0.24,on:t});return{beats:o}},
+ crit:["Повна АВ-дисоціація: P і QRS незалежні","PP і RR кожен правильні, частота P > частоти QRS","Заміщувальний ритм: вузловий (вузькі QRS, 40–60/хв) або шлуночковий (широкі, 20–40/хв)"],
+ clin:"При брадикардії з нестабільністю: атропін (часто неефективний при широких QRS), інфузія адреналіну/ізопреналіну, транскутанна стимуляція; далі — тимчасова та постійна ЕКС. При нижньому ІМ блокада часто минуща."},
+{id:"rbbb",cat:"Блокади",name:"Блокада правої ніжки (БПНПГ)",lead:"V1",
+ gen:d=>({beats:regular(75,d,{qrs:0.13,p:0.08,cx:[[0.18,0.09,0.35],[0.45,0.09,-0.55],[0.78,0.12,0.9]],t:-0.25,st:-0.05,tOff:0.22})}),
+ crit:["QRS ≥ 120 мс","rsR' («М»-подібний) у V1–V2","Широкий зазубрений S у I, aVL, V5–V6","Вторинна депресія ST / інверсія T у V1–V3","Неповна БПНПГ — та сама морфологія при QRS 110–119 мс"],
+ clin:"Може бути варіантом норми. Нова БПНПГ — шукати ТЕЛА, ГКС, міокардит, перевантаження ПШ. При підозрі на ГКС і симптомах ішемії, що тривають, — тактика як при STEMI (ESC 2023)."},
+{id:"lbbb",cat:"Блокади",name:"Блокада лівої ніжки (БЛНПГ)",lead:"V6",
+ gen:d=>({beats:regular(75,d,{qrs:0.14,cx:[[0.36,0.16,1.05],[0.68,0.14,1.15]],t:-0.35,st:-0.1,tw:0.06,tOff:0.22})}),
+ crit:["QRS ≥ 120 мс","Широкий зазубрений або плосковерхий R в I, aVL, V5–V6","Відсутні q у V5–V6","Глибокий QS або rS у V1","Дискордантні ST-T"],
+ clin:"Майже завжди органічна патологія: ІХС, АГ, кардіоміопатії, аортальний стеноз. На тлі БЛНПГ ішемію оцінюють за критеріями Sgarbossa (модифікація Smith). Підозра на ГКС із симптомами, що тривають, — тактика як при STEMI (ESC 2023)."},
+{id:"wpw",cat:"Блокади",name:"Синдром WPW",lead:"II",
+ gen:d=>({beats:regular(75,d,{pr:0.1,qrs:0.12,cx:[[0.22,0.17,0.35],[0.55,0.1,1.3],[0.82,0.08,-0.15]],t:0.15,tOff:0.2})}),
+ crit:["Укорочений PR < 120 мс","Дельта-хвиля — «змащений» висхідний відрізок QRS","QRS > 110–120 мс","Вторинні зміни ST-T"],
+ clin:"Ризик ортодромної АВРТ. ФП при WPW (широкі, різні за формою, нерегулярні комплекси) — НЕ давати АВ-блокатори (аденозин, верапаміл, дилтіазем, дигоксин, β-блокатори): електрична кардіоверсія або прокаїнамід. Пацієнта — на електрофізіологічне дослідження й абляцію."},
+
+{id:"stemi",cat:"Ішемія",name:"Гострий STEMI, передня стінка",lead:"V3",
+ gen:d=>({beats:regular(85,d,{r:0.75,s:0.1,q:0.05,st:0.38,t:0.72,tw:0.06,tOff:0.21})}),
+ crit:["Елевація ST у точці J у ≥ 2 суміжних відведеннях (≥ 1 мм; у V2–V3 ≥ 2 мм у чоловіків ≥ 40 р., ≥ 2,5 мм — < 40 р., ≥ 1,5 мм у жінок)","Реципрокна депресія ST у протилежних відведеннях","Надгострі T у найранішій фазі","Патологічні Q і інверсія T — пізніше"],
+ clin:"Елевація у V1–V4 — басейн ПМШГ. Негайна реперфузія: первинна ПКВ, якщо можлива протягом 120 хв від встановлення діагнозу; інакше — тромболізис протягом 10 хв (ESC 2023). Аспірин, антикоагулянт, знеболення; кисень лише при SpO₂ < 90%."},
+{id:"stdep",cat:"Ішемія",name:"Депресія ST (субендокардіальна ішемія)",lead:"V5",
+ gen:d=>({beats:regular(88,d,{st:-0.18,t:-0.15,tw:0.05,tOff:0.24})}),
+ crit:["Горизонтальна або косонизхідна депресія ST ≥ 0,5 мм у ≥ 2 суміжних відведеннях","Інверсія T > 1 мм при домінантному R","Динаміка на серійних ЕКГ"],
+ clin:"ГКС без елевації ST, навантажувальна ішемія, тахікардія. Дифузна депресія ST + елевація в aVR — ураження стовбура ЛКА або багатосудинне. Депресія у V1–V3 — виключити задній STEMI (записати V7–V9)."},
+{id:"peri",cat:"Ішемія",name:"Гострий перикардит",lead:"II",
+ gen:d=>({beats:regular(98,d,{st:0.15,t:0.35,tw:0.055,prd:-0.07})}),
+ crit:["Дифузна увігнута елевація ST у багатьох відведеннях, не відповідає одному басейну","Депресія PR (у aVR — елевація PR і депресія ST)","Немає реципрокних депресій ST (крім aVR і V1)","Часто синусова тахікардія"],
+ clin:"Діагноз за ≥ 2 з 4 критеріїв: типовий біль, шум тертя перикарда, ЕКГ-зміни, випіт. Лікування: НПЗП або аспірин + колхіцин. Виключити STEMI і тампонаду (ехоКГ)."},
+
+{id:"brugada",cat:"Інше",name:"Синдром Бругада (тип 1)",lead:"V1",
+ gen:d=>({beats:regular(72,d,{qrs:0.1,cx:[[0.3,0.1,0.25],[0.58,0.1,-0.45],[0.9,0.08,0.45]],cove:0.5,t:-0.28,tw:0.06,tOff:0.24})}),
+ crit:["«Склепінчаста» (coved) елевація ST ≥ 2 мм у V1–V2, що плавно переходить у негативний T","Схожа на неповну БПНПГ (r' у V1), але без широкого S у I, V6","Лише тип 1 (спонтанний або індукований) є діагностичним","Запис V1–V2 у 2–3 міжребер'ї підвищує чутливість"],
+ clin:"Каналопатія (часто SCN5A) з ризиком ФШ і раптової смерті, частіше у чоловіків, нерідко вночі. Тип 1 провокують лихоманка, ряд ліків (brugadadrugs.org), алкоголь. Лихоманку — агресивно знижувати. Синкопе або зупинка серця в анамнезі — показання до ІКД; консультація аритмолога, обстеження родичів."},
+{id:"pe",cat:"Інше",name:"ТЕЛА (S1Q3T3)",lead:"III",
+ gen:d=>({beats:regular(112,d,{q:0.22,r:0.55,s:0.1,t:-0.22,tw:0.05})}),
+ crit:["Найчастіша ознака — синусова тахікардія","S1Q3T3: глибокий S у I, зубець Q і негативний T у III","Інверсія T у V1–V4 (перевантаження ПШ), нова БПНПГ","Відхилення осі вправо, P pulmonale, ФП","ЕКГ може бути нормальною — не виключає ТЕЛА"],
+ clin:"ЕКГ-ознаки малочутливі й неспецифічні; S1Q3T3 — менш ніж у чверті хворих. Оцінити клінічну ймовірність (Wells/Geneva), D-димер, КТ-ангіографію, ехоКГ (дисфункція ПШ). Високий ризик (шок) — системний тромболізис."},
+{id:"rvh",cat:"Інше",name:"Гіпертрофія правого шлуночка",lead:"V1",
+ gen:d=>({beats:regular(80,d,{p:0.22,q:0,r:1.3,s:0.12,st:-0.08,t:-0.28,tw:0.055,tOff:0.22})}),
+ crit:["Відхилення осі вправо (> +90°)","Домінантний R у V1: R/S > 1, R ≥ 7 мм","Глибокий S у V5–V6","Депресія ST та інверсія T у V1–V3 («стрейн» ПШ)","Часто P pulmonale (P ≥ 2,5 мм у II)"],
+ clin:"Легенева гіпертензія, ХОЗЛ, мітральний стеноз, вроджені вади, хронічна ТЕЛА. Диференціювати з іншими причинами високого R у V1: задній ІМ, БПНПГ, WPW, декстрокардія, ГКМП. Підтверджувати ехоКГ."},
+{id:"hypoth",cat:"Інше",name:"Гіпотермія (хвиля Осборна)",lead:"II",
+ gen:d=>({beats:regular(40,d,{pr:0.22,qrs:0.1,osb:0.42,s:0.02,tOff:0.3,tw:0.06,t:0.22}),extra:t=>0.03*Math.sin(2*Math.PI*11*t)*(0.5+0.5*Math.sin(2*Math.PI*0.7*t))}),
+ crit:["Хвиля Осборна (J-хвиля) — горб у точці J, найкраще в II та V3–V6; її висота зростає з поглибленням гіпотермії","Брадикардія, подовження PR, QRS і QT","Тремтіння дає м'язовий артефакт ізолінії","Нижче 30 °C — ФП, далі ФШ або асистолія"],
+ clin:"Зігрівання; обережне поводження (ризик ФШ при грубих маніпуляціях). При зупинці серця й температурі < 30 °C — не більше 3 розрядів і адреналін не вводять до зігрівання; при 30–35 °C — інтервали між введеннями подвоюють (ERC). ЕКМО — метод вибору при гіпотермічній зупинці."},
+{id:"paced",cat:"Інше",name:"Ритм ЕКС (DDD)",lead:"II",
+ gen:d=>{const b=regular(65,d,{p:0.12,pr:0.18,p0:1,qrs:0.15,cx:[[0.35,0.2,-1.1],[0.8,0.12,0.25]],t:0.38,tw:0.06,tOff:0.22});
+   return{beats:b,spikes:b.flatMap(x=>[x.on-x.pr,x.on-0.008])}},
+ crit:["Вертикальні артефакти стимуляції («спайки»)","Передсердний спайк перед P, шлуночковий — перед широким QRS","QRS ≥ 120 мс з морфологією БЛНПГ і зазвичай відхиленням осі вліво (стимуляція з верхівки ПШ)","ST-T дискордантні — норма для стимульованого комплексу"],
+ clin:"Оцінити захоплення (за кожним спайком — комплекс) і чутливість (немає зайвих спайків на власні комплекси). Порушення — спайки без QRS, неадекватна стимуляція — потребують перевірки програматором. Для ішемії на тлі стимуляції — модифіковані критерії Sgarbossa."},
+{id:"wellens",cat:"Ішемія",name:"Синдром Велленса",lead:"V2",
+ gen:d=>({beats:regular(72,d,{q:0,r:0.45,s:1.0,st:0.04,t:-0.65,tw:0.06,tOff:0.24})}),
+ crit:["Глибокі симетричні негативні T у V2–V3 (тип B) або двофазні T (тип A)","Мінімальна елевація ST (< 1 мм) або ізолінія","Збережений R, немає патологічних Q","Зміни видно поза больовим нападом"],
+ clin:"Ознака критичного проксимального стенозу ПМШГ — високий ризик обширного переднього ІМ. Потрібна рання коронарографія; навантажувальні проби протипоказані."},
+{id:"hyperk",cat:"Інше",name:"Гіперкаліємія",lead:"II",
+ gen:d=>({beats:regular(70,d,{p:0.05,pr:0.21,qrs:0.11,t:1.0,tw:0.028,tOff:0.17})}),
+ crit:["Високі, вузькі, симетричні загострені T («намет»)","Сплощення і зникнення P, подовження PR","Розширення QRS","Синусоїдальна крива → ФШ / асистолія"],
+ clin:"Невідкладно: кальцію хлорид 10% 10 мл (або глюконат 10% 30 мл) в/в для стабілізації мембран; інсулін 10 ОД + глюкоза; сальбутамол небулайзерно; далі — виведення K⁺ (діаліз). Зміни ЕКГ погано корелюють із рівнем K⁺."},
+{id:"hypok",cat:"Інше",name:"Гіпокаліємія",lead:"II",
+ gen:d=>({beats:regular(70,d,{t:0.07,st:-0.06,u:0.16,tOff:0.2})}),
+ crit:["Сплощення або інверсія T","Виражена хвиля U (найкраще в V2–V3)","Депресія ST","Подовження QU, ризик ШЕС і Torsades"],
+ clin:"Корекція K⁺ і обов'язково Mg²⁺. Небезпечна в поєднанні з дигоксином і препаратами, що подовжують QT."},
+{id:"lqt",cat:"Інше",name:"Подовжений інтервал QT",lead:"II",
+ gen:d=>({beats:regular(65,d,{tOff:0.4,tw:0.06,t:0.28})}),
+ crit:["QTc > 450 мс у чоловіків, > 460 мс у жінок","QTc ≥ 500 мс — високий ризик Torsades","Вимірювати у II або V5–V6 методом дотичної до низхідного коліна T"],
+ clin:"Причини: ліки (антиаритміки IA/III, макроліди, фторхінолони, антипсихотики, ондансетрон, метадон), гіпо-K⁺/Mg²⁺/Ca²⁺, гіпотермія, вроджений LQTS. Перевірити препарати на crediblemeds.org."},
+{id:"lvh",cat:"Інше",name:"Гіпертрофія лівого шлуночка",lead:"V5",
+ gen:d=>({beats:regular(72,d,{r:2.9,q:0.1,s:0.2,qrs:0.1,st:-0.12,t:-0.3,tw:0.06,tOff:0.24})}),
+ crit:["Sokolow-Lyon: SV1 + RV5/V6 ≥ 35 мм","Cornell: RaVL + SV3 > 28 мм (ч) / > 20 мм (ж)","«Стрейн»: косонизхідна депресія ST і асиметрична інверсія T у V5–V6, I, aVL","Часто відхилення осі вліво, ознаки збільшення ЛП"],
+ clin:"АГ, аортальний стеноз, ГКМП. Вольтажні критерії мають низьку чутливість і хибно позитивні у молодих худорлявих — підтверджувати ехоКГ."}
+];
+
+/* ===================== Навігація ===================== */
+const views=["basics","atlas","analyze","calc","quiz"];
+function route(){
+  let h=(location.hash||"").slice(1); if(!views.includes(h)) h="basics";
+  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("on",v.id==="v-"+h));
+  document.querySelectorAll("nav.tabs a").forEach(a=>a.classList.toggle("on",a.dataset.v===h));
+  if(h==="atlas") renderList();
+  if(h==="quiz" && !quiz) quizStart();
+  window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",route);
+
+/* ===================== Основи ===================== */
+function anatomy(){
+  const e={gen:d=>({beats:[{...B,on:0.4,pr:0.16,tOff:0.2}]}),name:"Нормальний комплекс"};
+  const svg=renderStrip(e,1.0);
+  // підписи поверх
+  const base=svg.match(/H5V(\d+)/);
+  const W=Math.ceil((24+100)/20)*20;
+  const x=t=>24+t*100;
+  const on=0.4,pc=on-0.16+0.05,tc=on+0.08+0.2,tEnd=tc+0.11;
+  const lab=(t,y,s,c="#8a1c28")=>`<text x="${x(t)}" y="${y}" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="9" fill="${c}">${s}</text>`;
+  const br=(a,b,y,s)=>`<path d="M${x(a)} ${y-3}V${y}H${x(b)}V${y-3}" fill="none" stroke="#24508f" stroke-width=".8"/><text x="${(x(a)+x(b))/2}" y="${y+8}" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="700" font-size="6.5" fill="#24508f">${s}</text>`;
+  const m=svg.match(/viewBox="0 0 (\d+) (\d+)"/);const H=+m[2];const baseY=+svg.match(/M0 (\d+)/)[1];
+  const extra=lab(pc,baseY-12,"P")+lab(on+0.18*0.08-0.012,baseY+12,"Q")+lab(on+0.036,baseY-54,"R")+lab(on+0.07,baseY+16,"S")+lab(tc,baseY-20,"T")
+    +br(on-0.16,on,baseY+22,"PR")+br(on,on+0.08,baseY+34,"QRS")+br(on+0.08,tc-0.04,baseY+22,"ST")+br(on,tEnd,baseY+46-0,"QT");
+  let out=svg.replace("</svg>",extra+"</svg>");
+  // збільшимо висоту для дужок
+  out=out.replace(/viewBox="0 0 (\d+) (\d+)"/,(s,w,h)=>`viewBox="0 0 ${w} ${Math.max(+h,baseY+60)}"`).replace(/<rect width="(\d+)" height="(\d+)"/,(s,w,h)=>`<rect width="${w}" height="${Math.max(+h,baseY+60)}"`);
+  document.getElementById("anatomy").innerHTML=`<div class="scroll" style="border:none">${out}</div>`;
+}
+const STEPS=[
+ ["Технічна якість","Калібрування 10 мм/мВ, швидкість 25 мм/с, правильне накладання електродів, артефакти."],
+ ["Ритм","Чи є P перед кожним QRS і QRS після кожного P? Чи регулярні RR? Синусовий чи ні?"],
+ ["ЧСС","300 ÷ великі клітинки або (QRS за 6 с) × 10. Тахі- чи брадикардія?"],
+ ["Зубець P","Тривалість, амплітуда, морфологія (P mitrale / pulmonale)."],
+ ["Інтервал PR","120–200 мс. Подовжений — АВ-блокада; укорочений — WPW, вузловий ритм."],
+ ["Комплекс QRS","Ширина, вольтаж, патологічні Q, морфологія блокад ніжок, перехідна зона."],
+ ["Електрична вісь","За I та aVF (і II). Норма −30°…+90°."],
+ ["Сегмент ST і зубець T","Елевація, депресія, інверсія T, надгострі T, хвиля U. Локалізація за басейнами."],
+ ["Інтервал QT","QTc за Bazett/Fridericia. Порівняння з попередньою ЕКГ і клінікою."]];
+function steps(){document.getElementById("steps").innerHTML=STEPS.map((s,i)=>`<div class="step"><div class="n">${i+1}</div><div><b>${s[0]}</b><div style="font-size:14px;color:var(--mute)">${s[1]}</div></div></div>`).join("")}
+
+/* ===================== Атлас UI ===================== */
+let cat="Усі",cache={};
+function stripCached(e,d,o){const k=e.id+d+(o&&o.scale||"");return cache[k]||(cache[k]=renderStrip(e,d,o))}
+function renderCats(){document.getElementById("cats").innerHTML=CATS.map(c=>`<button class="chip ${c===cat?"on":""}" data-c="${c}">${c}</button>`).join("")}
+document.getElementById("cats").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;cat=b.dataset.c;renderCats();renderList()});
+document.getElementById("q").addEventListener("input",renderList);
+function filtered(){const q=document.getElementById("q").value.trim().toLowerCase();
+  return A.filter(e=>(cat==="Усі"||e.cat===cat)&&(!q||(e.name+" "+e.crit.join(" ")+" "+e.clin).toLowerCase().includes(q)))}
+function renderList(){
+  const L=filtered();
+  document.getElementById("list").innerHTML=L.length?L.map(e=>`<div class="rcard" data-id="${e.id}">${stripCached(e,4)}<div class="meta"><div><b>${e.name}</b><br><span>Відведення ${e.lead}</span></div><span class="tag">${e.cat}</span></div></div>`).join(""):`<div class="card">Нічого не знайдено.</div>`;
+}
+document.getElementById("list").addEventListener("click",e=>{const c=e.target.closest(".rcard");if(c)openSheet(c.dataset.id)});
+
+let cur=null;
+function openSheet(id){
+  cur=id;const e=A.find(x=>x.id===id);
+  document.getElementById("sh-title").textContent=e.name;
+  document.getElementById("sh-body").innerHTML=`
+    <div class="scroll">${stripCached(e,8,{scale:1.55})}</div>
+    <p class="hint">Відведення ${e.lead} · 25 мм/с · 10 мм/мВ · гортайте стрічку вбік</p>
+    <div class="box blue" style="margin-top:12px"><h4>Критерії</h4><ul class="clean">${e.crit.map(c=>`<li>${c}</li>`).join("")}</ul></div>
+    <div class="box red"><h4>Клінічне значення і тактика</h4><p style="margin:0">${e.clin}</p></div>
+    <span class="tag">${e.cat}</span>`;
+  const s=document.getElementById("sheet");s.classList.add("on");s.scrollTop=0;
+}
+function step(dir){const L=filtered().length?filtered():A;let i=L.findIndex(x=>x.id===cur);i=(i+dir+L.length)%L.length;openSheet(L[i].id)}
+document.getElementById("sh-close").onclick=()=>document.getElementById("sheet").classList.remove("on");
+document.getElementById("sh-prev").onclick=()=>step(-1);
+document.getElementById("sh-next").onclick=()=>step(1);
+
+/* ===================== Калькулятори ===================== */
+const $=id=>document.getElementById(id);
+const num=id=>{const v=parseFloat(String($(id).value).replace(",","."));return isFinite(v)?v:null};
+function calcHR(){
+  const v=num("c-rr"),u=$("c-unit").value;let hr=null;
+  if(v&&v>0){hr=u==="mm"?1500/v:u==="big"?300/v:u==="ms"?60000/v:v*10}
+  $("c-hr-res").innerHTML=hr?`<div class="big">${Math.round(hr)}</div><div class="sub">уд/хв · ${hr<60?"брадикардія":hr>100?"тахікардія":"нормальна частота"}${u!=="cnt"?` · RR ${Math.round(60000/hr)} мс`:""}</div>`:`<div class="big">—</div><div class="sub">уд/хв</div>`;
+}
+["c-rr","c-unit"].forEach(i=>$(i).addEventListener("input",calcHR));
+function qtc(qt,hr){const rr=60/hr;return{baz:qt/Math.sqrt(rr),fri:qt/Math.cbrt(rr),fra:qt+154*(1-rr),hod:qt+1.75*(hr-60)}}
+function qtVerdict(v,sex){const lim=sex==="f"?460:450;if(v>=500)return["Високий ризик (≥ 500 мс)","red"];if(v>lim)return["Подовжений","warn"];if(v<340)return["Укорочений (< 340 мс)","warn"];return["У нормі","ok"]}
+function calcQT(){
+  const qt=num("c-qt"),hr=num("c-hr"),sex=$("c-sex").value;
+  if(!qt||!hr){$("c-qt-res").innerHTML=`<div class="sub">Введіть QT та ЧСС</div>`;return}
+  const r=qtc(qt,hr),[vt,cl]=qtVerdict(r.baz,sex);
+  $("c-qt-res").innerHTML=`<div class="big">${Math.round(r.baz)} мс</div><div class="sub">QTc за Bazett</div>
+   <div class="box ${cl}" style="margin:10px 0 8px;padding:8px 12px"><b>${vt}</b>${hr>90||hr<60?" · при ЧСС поза 60–90 Bazett неточний, орієнтуйтеся на Fridericia":""}</div>
+   <table><tr><td>Fridericia</td><td class="mono">${Math.round(r.fri)} мс</td></tr><tr><td>Framingham</td><td class="mono">${Math.round(r.fra)} мс</td></tr><tr><td>Hodges</td><td class="mono">${Math.round(r.hod)} мс</td></tr></table>`;
+}
+["c-qt","c-hr","c-sex"].forEach(i=>$(i).addEventListener("input",calcQT));
+function axisName(a){if(a>=-30&&a<=90)return"Нормальне положення";if(a>90&&a<=180)return"Відхилення вправо";if(a<-30&&a>=-90)return"Відхилення вліво";return"Різке відхилення («нічийна зона»)"}
+function calcAxis(){
+  const i=num("c-i"),f=num("c-avf");
+  if(i===null||f===null||(i===0&&f===0)){$("c-ax-res").innerHTML=`<div class="sub">Введіть амплітуди</div>`;$("c-ax-svg").innerHTML="";return}
+  const a=Math.round(Math.atan2(f,i)*180/Math.PI);
+  $("c-ax-res").innerHTML=`<div class="big">${a>0?"+":""}${a}°</div><div class="sub">${axisName(a)}</div>`;
+  const R=80,cx=100,cy=100,rad=a*Math.PI/180,sx=cx+R*Math.cos(rad),sy=cy+R*Math.sin(rad);
+  const arc=(a1,a2,col)=>{const p=t=>[cx+R*Math.cos(t*Math.PI/180),cy+R*Math.sin(t*Math.PI/180)];const[x1,y1]=p(a1),[x2,y2]=p(a2);return`<path d="M${cx} ${cy}L${x1} ${y1}A${R} ${R} 0 ${(a2-a1)>180?1:0} 1 ${x2} ${y2}Z" fill="${col}"/>`};
+  const lbl=(deg,t)=>{const r=R+12,x=cx+r*Math.cos(deg*Math.PI/180),y=cy+r*Math.sin(deg*Math.PI/180)+3;return`<text x="${x}" y="${y}" text-anchor="middle" font-size="9" font-family="Manrope,sans-serif" font-weight="700" fill="#6f6865">${t}</text>`};
+  $("c-ax-svg").innerHTML=`<svg viewBox="0 0 200 200" style="width:100%;max-width:240px;display:block;margin:0 auto">
+   ${arc(-30,90,"#e5f4ec")}${arc(90,180,"#fdf1df")}${arc(-90,-30,"#e8eef8")}${arc(180,270,"#fbe9eb")}
+   <circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="#e7e0dc"/>
+   <line x1="${cx-R}" y1="${cy}" x2="${cx+R}" y2="${cy}" stroke="#d6cdc8"/><line x1="${cx}" y1="${cy-R}" x2="${cx}" y2="${cy+R}" stroke="#d6cdc8"/>
+   ${lbl(0,"I 0°")}${lbl(90,"aVF +90°")}${lbl(180,"±180°")}${lbl(-90,"−90°")}${lbl(-30,"aVL −30°")}${lbl(60,"II")}${lbl(120,"III")}
+   <line x1="${cx}" y1="${cy}" x2="${sx}" y2="${sy}" stroke="#c21f32" stroke-width="4" stroke-linecap="round"/><circle cx="${cx}" cy="${cy}" r="4" fill="#c21f32"/></svg>`;
+}
+["c-i","c-avf"].forEach(i=>$(i).addEventListener("input",calcAxis));
+function calcLVH(){
+  const sv1=num("c-sv1"),rv5=num("c-rv5"),ravl=num("c-ravl"),sv3=num("c-sv3"),sex=$("c-sex2").value;let h="";
+  if(sv1!==null&&rv5!==null){const s=sv1+rv5;h+=`<div class="stat"><span>Sokolow-Lyon</span><b class="mono" style="color:${s>=35?"var(--red)":"var(--ok)"}">${s} мм ${s>=35?"— ГЛШ":"— норма"}</b></div>`}
+  if(ravl!==null&&sv3!==null){const c=ravl+sv3,l=sex==="f"?20:28;h+=`<div class="stat"><span>Cornell</span><b class="mono" style="color:${c>l?"var(--red)":"var(--ok)"}">${c} мм ${c>l?"— ГЛШ":"— норма"}</b></div>`}
+  $("c-lvh-res").innerHTML=h||`<div class="sub">Sokolow-Lyon: SV1 + RV5/V6 ≥ 35 мм · Cornell: RaVL + SV3 &gt; 28 мм (ч) / &gt; 20 мм (ж)</div>`;
+}
+["c-sv1","c-rv5","c-ravl","c-sv3","c-sex2"].forEach(i=>$(i).addEventListener("input",calcLVH));
+
+/* ===================== Інтерпретація ===================== */
+const RH={sinus:"синусовий",af:"фібриляція передсердь",afl:"тріпотіння передсердь",svt:"надшлуночкова тахікардія",junc:"вузловий (з АВ-з'єднання)",vt:"шлуночкова тахікардія",idio:"ідіовентрикулярний",pace:"ритм електрокардіостимулятора"};
+const LOC={ant:"передніх відведеннях (V1–V4) — передня стінка, басейн ПМШГ",sept:"V1–V2 — міжшлуночкова перегородка",antlat:"V3–V6, I, aVL — передньобічна стінка",inf:"нижніх відведеннях (II, III, aVF) — нижня стінка, басейн ПКА/ОГ",lat:"бічних відведеннях (I, aVL, V5–V6) — бічна стінка, басейн ОГ/діагональних гілок",post:"V1–V3 (дзеркально) — підозра на задню стінку, запишіть V7–V9",avr:"багатьох відведеннях з елевацією в aVR — підозра на ураження стовбура ЛКА / багатосудинне"};
+const AXN={norm:"нормальне",left:"відхилення вліво",right:"відхилення вправо",ext:"різке відхилення"};
+const AVN={"1":"АВ-блокада I ступеня","2a":"АВ-блокада II ступеня, тип Мобітц I (Самойлова–Венкебаха)","2b":"АВ-блокада II ступеня, тип Мобітц II","21":"АВ-блокада II ступеня з проведенням 2:1","3":"Повна АВ-блокада (III ступеня)"};
+
+/* Підказка щодо невідкладного лікування (ERC 2021/2025, ESC) */
+function treatRec(o){
+  const {rh,reg,hr,qrs,av,st,tw,qtc,wpw,hemo}=o, wide=qrs&&qrs>=120, un=hemo==="unstable", arrest=hemo==="arrest";
+  const tach=hr&&hr>=150, unk=!hemo;
+  const cv="синхронізована кардіоверсія (до 3 спроб, з седацією), за неефективності — аміодарон 300 мг в/в за 10–20 хв і повторна кардіоверсія";
+  if(arrest&&(rh==="vt"||rh==="svt"&&wide)) return "ФШ/ШТ без пульсу: негайна дефібриляція, СЛР 30:2; адреналін 1 мг і аміодарон 300 мг в/в після 3-го розряду (далі адреналін кожні 3–5 хв, аміодарон 150 мг після 5-го).";
+  if(arrest) return "Зупинка кровообігу: СЛР 30:2, оцінка ритму; при недефібриляційному ритмі — адреналін 1 мг в/в якнайшвидше, далі кожні 3–5 хв; шукати оборотні причини (4Г/4Т).";
+  if(rh==="vt"||(rh==="svt"&&wide)){
+    if(un) return "Ширококомплексна тахікардія з нестабільністю: "+cv+".";
+    if(qtc&&qtc>=500) return "Поліморфна ШТ на тлі подовженого QT (Torsades): магнію сульфат 2 г в/в за 10 хв, корекція K⁺, відміна препаратів, що подовжують QT; при нестабільності — дефібриляція.";
+    return (unk?"Ширококомплексна тахікардія (вважати ШТ), якщо гемодинаміка стабільна":"Стабільна ширококомплексна тахікардія (вважати ШТ)")+": аміодарон 300 мг в/в за 10–60 хв або прокаїнамід 10–15 мг/кг за 20 хв; готовність до синхронізованої кардіоверсії"+(unk?"; якщо нестабільний — одразу кардіоверсія":"")+".";
+  }
+  if(rh==="svt"){
+    if(un) return "НШТ з нестабільністю: "+cv+".";
+    if(wpw) return "Тахікардія при WPW: вагусні проби; АВ-блокатори з обережністю (при передзбудженні — протипоказані), препарат вибору — прокаїнамід 10–15 мг/кг в/в за 20 хв або кардіоверсія.";
+    return "НШТ: вагусні проби (модифікований Вальсальва); аденозин 6 мг в/в швидким болюсом з промиванням → 12 мг → 18 мг (або АТФ 1% 1–2 мл в/в швидко — за місцевим протоколом); альтернатива — верапаміл 2,5–5 мг в/в за 2 хв (не при β-блокаторах, СН, гіпотензії)"+(unk?"; якщо нестабільний — кардіоверсія":"")+".";
+  }
+  if((rh==="af"||rh==="afl")&&hr&&hr>110){
+    if(wpw) return "ФП/ТП при WPW (передзбудження): НЕ вводити аденозин, верапаміл, дилтіазем, дигоксин, β-блокатори; синхронізована кардіоверсія або прокаїнамід 10–15 мг/кг в/в за 20 хв.";
+    if(un) return (rh==="af"?"ФП":"ТП")+" з високою ЧСС і нестабільністю: "+cv+".";
+    return (rh==="af"?"ФП":"ТП")+" з високою ЧСС: контроль частоти — при ФВ > 40% метопролол 2,5–5 мг в/в повільно (до 15 мг) або верапаміл/дилтіазем; при ФВ < 40% — аміодарон 300 мг в/в або дигоксин; антикоагуляція"+(unk?"; якщо нестабільний — кардіоверсія":"")+".";
+  }
+  const highAV=av==="2b"||av==="21"||av==="3";
+  if((hr&&hr<50)||highAV){
+    if(un||highAV&&unk) return "Брадикардія"+(highAV?" з АВ-блокадою високого ступеня":"")+(un?" з нестабільністю":"")+": атропін 0,5 мг в/в, повторювати до 3 мг (часто неефективний при широких QRS); далі адреналін 2–10 мкг/хв або ізопреналін 5 мкг/хв в/в, транскутанна стимуляція; підготовка до ЕКС.";
+    if(highAV) return "АВ-блокада високого ступеня при стабільній гемодинаміці: моніторинг, накласти електроди для транскутанної стимуляції, атропін/адреналін напоготові, госпіталізація для ЕКС.";
+  }
+  if(st==="up") return "Підозра на STEMI: аспірин 150–300 мг перорально, НФГ 70–100 ОД/кг в/в, знеболення (морфін при потребі), кисень лише при SpO₂ < 90%; первинна ПКВ ≤ 120 хв від діагнозу, інакше тромболізис ≤ 10 хв.";
+  if(tw==="peak") return "Підозра на гіперкаліємію: кальцію хлорид 10% 10 мл в/в (або глюконат 10% 30 мл), інсулін 10 ОД + глюкоза 25 г в/в, сальбутамол 10–20 мг небулайзерно; терміново K⁺ і моніторинг.";
+  if(rh==="sinus"&&hr&&hr>100) return "Синусова тахікардія: антиаритміки не показані — лікувати причину (біль, гіповолемія, гіпоксія, лихоманка, ТЕЛА тощо).";
+  return null;
+}
+$("a-go").onclick=()=>{
+  const rh=$("a-rhythm").value,reg=$("a-reg").value,hr=num("a-hr"),pr=num("a-pr"),qrs=num("a-qrs"),qt=num("a-qt"),sex=$("a-sex").value;
+  let ax=$("a-axis").value;const deg=num("a-deg");if(deg!==null&&!ax){const n=axisName(deg);ax=n.startsWith("Норм")?"norm":n.includes("вправо")?"right":n.includes("вліво")?"left":"ext"}
+  const lines=[],concl=[],warn=[],urgent=[];
+  // ритм
+  let rtxt=`Ритм ${RH[rh]}, ${reg==="reg"?"правильний":"неправильний"}`;
+  if(hr) rtxt+=`, ЧСС ${Math.round(hr)} уд/хв`;
+  lines.push(rtxt+".");
+  if(rh==="sinus"&&hr){ if(hr<60)concl.push("Синусова брадикардія"); else if(hr>100)concl.push("Синусова тахікардія"); else concl.push(reg==="irr"?"Синусова аритмія":"Синусовий ритм"); }
+  else concl.push(RH[rh][0].toUpperCase()+RH[rh].slice(1)+(hr&&rh==="af"?(hr>110?" з високою частотою шлуночків":hr<60?" з низькою частотою шлуночків":" з нормальною частотою шлуночків"):""));
+  if(rh==="vt") urgent.push("Шлуночкова тахікардія — оцініть пульс і гемодинаміку негайно.");
+  if(rh==="svt"&&qrs&&qrs>=120) warn.push("Ширококомплексна тахікардія: розглядайте як ШТ, доки не доведено інше.");
+  if(rh==="afl"&&hr&&Math.abs(hr-150)<12) warn.push("ЧСС ≈ 150/хв — типово для тріпотіння з проведенням 2:1.");
+  const ext=$("a-ext").value;
+  if(ext==="pac")concl.push("Надшлуночкова екстрасистолія");
+  if(ext==="pvc")concl.push("Поодинока шлуночкова екстрасистолія");
+  if(ext==="pvcf"){concl.push("Часта шлуночкова екстрасистолія");warn.push("Часта ШЕС: доцільні ехоКГ, Холтер-моніторинг, контроль електролітів.")}
+  // вісь
+  if(ax) lines.push(`Електрична вісь: ${AXN[ax]}${deg!==null?` (${deg>0?"+":""}${deg}°)`:""}.`);
+  if(ax&&ax!=="norm") concl.push((AXN[ax][0].toUpperCase()+AXN[ax].slice(1))+" електричної осі серця");
+  // інтервали
+  const iv=[];
+  if(pr) iv.push(`PR ${pr} мс`); if(qrs) iv.push(`QRS ${qrs} мс`);
+  let qc=null; if(qt&&hr){qc=qtc(qt,hr);iv.push(`QT/QTc ${qt}/${Math.round(qc.baz)} мс (Bazett; Fridericia ${Math.round(qc.fri)} мс)`)} else if(qt) iv.push(`QT ${qt} мс`);
+  if(iv.length) lines.push("Інтервали: "+iv.join(", ")+".");
+  const av=$("a-av").value;
+  if(pr&&rh==="sinus"){ if(pr>200&&!av){warn.push("PR > 200 мс — відповідає АВ-блокаді I ступеня (позначте її у розділі провідності).")} if(pr<120){warn.push("PR < 120 мс — виключіть WPW (дельта-хвиля) та нижньопередсердний/вузловий ритм.")} }
+  if(qrs){ if(qrs>=120 && ![...document.querySelectorAll("#a-cond input:checked")].length && !["vt","idio","pace"].includes(rh)) warn.push("QRS ≥ 120 мс — оцініть морфологію: БПНПГ, БЛНПГ, WPW, неспецифічне порушення внутрішньошлуночкового проведення, гіперкаліємія."); else if(qrs>=110&&qrs<120) warn.push("QRS 110–119 мс — неповна блокада ніжки або неспецифічне уповільнення проведення."); }
+  if(qc){const[vt]=qtVerdict(qc.fri,sex);const v=Math.max(qc.baz,qc.fri);const lim=sex==="f"?460:450;
+    if(qc.fri>=500||qc.baz>=500&&hr<=90){concl.push("Значне подовження інтервалу QTc");urgent.push("QTc ≥ 500 мс — високий ризик Torsades de pointes: перевірте K⁺, Mg²⁺ і ліки.")}
+    else if((hr>=60&&hr<=90?qc.baz:qc.fri)>lim) concl.push("Подовження інтервалу QTc");}
+  if(av){concl.push(AVN[av]);if(av==="2b"||av==="3"||av==="21")urgent.push("АВ-блокада високого ступеня — моніторинг, готовність до стимуляції, консультація кардіолога.")}
+  document.querySelectorAll("#a-cond input:checked").forEach(c=>concl.push(c.value));
+  // ST-T
+  const st=$("a-st").value,loc=$("a-loc").value,tw=$("a-t").value,q=$("a-q").checked;
+  if(st==="up"){lines.push(`Елевація сегмента ST у ${LOC[loc]}.`);concl.push(`Елевація ST у ${LOC[loc].split(" — ")[0]}`);urgent.push("Елевація ST: перевірте критерії STEMI (суміжні відведення, реципрокні зміни) — при відповідності невідкладна реперфузія.")}
+  if(st==="down"){lines.push(`Депресія сегмента ST у ${LOC[loc]}.`);concl.push(`Депресія ST у ${LOC[loc].split(" — ")[0]} — ознаки ішемії`);if(loc==="post"||loc==="avr")urgent.push(loc==="post"?"Депресія ST у V1–V3 може бути дзеркальним відображенням заднього STEMI — запишіть V7–V9.":"Дифузна депресія ST з елевацією в aVR — підозра на ураження стовбура ЛКА / багатосудинне.")}
+  if(st==="diff"){concl.push("Дифузна увігнута елевація ST — характерно для гострого перикардиту (диференціювати зі STEMI)")}
+  if(tw==="inv")concl.push("Інверсія зубців T"+(st?"":" — неспецифічні зміни реполяризації або ішемія, порівняйте з попередньою ЕКГ"));
+  if(tw==="peak"){concl.push("Високі загострені зубці T — виключіть гіперкаліємію");warn.push("Загострені T: терміново визначте K⁺.")}
+  if(tw==="flat")concl.push("Сплощення T і хвиля U — виключіть гіпокаліємію");
+  if(tw==="hyper"){concl.push("Надгострі зубці T — можлива найрання фаза STEMI");urgent.push("Надгострі T: повторіть ЕКГ через 15–30 хв, оцініть клініку.")}
+  if(q)concl.push("Патологічні зубці Q — рубцеві зміни / перенесений ІМ"+(st==="up"?" (або ІМ, що розвивається)":""));
+  document.querySelectorAll("#a-hyp input:checked").forEach(c=>concl.push(c.value));
+  const free=$("a-free").value.trim(); if(free) concl.push(free);
+  const qcv=qc?(hr>=60&&hr<=90?qc.baz:qc.fri):null;
+  const wpw=[...document.querySelectorAll("#a-cond input:checked")].some(c=>c.value.includes("WPW"));
+  const hemo=$("a-hemo").value;
+  if(hemo==="unstable")lines.push("Гемодинаміка нестабільна.");else if(hemo==="arrest")lines.push("Пульс відсутній.");else if(hemo==="stable")lines.push("Гемодинаміка стабільна.");
+  const rec=treatRec({rh,reg,hr,qrs,av,st,tw,qtc:qcv,wpw,hemo});
+  const text=`ЕКГ: ${lines.join(" ")}\n\nВисновок:\n${concl.map((c,i)=>`${i+1}. ${c}.`).join("\n")}`+(rec?`\n\nРекомендація (підказка): ${rec}`:"");
+  $("a-out").innerHTML=`${urgent.map(u=>`<div class="alert">⚠ ${u}</div>`).join("")}
+    ${warn.length?`<div class="box warn"><h4>Зверніть увагу</h4><ul class="clean">${warn.map(w=>`<li>${w}</li>`).join("")}</ul></div>`:""}
+    <div class="card"><h3>Висновок ЕКГ</h3><div class="out" id="a-text">${text}</div>
+    <div class="row" style="margin-top:12px"><button class="btn sec" id="a-copy">Копіювати</button><button class="btn sec" id="a-reset">Очистити</button></div></div>
+    <p class="hint">Автоматичний висновок — допоміжний інструмент. Рекомендація — орієнтир за ERC/ESC для дорослих; рішення, дози та протипоказання — за лікарем і місцевим протоколом.${!hemo&&rec?" Вкажіть гемодинаміку для точнішої підказки.":""}</p>`;
+  $("a-copy").onclick=async()=>{try{await navigator.clipboard.writeText(text);$("a-copy").textContent="Скопійовано ✓"}catch(e){const r=document.createRange();r.selectNodeContents($("a-text"));const s=getSelection();s.removeAllRanges();s.addRange(r);$("a-copy").textContent="Виділено — скопіюйте вручну"}};
+  $("a-reset").onclick=()=>{document.querySelectorAll("#v-analyze input,#v-analyze textarea").forEach(i=>i.type==="checkbox"?i.checked=false:i.value="");document.querySelectorAll("#v-analyze select").forEach(s=>s.selectedIndex=0);$("a-out").innerHTML="";window.scrollTo(0,0)};
+  $("a-out").scrollIntoView({behavior:"smooth",block:"start"});
+};
+
+/* ===================== Тест ===================== */
+let quiz=null;
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+// Теоретичні питання: перший варіант — правильний
+const TQ=[
+ ["Нормальна тривалість інтервалу PR у дорослих:",["120–200 мс","80–120 мс","200–280 мс","40–100 мс"],"PR > 200 мс — АВ-блокада I ст.; < 120 мс — підозра на WPW або вузловий ритм."],
+ ["Мінімальна ширина QRS для повної блокади ніжки пучка Гіса:",["≥ 120 мс","≥ 100 мс","≥ 90 мс","≥ 160 мс"],"QRS 110–119 мс з відповідною морфологією — неповна блокада."],
+ ["З якого значення QTc ризик Torsades de pointes вважають високим?",["≥ 500 мс","≥ 440 мс","≥ 470 мс","≥ 600 мс"],"Норма QTc: ≤ 450 мс у чоловіків, ≤ 460 мс у жінок; ≥ 500 мс — високий ризик."],
+ ["Ритм правильний, між зубцями R — 4 великі клітинки. ЧСС?",["75 /хв","60 /хв","100 /хв","150 /хв"],"300 ÷ 4 = 75."],
+ ["Ритм правильний, RR = 15 малих клітинок. ЧСС?",["100 /хв","75 /хв","150 /хв","60 /хв"],"1500 ÷ 15 = 100."],
+ ["Як визначити ЧСС при неправильному ритмі (наприклад, ФП)?",["Кількість QRS за 6 с × 10","300 ÷ найкоротший RR у великих клітинках","1500 ÷ найдовший RR у малих клітинках","За частотою хвиль f"],"6 с = 30 великих клітинок при 25 мм/с."],
+ ["QRS у I позитивний, в aVF і II — негативні. Електрична вісь:",["Відхилення вліво","Нормальна","Відхилення вправо","Різке відхилення"],"Негативний II при позитивному I означає вісь лівіше −30°."],
+ ["QRS у I негативний, в aVF — позитивний. Електрична вісь:",["Відхилення вправо","Відхилення вліво","Нормальна","Різке відхилення"],"Вісь у межах +90…+180°: ГПШ, ТЕЛА, блокада задньої гілки ЛНПГ, норма в дітей."],
+ ["Елевація ST у II, III, aVF найчастіше пов'язана з оклюзією:",["Правої коронарної артерії","Передньої міжшлуночкової гілки","Стовбура ЛКА","Діагональної гілки"],"Нижній ІМ: ПКА ≈ 80%, решта — огинаюча гілка. Запишіть V4R для оцінки ПШ."],
+ ["Елевація ST у V1–V4 вказує на ураження:",["Передньої міжшлуночкової гілки (ПМШГ)","Правої коронарної артерії","Огинаючої гілки","Задньої міжшлуночкової гілки"],"Передня стінка й перегородка — басейн ПМШГ."],
+ ["Горизонтальна депресія ST у V1–V3 з високим R у V2 насамперед потребує виключити:",["Задній STEMI","ГЛШ","WPW","Перикардит"],"Запишіть V7–V9: елевація ≥ 0,5 мм підтверджує задній ІМ."],
+ ["Поріг елевації ST у V2–V3 для жінок (4-те універсальне визначення ІМ):",["≥ 1,5 мм","≥ 1 мм","≥ 2 мм","≥ 2,5 мм"],"Чоловіки ≥ 40 р. — ≥ 2 мм, < 40 р. — ≥ 2,5 мм."],
+ ["Препарат першої лінії при Torsades de pointes:",["Магнію сульфат 2 г в/в","Аміодарон 300 мг в/в","Аденозин 6 мг в/в","Верапаміл 5 мг в/в"],"Аміодарон подовжує QT і може погіршити стан."],
+ ["ФП при синдромі WPW (широкі нерегулярні QRS). Що протипоказано?",["Верапаміл","Прокаїнамід","Електрична кардіоверсія","Консультація кардіолога"],"АВ-блокатори (верапаміл, дилтіазем, аденозин, дигоксин, β-блокатори) прискорюють проведення через додатковий шлях і можуть спричинити ФШ."],
+ ["Найраніша ЕКГ-ознака гіперкаліємії:",["Високі загострені зубці T","Розширення QRS","Синусоїдальна крива","Хвиля U"],"Далі — сплощення P, подовження PR, розширення QRS, синусоїда."],
+ ["Виражена хвиля U характерна для:",["Гіпокаліємії","Гіперкаліємії","Гіперкальціємії","Перикардиту"],"Також сплощення T і депресія ST."],
+ ["Початкова доза аденозину при AVNRT у дорослого:",["6 мг швидким болюсом","1 мг повільно","12 мг інфузією за 10 хв","0,5 мг/кг"],"За потреби — 12 мг; вводити швидко з промиванням фізрозчином."],
+ ["Регулярна вузькокомплексна тахікардія з ЧСС рівно ~150/хв. Про що подумати насамперед?",["Тріпотіння передсердь 2:1","Синусова тахікардія при лихоманці","Фібриляція шлуночків","АВ-блокада II ст."],"Хвилі F 300/хв при проведенні 2:1 дають ЧСС ≈ 150."],
+ ["АВ-блокаду II ст. Мобітц I характеризує:",["Прогресивне подовження PR до випадіння QRS","Постійний PR з раптовим випадінням QRS","Повна АВ-дисоціація","PR < 120 мс з дельта-хвилею"],"Періодика Самойлова–Венкебаха, блок зазвичай на рівні АВ-вузла."],
+ ["Яке порушення провідності найчастіше є показанням до постійної ЕКС?",["АВ-блокада II ст. Мобітц II","АВ-блокада I ст.","Мобітц I у тренованого спортсмена","Синусова аритмія"],"Мобітц II — інфрагісальний блок з ризиком повної блокади."],
+ ["Критерій Sokolow-Lyon для ГЛШ:",["SV1 + RV5/V6 ≥ 35 мм","RaVL + SV3 > 28 мм","RV1 > 7 мм","R у I + S у III > 25 мм"],"RaVL + SV3 — це критерій Cornell."],
+ ["Дифузна увігнута елевація ST із депресією PR характерна для:",["Гострого перикардиту","Нижнього STEMI","Гіпокаліємії","БЛНПГ"],"Без реципрокних депресій ST, крім aVR і V1."],
+ ["Яка ознака найбільше свідчить на користь ШТ (а не НШТ з аберацією)?",["АВ-дисоціація","Вузькі QRS","Купірування вагусними пробами","Вік молодше 35 років"],"Також захоплені та зливні комплекси, конкордантність у грудних відведеннях."],
+ ["Одна мала клітинка по горизонталі при 25 мм/с дорівнює:",["0,04 с","0,02 с","0,1 с","0,2 с"],"Велика клітинка (5 мм) = 0,2 с."],
+ ["Одна велика клітинка по вертикалі при калібруванні 10 мм/мВ дорівнює:",["0,5 мВ","1 мВ","0,1 мВ","2 мВ"],"10 мм = 1 мВ, отже 5 мм = 0,5 мВ."],
+ ["Адреналін при асистолії (ERC) вводять:",["1 мг в/в якомога швидше, далі кожні 3–5 хв","1 мг після 3-го розряду","0,5 мг одноразово","Не вводять"],"Асистолія — недефібриляційний ритм, адреналін одразу після доступу."],
+ ["Дельта-хвиля на ЕКГ — ознака:",["Синдрому WPW","Гіперкаліємії","Гіпотермії","Синдрому Бругада"],"Також PR < 120 мс і розширений QRS."],
+ ["Повна компенсаторна пауза характерна для:",["Шлуночкової екстрасистоли","Передсердної екстрасистоли","Синусової аритмії","Тріпотіння передсердь"],"Синусовий вузол не перезапускається, тож інтервал навколо ШЕС = 2 × RR."],
+ ["Який препарат подовжує інтервал QT?",["Азитроміцин","Амоксицилін","Парацетамол","Атропін"],"Також фторхінолони, антипсихотики, ондансетрон, метадон, аміодарон."],
+ ["«Склепінчаста» елевація ST ≥ 2 мм у V1–V2 з переходом у негативний T — це:",["Синдром Бругада, тип 1","Неповна БПНПГ","Гострий перикардит","Синдром Велленса"],"Ризик ФШ; провокується лихоманкою і низкою ліків."],
+ ["Найчастіша ЕКГ-знахідка при ТЕЛА:",["Синусова тахікардія","S1Q3T3","Нова БПНПГ","Фібриляція передсердь"],"S1Q3T3 трапляється менш ніж у чверті хворих; нормальна ЕКГ ТЕЛА не виключає."],
+ ["Хвиля Осборна (J-хвиля) характерна для:",["Гіпотермії","Гіперкаліємії","Синдрому WPW","Гіпокальціємії"],"Висота J-хвилі зростає з поглибленням гіпотермії."],
+ ["Глибокі симетричні негативні T у V2–V3 поза больовим нападом (синдром Велленса) вказують на:",["Критичний стеноз проксимальної ПМШГ","Гіпокаліємію","Тромбоз ПКА","Норму у молодих"],"Потрібна рання коронарографія; навантажувальні проби протипоказані."],
+ ["Домінантний R у V1 (R/S > 1) у поєднанні з відхиленням осі вправо свідчить про:",["Гіпертрофію правого шлуночка","Гіпертрофію лівого шлуночка","БЛНПГ","Гіперкаліємію"],"Інші причини високого R у V1: задній ІМ, БПНПГ, WPW, декстрокардія."],
+ ["Стимульований з верхівки ПШ комплекс QRS зазвичай має морфологію:",["БЛНПГ","БПНПГ","Нормального вузького QRS","WPW"],"ST-T при цьому дискордантні — це норма."],
+ ["Нормальна перехідна зона в грудних відведеннях:",["V3–V4","V1–V2","V5–V6","aVL–aVF"],"Зсув вправо (V1–V2) або вліво (V5–V6) — привід оцінити ротацію серця, ГПШ, ІМ."]
+];
+let qMode="mix",qLen=20;
+function quizStart(){
+  const best=store.get(`ekg-best-${qMode}-${qLen}`);
+  $("quiz").innerHTML=`<div class="card">
+    <h3>Кількість питань</h3><div class="chips" id="qz-len">${[10,20,30].map(n=>`<button class="chip ${n===qLen?"on":""}" data-n="${n}">${n}</button>`).join("")}</div>
+    <h3>Тип питань</h3><div class="chips" id="qz-mode">${[["mix","Мікс"],["strip","Стрічки ЕКГ"],["theory","Теорія"]].map(([k,t])=>`<button class="chip ${k===qMode?"on":""}" data-m="${k}">${t}</button>`).join("")}</div>
+    <p class="hint">${qMode==="strip"?`У базі ${A.length} стрічок${A.length<qLen?" — кілька повторяться":""}.`:qMode==="theory"?`У базі ${TQ.length} теоретичних питань.`:`Стрічки ЕКГ (~⅔) і теоретичні питання (~⅓), без повторів.`}${best?` · Найкращий результат: ${best}/${qLen}`:""}</p>
+    <button class="btn full" id="qz-go" style="margin-top:8px">Почати тест</button></div>`;
+  $("qz-len").onclick=e=>{const b=e.target.closest(".chip");if(b){qLen=+b.dataset.n;quizStart()}};
+  $("qz-mode").onclick=e=>{const b=e.target.closest(".chip");if(b){qMode=b.dataset.m;quizStart()}};
+  $("qz-go").onclick=newQuiz;
+}
+function stripQ(e){const same=shuffle(A.filter(x=>x.id!==e.id&&x.cat===e.cat)),other=shuffle(A.filter(x=>x.id!==e.id&&x.cat!==e.cat));const d=[...same.slice(0,2),...other].slice(0,3);const opts=shuffle([e,...d]);
+  return{type:"strip",e,opts:opts.map(o=>o.name),ans:opts.indexOf(e),title:e.name,exp:e.crit}}
+function textQ(t){const idx=shuffle([0,1,2,3]);return{type:"text",q:t[0],opts:idx.map(i=>t[1][i]),ans:idx.indexOf(0),title:t[1][0],exp:[t[2]]}}
+function newQuiz(){
+  let nS=qMode==="strip"?qLen:qMode==="theory"?0:Math.round(qLen*2/3), nT=qLen-nS;
+  let strips=[];while(strips.length<nS)strips=strips.concat(shuffle(A));strips=strips.slice(0,nS);
+  let texts=[];while(texts.length<nT)texts=texts.concat(shuffle(TQ));texts=texts.slice(0,nT);
+  const qs=shuffle([...strips.map(stripQ),...texts.map(textQ)]);
+  quiz={qs,i:0,score:0,answered:false,wrong:[]};renderQuiz();
+}
+function renderQuiz(){
+  const el=$("quiz"),N=quiz.qs.length;
+  if(quiz.i>=N){
+    const key=`ekg-best-${qMode}-${N}`,best=Math.max(quiz.score,+(store.get(key)||0));store.set(key,best);
+    const pct=quiz.score/N;
+    el.innerHTML=`<div class="card" style="text-align:center"><div class="res" style="background:none"><div class="big" style="font-size:44px">${quiz.score}/${N}</div><div class="sub">${Math.round(pct*100)}% · найкращий результат: ${best}/${N}</div></div>
+      <p>${pct>=0.9?"Відмінно — рівень впевненого читання ЕКГ.":pct>=0.7?"Добре! Перегляньте помилки нижче.":"Варто повторити атлас і основи та спробувати ще раз."}</p>
+      <div class="row"><button class="btn" id="qz-again">Ще раз</button><button class="btn sec" id="qz-set">Налаштування</button></div></div>
+      ${quiz.wrong.length?`<div class="card"><h3>Помилки (${quiz.wrong.length})</h3>${quiz.wrong.map(w=>`<div class="step" style="display:block"><div style="font-size:13px;color:var(--mute)">${w.type==="strip"?"Стрічка ЕКГ, відведення "+w.e.lead:esc(w.q)}</div><div>Ваша відповідь: <span style="color:var(--red)">${esc(w.given)}</span></div><div>Правильно: <b style="color:var(--ok)">${esc(w.title)}</b></div>${w.type==="strip"?`<a href="#atlas" data-open="${w.e.id}" style="font-size:13px;color:var(--blue)">Відкрити в атласі →</a>`:`<div style="font-size:13px;color:var(--mute)">${esc(w.exp[0])}</div>`}</div>`).join("")}</div>`:""}`;
+    $("qz-again").onclick=()=>{newQuiz();window.scrollTo(0,0)};$("qz-set").onclick=quizStart;
+    el.querySelectorAll("[data-open]").forEach(a=>a.onclick=()=>setTimeout(()=>openSheet(a.dataset.open),50));
+    return;
+  }
+  const Q=quiz.qs[quiz.i];
+  const body=Q.type==="strip"
+    ?`<div class="card" style="padding:12px"><p style="margin:0 0 8px;font-weight:700">Який діагноз на стрічці?</p><div class="scroll">${stripCached(Q.e,6,{scale:1.25})}</div><p class="hint">Відведення ${Q.e.lead} · гортайте стрічку вбік</p></div>`
+    :`<div class="card"><span class="tag" style="background:var(--blue-soft);color:var(--blue)">Теорія</span><p style="margin:10px 0 0;font-weight:700;font-size:16px">${esc(Q.q)}</p></div>`;
+  el.innerHTML=`<div class="stat"><span>Питання ${quiz.i+1} з ${N}</span><span>Правильно: ${quiz.score}</span></div>
+    <div class="progress"><i style="width:${quiz.i/N*100}%"></i></div>${body}
+    <div id="qz-opts">${Q.opts.map((o,i)=>`<button class="opt" data-i="${i}">${esc(o)}</button>`).join("")}</div><div id="qz-exp"></div>`;
+  quiz.answered=false;
+  $("qz-opts").onclick=ev=>{
+    const b=ev.target.closest(".opt");if(!b||quiz.answered)return;quiz.answered=true;
+    const i=+b.dataset.i,ok=i===Q.ans;if(ok)quiz.score++;else quiz.wrong.push({...Q,given:Q.opts[i]});
+    document.querySelectorAll(".opt").forEach(o=>{if(+o.dataset.i===Q.ans)o.classList.add("right");else if(o===b)o.classList.add("wrong")});
+    $("qz-exp").innerHTML=`<div class="box ${ok?"ok":"red"}"><h4>${ok?"Правильно":"Правильна відповідь: "+esc(Q.title)}</h4><ul class="clean">${Q.exp.map(c=>`<li>${c}</li>`).join("")}</ul></div>
+      <button class="btn full" id="qz-next">${quiz.i===N-1?"Результат":"Далі"}</button>`;
+    $("qz-next").onclick=()=>{quiz.i++;renderQuiz();window.scrollTo(0,0)};
+    $("qz-exp").scrollIntoView({behavior:"smooth",block:"nearest"});
+  };
+}
+
+/* ===================== Фото/відео ЕКГ + ШІ ===================== */
+let media=[],mcur=-1,sampleFn=null,maxImg=20,mid=0;
+async function toJpeg(src,maxSide=2200){
+  const img=await createImageBitmap(src);
+  const k=Math.min(1,maxSide/Math.max(img.width,img.height));
+  const c=document.createElement("canvas");c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);
+  c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+  return await new Promise(r=>c.toBlob(r,"image/jpeg",0.88));
+}
+async function addFiles(files){
+  for(const f of files){
+    if(!f)continue;
+    if(f.type.startsWith("video/")){media.push({id:++mid,kind:"video",blob:f,url:URL.createObjectURL(f),name:f.name||"Відео"});}
+    else if(f.type.startsWith("image/")||!f.type){let b;try{b=await toJpeg(f)}catch(e){b=f}media.push({id:++mid,kind:"image",blob:b,url:URL.createObjectURL(b)});}
+  }
+  if(media.length){mcur=media.length-1;renderMedia();$("ph-ai-out").innerHTML=""}
+}
+function renderMedia(){
+  $("ph-wrap").style.display=media.length?"block":"none";
+  if(!media.length){$("ph-card").classList.remove("pin");$("ph-pin").textContent="📌 Закріпити";return}
+  $("ph-thumbs").innerHTML=media.map((m,i)=>`<div class="th ${i===mcur?"on":""}" data-i="${i}">${m.kind==="video"?`<video src="${m.url}#t=0.1" muted playsinline preload="metadata"></video><span class="vb">▶</span>`:`<img src="${m.url}" alt="">`}<button class="x" data-x="${i}" aria-label="Видалити">✕</button><span class="n">${i+1}</span></div>`).join("");
+  const m=media[mcur];
+  $("ph-view").innerHTML=m.kind==="video"?`<video id="ph-video" src="${m.url}" controls playsinline style="display:block;width:100%;background:#000"></video>`:`<img id="ph-img" src="${m.url}" alt="ЕКГ ${mcur+1}" style="display:block;width:100%">`;
+  $("ph-zoom").style.display=m.kind==="video"?"none":"";$("ph-zoom").textContent="🔍 Збільшити";
+  $("ph-frame").style.display=m.kind==="video"?"":"none";
+  const ni=media.filter(x=>x.kind==="image").length,nv=media.length-ni;
+  $("ph-count").textContent=`Фото: ${ni}${nv?` · відео: ${nv} (для ШІ з кожного відео береться кілька кадрів; кнопкою «📸 Кадр» можна додати потрібний момент окремим фото)`:""}`;
+}
+$("ph-thumbs").addEventListener("click",e=>{
+  const x=e.target.closest("[data-x]");
+  if(x){const i=+x.dataset.x;URL.revokeObjectURL(media[i].url);media.splice(i,1);if(mcur>=media.length)mcur=media.length-1;renderMedia();return}
+  const t=e.target.closest(".th");if(t){mcur=+t.dataset.i;renderMedia()}
+});
+$("ph-cam").onchange=e=>{addFiles([...e.target.files]);e.target.value=""};
+$("ph-vcam").onchange=e=>{addFiles([...e.target.files]);e.target.value=""};
+$("ph-file").onchange=e=>{addFiles([...e.target.files]);e.target.value=""};
+let fcTimer=null;
+const fcCancel=()=>{clearTimeout(fcTimer);fcTimer=null};
+window.addEventListener("blur",fcCancel);document.addEventListener("visibilitychange",()=>{if(document.hidden)fcCancel()});
+document.querySelectorAll(".fbtn input").forEach(inp=>{
+  inp.addEventListener("change",fcCancel);
+  inp.addEventListener("click",()=>{fcCancel();if(window.EKG_NATIVE)return;fcTimer=setTimeout(()=>{
+    const z=$("ph-paste");z.style.borderColor="var(--red)";z.style.background="var(--red-soft)";z.style.color="var(--red)";
+    $("ph-help").innerHTML="<b style='color:var(--red)'>У цьому переглядачі камера й галерея недоступні.</b> Скопіюйте фото в галереї і довго натисніть на поле нижче → «Вставити». У Chrome кнопки працюють.";
+    z.scrollIntoView({behavior:"smooth",block:"center"});},1500)});
+});
+function pasteImg(e){const fs=[...((e.clipboardData||{}).items||[])].filter(it=>it.type&&(it.type.startsWith("image/")||it.type.startsWith("video/"))).map(it=>it.getAsFile());if(fs.length){e.preventDefault();addFiles(fs);$("ph-paste").textContent="📋 Вставити фото сюди"}}
+$("ph-paste").addEventListener("paste",pasteImg);
+$("ph-paste").addEventListener("input",()=>{$("ph-paste").textContent="📋 Вставити фото сюди"});
+$("ph-paste").addEventListener("drop",e=>{e.preventDefault();addFiles([...e.dataTransfer.files])});
+$("ph-paste").addEventListener("dragover",e=>e.preventDefault());
+$("ph-zoom").onclick=()=>{const im=$("ph-img");if(!im)return;const z=im.classList.toggle("z");$("ph-zoom").textContent=z?"🔍 Зменшити":"🔍 Збільшити"};
+$("ph-pin").onclick=()=>{const p=$("ph-card").classList.toggle("pin");$("ph-pin").textContent=p?"📌 Відкріпити":"📌 Закріпити"};
+$("ph-del").onclick=()=>{media.forEach(m=>URL.revokeObjectURL(m.url));media=[];mcur=-1;renderMedia();$("ph-ai-out").innerHTML=""};
+function grab(v){const c=document.createElement("canvas");c.width=v.videoWidth;c.height=v.videoHeight;c.getContext("2d").drawImage(v,0,0);return new Promise(r=>c.toBlob(r,"image/jpeg",0.9))}
+$("ph-frame").onclick=async()=>{
+  const v=$("ph-video");if(!v||!v.videoWidth)return;v.pause();
+  try{const b=await toJpeg(await grab(v));const keep=mcur;media.splice(mcur+1,0,{id:++mid,kind:"image",blob:b,url:URL.createObjectURL(b)});mcur=keep+1;renderMedia();}
+  catch(e){$("ph-count").textContent="Не вдалося взяти кадр з цього відео."}
+};
+async function videoFrames(m,n){
+  const v=document.createElement("video");v.muted=true;v.playsInline=true;v.preload="auto";v.src=m.url;
+  await new Promise((ok,bad)=>{v.onloadeddata=ok;v.onerror=()=>bad(new Error("video"));setTimeout(()=>bad(new Error("timeout")),15000)});
+  const d=isFinite(v.duration)&&v.duration>0?v.duration:1,out=[];
+  for(let i=0;i<n;i++){
+    const t=Math.min(d-0.05,d*(i+0.5)/n);
+    await new Promise(ok=>{v.onseeked=ok;v.currentTime=Math.max(0,t);setTimeout(ok,4000)});
+    try{out.push(await toJpeg(await grab(v)))}catch(e){}
+  }
+  return out;
+}
+async function collectImages(status){
+  const imgs=media.filter(m=>m.kind==="image").map(m=>m.blob).slice(0,maxImg);
+  const vids=media.filter(m=>m.kind==="video");
+  if(vids.length){
+    const free=Math.max(0,maxImg-imgs.length);
+    const per=Math.max(0,Math.min(6,Math.floor(free/vids.length)));
+    for(let i=0;i<vids.length&&per>0;i++){status(`Беру кадри з відео ${i+1} з ${vids.length}…`);try{imgs.push(...await videoFrames(vids[i],per))}catch(e){}}
+  }
+  return imgs;
+}
+
+(async()=>{try{
+  if(!window.claude||!claude.use)return;
+  const s=await claude.use("sample");if(!s)return;
+  const lim=await s.limits().catch(()=>null);if(!lim||!lim.images)return;
+  maxImg=lim.images.maxCount||maxImg;
+  sampleFn=s;$("ph-ai").style.display="flex";
+}catch(e){}})();
+
+const COND_KEYS={rbbb:0,irbbb:1,lbbb:2,lafb:3,lpfb:4,wpw:5},HYP_KEYS={lvh:0,rvh:1,lae:2,rae:3};
+const AI_PROMPT=(N,H)=>`Ти — досвідчений кардіолог-функціоналіст і лікар екстреної медицини. Гемодинаміка пацієнта за даними медика: ${H}. Тобі надано ${N} зображень однієї ЕКГ-досліджуваної ситуації: це можуть бути різні відведення або частини однієї стрічки, кілька стрічок, а також кадри з відео кардіомонітора (по порядку часу). Розглянь УСІ зображення разом як одне дослідження: зістав відведення, шукай минущі аритмії, паузи, екстрасистоли, динаміку між кадрами. Якщо зображення явно належать різним пацієнтам або записам — вкажи це в uncertain. Проаналізуй систематично (якість запису, ритм, ЧСС, PR, QRS, QT, вісь, провідність, ST-T, гіпертрофія) і поверни ТІЛЬКИ JSON без markdown за схемою:
+{
+ "quality": "коротка оцінка якості фото/запису українською",
+ "readable": true|false,
+ "rhythm": "sinus"|"af"|"afl"|"svt"|"junc"|"vt"|"idio"|"pace",
+ "regular": "reg"|"irr",
+ "hr": число або null,
+ "ext": ""|"pac"|"pvc"|"pvcf",
+ "pr": мс або null, "qrs": мс або null, "qt": мс або null,
+ "axis": ""|"norm"|"left"|"right"|"ext", "deg": градуси або null,
+ "av": ""|"1"|"2a"|"2b"|"21"|"3",
+ "cond": масив з ["rbbb","irbbb","lbbb","lafb","lpfb","wpw"],
+ "st": ""|"up"|"down"|"diff",
+ "loc": "ant"|"sept"|"antlat"|"inf"|"lat"|"post"|"avr",
+ "t": ""|"inv"|"peak"|"flat"|"hyper",
+ "q": true|false,
+ "hyp": масив з ["lvh","rvh","lae","rae"],
+ "free": "інші знахідки українською або порожньо",
+ "description": "розгорнутий опис ЕКГ українською, 4–8 речень, з обґрунтуванням",
+ "urgent": "невідкладні знахідки українською або порожньо",
+ "confidence": "висока"|"середня"|"низька",
+ "uncertain": "що саме не вдалося надійно оцінити по фото",
+ "perImage": "коротко: що видно на кожному зображенні (№1 — ..., №2 — ...)",
+ "treatment": "ОДНЕ речення: невідкладна тактика/препарат першої лінії з дозою для дорослого за ERC/ESC (напр. для НШТ — вагусні проби, аденозин 6→12→18 мг в/в швидко або АТФ за місцевим протоколом, альтернатива верапаміл 2,5–5 мг в/в); врахуй гемодинаміку і протипоказання (WPW, широкі QRS); порожньо, якщо невідкладне лікування не потрібне"
+}
+Швидкість стрічки вважай 25 мм/с і 10 мм/мВ, якщо на фото не вказано інше. Якщо параметр не можна оцінити — null або порожньо, не вигадуй. Якщо на фото не ЕКГ — readable=false.`;
+const esc=s=>String(s??"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+function setF(id,v){if(v===null||v===undefined||v==="")return;const el=$(id);
+  if(el.tagName==="SELECT"&&![...el.options].some(o=>o.value===String(v)))return;el.value=v;el.classList.add("ai-fill")}
+function fillForm(r){
+  document.querySelectorAll(".ai-fill").forEach(e=>e.classList.remove("ai-fill"));
+  setF("a-rhythm",r.rhythm);setF("a-reg",r.regular);setF("a-hr",r.hr);setF("a-ext",r.ext);
+  setF("a-pr",r.pr);setF("a-qrs",r.qrs);setF("a-qt",r.qt);setF("a-axis",r.axis);setF("a-deg",r.deg);
+  setF("a-av",r.av);setF("a-st",r.st);if(r.st)setF("a-loc",r.loc);setF("a-t",r.t);
+  const cb=document.querySelectorAll("#a-cond input");cb.forEach(c=>c.checked=false);(r.cond||[]).forEach(k=>{if(k in COND_KEYS){cb[COND_KEYS[k]].checked=true;cb[COND_KEYS[k]].parentElement.classList.add("ai-fill")}});
+  const hb=document.querySelectorAll("#a-hyp input");hb.forEach(c=>c.checked=false);(r.hyp||[]).forEach(k=>{if(k in HYP_KEYS){hb[HYP_KEYS[k]].checked=true;hb[HYP_KEYS[k]].parentElement.classList.add("ai-fill")}});
+  $("a-q").checked=!!r.q;if(r.q)$("a-q").parentElement.classList.add("ai-fill");
+  if(r.free){$("a-free").value=r.free;$("a-free").classList.add("ai-fill")}
+}
+$("ph-ai").onclick=async()=>{
+  if(!sampleFn||!media.length)return;const btn=$("ph-ai"),out=$("ph-ai-out");
+  btn.disabled=true;const st=t=>btn.innerHTML=`<span class="spin"></span> ${t}`;st("Готую зображення…");out.innerHTML="";
+  try{
+    const imgs=await collectImages(st);
+    if(!imgs.length)throw{code:"no_images"};
+    st(`Аналізую ${imgs.length} зображ. — це може тривати до 1–2 хв…`);
+    const H={stable:"стабільна",unstable:"нестабільна (шок, синкопе, ішемія, тяжка СН)",arrest:"пульс відсутній"}[$("a-hemo").value]||"не вказано (якщо тактика залежить від неї — дай варіант для стабільного і коротко для нестабільного)";
+    const r=await sampleFn.json(AI_PROMPT(imgs.length,H),{images:imgs,modelTier:"complex"});
+    if(!r||r.readable===false){out.innerHTML=`<div class="box warn" style="margin-top:10px"><h4>Не вдалося прочитати</h4><p style="margin:0">${esc(r&&r.quality||"Сфотографуйте ЕКГ рівніше, ближче і при кращому освітленні.")}</p></div>`;}
+    else{
+      fillForm(r);
+      out.innerHTML=`${r.urgent?`<div class="alert" style="margin-top:10px">⚠ ${esc(r.urgent)}</div>`:""}
+       <div class="box blue" style="margin-top:10px"><h4>Опис ШІ · впевненість: ${esc(r.confidence||"—")}</h4><p style="margin:0 0 6px">${esc(r.description)}</p>
+       ${r.treatment?`<p style="margin:0 0 6px"><b>💉 Підказка щодо лікування:</b> ${esc(r.treatment)}</p>`:""}
+       ${r.perImage?`<p style="margin:0 0 6px;font-size:13px"><b>По зображеннях:</b> ${esc(r.perImage)}</p>`:""}
+       ${r.uncertain?`<p style="margin:0 0 6px;font-size:13px"><b>Не оцінено надійно:</b> ${esc(r.uncertain)}</p>`:""}
+       <p style="margin:0;font-size:13px;color:var(--mute)">Якість: ${esc(r.quality)}</p></div>
+       <div class="box warn"><p style="margin:0;font-size:13px">Поля, заповнені ШІ, підсвічені фіолетовим. <b>Перевірте кожне по фото</b>, виправте за потреби і натисніть «Сформувати висновок».</p></div>`;
+    }
+  }catch(e){
+    out.innerHTML=`<div class="box warn" style="margin-top:10px"><p style="margin:0">${e&&e.code==="rate_limited"?"Забагато запитів — спробуйте за хвилину.":e&&e.code==="not_granted"?"Доступ до ШІ не надано.":e&&e.code==="image_rejected"?"Один із файлів не підходить (формат або розмір). Видаліть його і спробуйте ще раз.":e&&e.code==="no_images"?"Не вдалося отримати зображення з відео. Поставте відео на паузу в потрібному місці й натисніть «📸 Кадр».":"Не вдалося виконати аналіз. Спробуйте ще раз."}</p></div>`;
+    if(e&&e.code==="not_granted")btn.style.display="none";
+  }
+  btn.disabled=false;btn.innerHTML="✨ Розібрати все з ШІ ще раз";
+};
+document.addEventListener("input",e=>{if(e.target.classList)e.target.classList.remove("ai-fill")},true);
+document.addEventListener("change",e=>{if(e.target.type==="checkbox")e.target.parentElement.classList.remove("ai-fill")},true);
+
+/* ===================== Старт ===================== */
+if(true){const h=$("ph-help");if(h)h.textContent="У галереї можна вибрати одразу кілька фото й відео. Фото також можна скопіювати й вставити в поле нижче.";}
+anatomy();steps();renderCats();route();
+if(!window.EKG_NATIVE&&"serviceWorker" in navigator&&location.protocol==="https:"){navigator.serviceWorker.register("sw.js").catch(()=>{})}
+</script>
+</body>
+</html>
