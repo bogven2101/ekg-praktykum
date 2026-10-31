@@ -115,6 +115,8 @@ textarea{min-height:70px;resize:vertical}
 #ph-card.pin #ph-wrap{margin-top:0!important}
 #ph-wrap .row .btn{padding:9px 8px;font-size:14px;white-space:nowrap}
 #ph-card.pin #ph-scroll{max-height:30vh!important}
+.keybox{background:var(--bg);border-radius:12px;padding:10px 12px}
+.keybox summary{font-weight:700;font-size:14px;cursor:pointer}
 .thumbs{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px}
 .th{position:relative;flex:none;width:76px;height:58px;border-radius:10px;overflow:hidden;border:2px solid var(--line);background:#000;cursor:pointer}
 .th.on{border-color:var(--red)}
@@ -249,6 +251,13 @@ textarea{min-height:70px;resize:vertical}
       </div>
       <p class="hint" id="ph-count"></p>
       <button class="btn full" id="ph-ai" style="margin-top:8px;display:none">✨ Розібрати все з ШІ і заповнити форму</button>
+      <details id="ph-key" style="display:none;margin-top:10px" class="keybox">
+        <summary>⚙ Свій ключ ШІ (Anthropic API)</summary>
+        <p class="hint" style="margin:8px 0">Вставте власний ключ — і розбір ШІ працюватиме прямо тут. Ключ зберігається <b>лише на цьому пристрої</b>, запити йдуть напряму в Anthropic, оплата — з вашого балансу (≈ 2–4 центи за розбір). Отримати ключ: <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com</a> → Billing (поповнити) → API Keys → Create Key. Радимо встановити місячний ліміт у Limits.</p>
+        <input type="password" id="ph-keyin" placeholder="sk-ant-..." autocomplete="off" spellcheck="false" style="width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;font:500 14px 'JetBrains Mono',monospace">
+        <div class="row" style="margin-top:8px"><button class="btn sec" id="ph-keysave">Зберегти</button><button class="btn sec" id="ph-keytest">Перевірити</button><button class="btn sec" id="ph-keydel" style="flex:0 0 52px" aria-label="Видалити ключ">🗑</button></div>
+        <p class="hint" id="ph-keymsg"></p>
+      </details>
       <a class="btn sec full" id="ph-claude" href="https://claude.ai/artifact/2sponh6AAyHQDLkHdr3h1s" target="_blank" rel="noopener" style="margin-top:8px;display:none;text-decoration:none">✨ Розбір ШІ у версії Claude ↗</a>
       <div id="ph-ai-out"></div>
     </div>
@@ -1077,18 +1086,49 @@ async function collectImages(status){
 }
 
 let aiProxy=null;
+let userKey="";
+const KEY_LS="ekg-anthropic-key";
+function refreshAIButtons(){
+  const on=!!(sampleFn||userKey||aiProxy);
+  $("ph-ai").style.display=on?"flex":"none";
+  if(!window.claude)$("ph-claude").textContent=on?"Відкрити версію в Claude ↗":"✨ Розбір ШІ у версії Claude ↗";
+  $("ph-keymsg").textContent=userKey?"✓ Ключ збережено на цьому пристрої (…"+userKey.slice(-4)+")":"";
+}
 function initExternalAI(){
   if(window.claude)return;
-  $("ph-claude").style.display="flex";
+  $("ph-claude").style.display="flex";$("ph-key").style.display="block";
+  userKey=store.get(KEY_LS)||"";if(userKey)$("ph-keyin").value=userKey;
   const u=(window.EKG_AI_URL||"").trim();
-  if(u){aiProxy=u;maxImg=10;$("ph-ai").style.display="flex";$("ph-claude").textContent="Відкрити версію в Claude ↗";}
+  if(u){aiProxy=u;maxImg=10;}
+  if(userKey)maxImg=10;
+  refreshAIButtons();
 }
+async function anthropicDirect(prompt,b64s,maxTokens){
+  let r;
+  try{r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"x-api-key":userKey,"anthropic-version":"2023-06-01","content-type":"application/json","anthropic-dangerous-direct-browser-access":"true"},
+    body:JSON.stringify({model:"claude-sonnet-5-5",max_tokens:maxTokens||2500,messages:[{role:"user",content:[...b64s.map(d=>({type:"image",source:{type:"base64",media_type:"image/jpeg",data:d}})),{type:"text",text:prompt}]}]})})}
+  catch(e){throw{code:"network"}}
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok){const m=(d.error&&d.error.message)||"";throw{code:r.status===401||r.status===403?"bad_key":r.status===429||r.status===529?"rate_limited":r.status===400&&/credit|balance/i.test(m)?"no_credit":"upstream_error",message:m}}
+  return (d.content||[]).filter(c=>c.type==="text").map(c=>c.text).join("\n");
+}
+$("ph-keysave").onclick=()=>{const v=$("ph-keyin").value.trim();if(!/^sk-ant-/.test(v)){$("ph-keymsg").textContent="Ключ має починатися з sk-ant-";return}userKey=v;store.set(KEY_LS,v);maxImg=10;refreshAIButtons()};
+$("ph-keydel").onclick=()=>{userKey="";$("ph-keyin").value="";try{localStorage.removeItem(KEY_LS)}catch(e){}refreshAIButtons();$("ph-keymsg").textContent="Ключ видалено з пристрою."};
+$("ph-keytest").onclick=async()=>{
+  const v=$("ph-keyin").value.trim();if(!v){$("ph-keymsg").textContent="Вставте ключ.";return}
+  const old=userKey;userKey=v;$("ph-keymsg").textContent="Перевіряю…";
+  try{await anthropicDirect("Відповідай одним словом: ок",[],5);$("ph-keymsg").textContent="✓ Ключ працює. Натисніть «Зберегти»."}
+  catch(e){$("ph-keymsg").textContent=e.code==="bad_key"?"✕ Ключ недійсний.":e.code==="no_credit"?"✕ Ключ дійсний, але на балансі немає коштів (Billing).":e.code==="network"?"✕ Немає з'єднання.":"✕ Помилка: "+(e.message||e.code)}
+  userKey=old;
+};
 function parseJSONLoose(t){try{return JSON.parse(t)}catch(e){}const m=String(t).match(/```(?:json)?\s*([\s\S]*?)```/);if(m){try{return JSON.parse(m[1])}catch(e){}}const a=t.indexOf("{"),b=t.lastIndexOf("}");if(a>=0&&b>a)return JSON.parse(t.slice(a,b+1));throw{code:"invalid_json"}}
 async function blobToB64(b){const buf=new Uint8Array(await b.arrayBuffer());let s="";for(let i=0;i<buf.length;i+=0x8000)s+=String.fromCharCode.apply(null,buf.subarray(i,i+0x8000));return btoa(s)}
 async function aiAnalyze(prompt,imgs){
   if(sampleFn)return await sampleFn.json(prompt,{images:imgs,modelTier:"complex"});
   const small=[];for(const b of imgs.slice(0,10)){try{small.push(await toJpeg(b,1568))}catch(e){small.push(b)}}
-  const body={prompt,token:window.EKG_AI_TOKEN||"",images:await Promise.all(small.map(blobToB64))};
+  const b64s=await Promise.all(small.map(blobToB64));
+  if(userKey)return parseJSONLoose(await anthropicDirect(prompt+"\n\nВідповідай ТІЛЬКИ одним JSON-об'єктом, без markdown.",b64s));
+  const body={prompt,token:window.EKG_AI_TOKEN||"",images:b64s};
   let r;try{r=await fetch(aiProxy,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)})}catch(e){throw{code:"network"}}
   const d=await r.json().catch(()=>({}));
   if(!r.ok)throw{code:r.status===429?"rate_limited":r.status===401?"not_granted":"upstream_error",message:d.error};
@@ -1144,7 +1184,7 @@ function fillForm(r){
   if(r.free){$("a-free").value=r.free;$("a-free").classList.add("ai-fill")}
 }
 $("ph-ai").onclick=async()=>{
-  if((!sampleFn&&!aiProxy)||!media.length)return;const btn=$("ph-ai"),out=$("ph-ai-out");
+  if((!sampleFn&&!aiProxy&&!userKey)||!media.length)return;const btn=$("ph-ai"),out=$("ph-ai-out");
   btn.disabled=true;const st=t=>btn.innerHTML=`<span class="spin"></span> ${t}`;st("Готую зображення…");out.innerHTML="";
   try{
     const imgs=await collectImages(st);
@@ -1164,7 +1204,7 @@ $("ph-ai").onclick=async()=>{
        <div class="box warn"><p style="margin:0;font-size:13px">Поля, заповнені ШІ, підсвічені фіолетовим. <b>Перевірте кожне по фото</b>, виправте за потреби і натисніть «Сформувати висновок».</p></div>`;
     }
   }catch(e){
-    out.innerHTML=`<div class="box warn" style="margin-top:10px"><p style="margin:0">${e&&e.code==="rate_limited"?"Забагато запитів — спробуйте за хвилину.":e&&e.code==="not_granted"?"Доступ до ШІ не надано.":e&&e.code==="image_rejected"?"Один із файлів не підходить (формат або розмір). Видаліть його і спробуйте ще раз.":e&&e.code==="network"?"Немає з'єднання з сервером ШІ. Перевірте інтернет.":e&&e.code==="invalid_json"?"ШІ відповів у неочікуваному форматі. Спробуйте ще раз.":e&&e.code==="no_images"?"Не вдалося отримати зображення з відео. Поставте відео на паузу в потрібному місці й натисніть «📸 Кадр».":"Не вдалося виконати аналіз. Спробуйте ще раз."}</p></div>`;
+    out.innerHTML=`<div class="box warn" style="margin-top:10px"><p style="margin:0">${e&&e.code==="rate_limited"?"Забагато запитів — спробуйте за хвилину.":e&&e.code==="not_granted"?"Доступ до ШІ не надано.":e&&e.code==="image_rejected"?"Один із файлів не підходить (формат або розмір). Видаліть його і спробуйте ще раз.":e&&e.code==="bad_key"?"Ключ API недійсний — перевірте його в «⚙ Свій ключ ШІ».":e&&e.code==="no_credit"?"На балансі Anthropic немає коштів — поповніть у console.anthropic.com → Billing.":e&&e.code==="network"?"Немає з'єднання з сервером ШІ. Перевірте інтернет.":e&&e.code==="invalid_json"?"ШІ відповів у неочікуваному форматі. Спробуйте ще раз.":e&&e.code==="no_images"?"Не вдалося отримати зображення з відео. Поставте відео на паузу в потрібному місці й натисніть «📸 Кадр».":"Не вдалося виконати аналіз. Спробуйте ще раз."}</p></div>`;
     if(e&&e.code==="not_granted")btn.style.display="none";
   }
   btn.disabled=false;btn.innerHTML="✨ Розібрати все з ШІ ще раз";
