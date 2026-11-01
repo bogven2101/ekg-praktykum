@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Довідник парамедика</title>
+<meta name="theme-color" content="#14213d">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Парамедик">
+<style>
+@font-face{font-family:Manrope;font-weight:400;font-display:swap;src:url(fonts/manrope-cyrillic-400-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Manrope;font-weight:500;font-display:swap;src:url(fonts/manrope-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Manrope;font-weight:600;font-display:swap;src:url(fonts/manrope-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Manrope;font-weight:700;font-display:swap;src:url(fonts/manrope-cyrillic-700-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Manrope;font-weight:800;font-display:swap;src:url(fonts/manrope-cyrillic-800-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'JetBrains Mono';font-weight:500;font-display:swap;src:url(fonts/jetbrains-mono-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'JetBrains Mono';font-weight:700;font-display:swap;src:url(fonts/jetbrains-mono-cyrillic-700-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Manrope;font-weight:400;font-display:swap;src:url(fonts/manrope-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Manrope;font-weight:500;font-display:swap;src:url(fonts/manrope-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Manrope;font-weight:600;font-display:swap;src:url(fonts/manrope-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Manrope;font-weight:700;font-display:swap;src:url(fonts/manrope-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Manrope;font-weight:800;font-display:swap;src:url(fonts/manrope-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-weight:500;font-display:swap;src:url(fonts/jetbrains-mono-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-weight:700;font-display:swap;src:url(fonts/jetbrains-mono-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{--bg:#f4f5f8;--card:#fff;--ink:#141a2b;--mute:#626b80;--line:#e2e5ec;--navy:#14213d;--navy2:#1f3160;--red:#c62828;--red-soft:#fdeaea;--yel:#f2c200;--ok:#1f7a4d;--ok-soft:#e5f4ec;--warn:#9a5b00;--warn-soft:#fdf2df;--blue:#24508f;--blue-soft:#e8eef8;--r:16px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Manrope,system-ui,sans-serif;font-size:15px;line-height:1.5}
+body{padding-top:env(safe-area-inset-top);padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+header{position:sticky;top:0;z-index:20;background:var(--navy);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px}
+header .logo{width:36px;height:36px;border-radius:50%;background:var(--red);display:grid;place-items:center;flex:none;box-shadow:0 0 0 3px rgba(255,255,255,.15)}
+header h1{font-size:17px;margin:0;font-weight:800}
+header small{display:block;color:#b8c2dc;font-size:12px;font-weight:500;margin-top:-1px}
+main{max-width:640px;margin:0 auto;padding:14px 14px 30px}
+.view{display:none}.view.on{display:block}
+h2{font-size:22px;margin:6px 4px 4px;font-weight:800;letter-spacing:-.3px}
+h3{font-size:16px;margin:0 0 8px;font-weight:700}
+.lead{color:var(--mute);margin:0 4px 14px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:12px}
+.search{width:100%;padding:13px 14px;border-radius:12px;border:1px solid var(--line);font:500 16px Manrope,system-ui,sans-serif;margin-bottom:10px;background:#fff}
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.quick button{border:none;border-radius:14px;padding:10px 4px;font:700 12px Manrope,system-ui,sans-serif;color:#fff;background:var(--navy2);display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;min-height:64px;justify-content:center;text-align:center;line-height:1.2}
+.quick button.r{background:var(--red)}
+.quick button span{font-size:20px}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 13px;font:600 13px Manrope,system-ui,sans-serif;color:var(--ink);cursor:pointer}
+.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.item{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:8px;cursor:pointer}
+.item:active{transform:scale(.99)}
+.item .no{flex:none;min-width:38px;height:38px;border-radius:10px;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center;font:800 13px Manrope,system-ui,sans-serif}
+.item .no.x{background:var(--red-soft);color:var(--red)}
+.item b{display:block;font-size:15px;line-height:1.3}.item small{color:var(--mute);font-size:12px}
+.sheet{position:fixed;inset:0;z-index:50;background:var(--bg);overflow-y:auto;transform:translateY(100%);transition:transform .22s ease;padding-top:env(safe-area-inset-top);padding-bottom:calc(24px + env(safe-area-inset-bottom))}
+.sheet.on{transform:none}
+.bar{position:sticky;top:0;background:var(--navy);color:#fff;display:flex;align-items:center;gap:8px;padding:10px 12px;z-index:2}
+.bar b{flex:1;font-size:15px;line-height:1.25}
+.ibtn{border:none;background:rgba(255,255,255,.14);color:#fff;border-radius:10px;width:40px;height:40px;display:grid;place-items:center;font-size:18px;cursor:pointer;flex:none}
+.inner{max-width:640px;margin:0 auto;padding:14px}
+.box{border-radius:12px;padding:12px 14px;margin-bottom:12px}
+.box h4{margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:.6px}
+.box.red{background:var(--red-soft)}.box.red h4{color:var(--red)}
+.box.blue{background:var(--blue-soft)}.box.blue h4{color:var(--blue)}
+.box.ok{background:var(--ok-soft)}.box.ok h4{color:var(--ok)}
+.box.warn{background:var(--warn-soft)}.box.warn h4{color:var(--warn)}
+.box.gray{background:#fff;border:1px solid var(--line)}.box.gray h4{color:var(--mute)}
+ul.clean{margin:0;padding-left:18px}ul.clean li{margin:3px 0}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{counter-increment:s;display:flex;gap:10px;padding:10px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+.steps li:last-child{border-bottom:none}
+.steps li::before{content:counter(s);flex:none;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font:700 12px Manrope,system-ui,sans-serif;margin-top:1px}
+.steps li.crit::before{background:var(--red)}
+.steps li.done{color:var(--mute);text-decoration:line-through}
+.steps li.done::before{content:"✓";background:var(--ok)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td,th{padding:7px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.4px}
+tr:last-child td{border-bottom:none}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:13px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:none;background:var(--red);color:#fff;font:700 15px Manrope,system-ui,sans-serif;border-radius:12px;padding:12px 16px;cursor:pointer;text-decoration:none}
+.btn.sec{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn.navy{background:var(--navy2)}
+.btn.full{width:100%}
+.row{display:flex;gap:8px}.row>*{flex:1;min-width:0}
+label.f{display:block;font-size:13px;font-weight:600;color:var(--mute);margin:10px 0 4px}
+input[type=number],select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;font:500 16px Manrope,system-ui,sans-serif;background:#fff;color:var(--ink)}
+.hint{font-size:12px;color:var(--mute);margin:6px 2px 0}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fff;border-top:1px solid var(--line);display:flex;padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+nav.tabs a{flex:1;text-decoration:none;color:var(--mute);display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:700;padding:4px 0}
+nav.tabs a svg{width:23px;height:23px}nav.tabs a.on{color:var(--red)}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;text-align:left;font:inherit;color:inherit}
+.tile b{display:block;font-size:15px}.tile span{font-size:12px;color:var(--mute)}.tile i{font-style:normal;font-size:24px;display:block;margin-bottom:4px}
+/* CPR */
+.cpr-top{background:var(--navy);color:#fff;border-radius:var(--r);padding:16px;text-align:center;margin-bottom:12px}
+.cpr-top .big{font:800 46px "JetBrains Mono",ui-monospace,monospace;letter-spacing:-1px;line-height:1}
+.cpr-top .cyc{font:700 22px "JetBrains Mono",ui-monospace,monospace;margin-top:8px}
+.cpr-top .cyc.alert{color:var(--yel);animation:bl 1s infinite}
+@keyframes bl{50%{opacity:.35}}
+.cpr-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.cpr-grid button{border:none;border-radius:14px;padding:14px 8px;font:800 15px Manrope,system-ui,sans-serif;color:#fff;cursor:pointer;min-height:62px;line-height:1.2}
+.cpr-grid small{display:block;font-weight:600;font-size:11px;opacity:.85;margin-top:2px}
+.b-shock{background:#d97706}.b-adr{background:var(--red)}.b-amio{background:#7c3aed}.b-air{background:var(--blue)}.b-rosc{background:var(--ok)}.b-rh{background:#475569}
+.cpr-hint{background:var(--warn-soft);border-radius:12px;padding:10px 12px;font-weight:700;color:var(--warn);margin-bottom:10px;min-height:20px}
+.log{font-size:13px;max-height:260px;overflow:auto}
+.log div{display:flex;gap:10px;padding:5px 0;border-bottom:1px solid var(--line)}
+.log div span:first-child{font-family:"JetBrains Mono",ui-monospace,monospace;color:var(--mute);flex:none;width:52px}
+.res{background:var(--bg);border-radius:12px;padding:12px 14px;margin-top:10px}
+.res .big{font:800 26px "JetBrains Mono",ui-monospace,monospace}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.checks label{display:flex;gap:8px;align-items:flex-start;font-size:14px;background:var(--bg);padding:9px 10px;border-radius:10px;cursor:pointer}
+.checks input{margin-top:3px;accent-color:var(--red)}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font:600 15px Manrope,system-ui,sans-serif;margin-bottom:8px;cursor:pointer;color:var(--ink)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}.opt.wrong{border-color:var(--red);background:var(--red-soft)}
+.progress{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin:4px 0 12px}.progress i{display:block;height:100%;background:var(--red);transition:width .3s}
+.stat{display:flex;justify-content:space-between;font-size:13px;color:var(--mute);margin-bottom:6px}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--blue-soft);color:var(--blue)}
+.triage{display:grid;gap:8px}
+.tr-q{font-weight:800;font-size:17px;margin:4px 0 10px}
+.tr-res{border-radius:14px;padding:18px;text-align:center;color:#fff;font:800 22px Manrope,system-ui,sans-serif}
+.foot{font-size:12px;color:var(--mute);text-align:center;margin:18px 10px}
+.empty{color:var(--mute);text-align:center;padding:20px}
+mark{background:#fff3b0;border-radius:3px;padding:0 1px}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M9 2h6v7h7v6h-7v7H9v-7H2V9h7z"/></svg></div>
+  <div><h1>Довідник парамедика</h1><small>Протоколи ЕМД · інструменти · симуляції</small></div>
+</header>
+
+<main>
+<section class="view" id="v-protocols">
+  <input class="search" id="q" type="search" placeholder="🔍 Пошук: анафілаксія, турнікет, аденозин…" autocomplete="off">
+  <div class="quick" id="quick"></div>
+  <div class="chips" id="cats"></div>
+  <div id="list"></div>
+</section>
+
+<section class="view" id="v-tools">
+  <h2>Інструменти</h2>
+  <p class="lead">Для роботи на виклику: таймер СЛР, дози за вагою, шкали.</p>
+  <div class="tgrid" id="tgrid"></div>
+</section>
+
+<section class="view" id="v-quiz">
+  <h2>Симуляційний тест</h2>
+  <p class="lead">Клінічні кейси з поясненням після кожної відповіді та розбором помилок.</p>
+  <div id="quiz"></div>
+</section>
+
+<section class="view" id="v-about">
+  <h2>Про застосунок</h2>
+  <div class="card">
+    <p style="margin-top:0"><b>Довідник парамедика</b> — кишеньковий помічник лікаря та парамедика догоспітального етапу: алгоритми й протоколи невідкладних станів, інструменти для виклику та симуляційні кейси.</p>
+    <p><b>Автор:</b> Богдан Венник — лікар медицини невідкладних станів вищої категорії, стаж у системі ЕМД 28 років, викладач і методист підготовки парамедиків.</p>
+    <p style="margin-bottom:0">Нумерація протоколів (№) відповідає збірнику клінічних маршрутів пацієнта при наданні ЕМД на догоспітальному етапі; зміст — стислі алгоритми автора, звірені з настановами.</p>
+  </div>
+  <div class="card">
+    <h3>Джерела</h3>
+    <ul class="clean" style="font-size:14px">
+      <li>European Resuscitation Council Guidelines 2025</li>
+      <li>ESC Guidelines (ACS 2023, Hypertension 2024, Heart Failure, Syncope)</li>
+      <li>ATLS 10th ed.; TCCC Guidelines; Brain Trauma Foundation</li>
+      <li>Resuscitation Council UK — Anaphylaxis 2021; GINA</li>
+      <li>Закон України «Про екстрену медичну допомогу»; Наказ МОЗ України № 632 від 04.07.2024</li>
+      <li>Б. Венник. Алгоритмічний довідник парамедика</li>
+    </ul>
+  </div>
+  <div class="box red"><h4>Важливо</h4><p style="margin:0">Застосунок не замінює сертифіковане навчання, клінічне мислення та чинні протоколи МОЗ і вашого центру ЕМД. Дози наведено для орієнтиру — перевіряйте препарат, концентрацію, протипоказання і масу тіла.</p></div>
+  <a class="btn navy full" href="https://bogven2101.github.io/ekg-praktykum/" target="_blank" rel="noopener">📈 ЕКГ Практикум — розбір ЕКГ ↗</a>
+  <p class="foot">Версія 1.0 · 2026</p>
+</section>
+</main>
+
+<div class="sheet" id="sheet"><div class="bar"><button class="ibtn" id="sh-x" aria-label="Закрити">✕</button><b id="sh-t"></b></div><div class="inner" id="sh-b"></div></div>
+
+<nav class="tabs">
+  <a href="#protocols" data-v="protocols"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2"/><path d="M8 7h7M8 11h5"/></svg>Протоколи</a>
+  <a href="#tools" data-v="tools"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg>Інструменти</a>
+  <a href="#quiz" data-v="quiz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>Тест</a>
+  <a href="#about" data-v="about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>Про</a>
+</nav>
+
+<script>
+/* Протоколи. Формат: id, no (номер у збірнику МОЗ або ""), cat, title, keys (для пошуку),
+   w — коли застосовувати; s — ключові ознаки; a — алгоритм ("!" на початку = критичний крок);
+   d — дози [препарат, доза, шлях/примітка]; e — типові помилки; t — транспортування/передача; src — джерела; tool — пов'язаний інструмент */
+const CATS=[
+ ["res","Реанімація"],["assess","Оцінка"],["cardio","Серце і судини"],["resp","Дихання"],
+ ["gen","Загальні стани"],["trauma","Травма"],["kids","Діти й вагітні"],["tox","Отруєння"],["env","Довкілля"]];
+const P=[
+/* ========== РЕАНІМАЦІЯ ========== */
+{id:"cpr",no:"",cat:"res",title:"Зупинка кровообігу у дорослих (BLS/ALS)",keys:"СЛР реанімація ФШ ШТ асистолія ЕАБП PEA дефібриляція адреналін аміодарон",tool:"cpr",
+ w:"Непритомний, не дихає або лише агональні вдихи, пульсу на сонній немає (перевірка ≤ 10 с).",
+ s:["Відсутність свідомості й нормального дихання","Агональне дихання = зупинка кровообігу","Судоми на початку можуть бути проявом зупинки"],
+ a:["!Безпека → оклик, струсити за плечі → викликати допомогу / АЕД","!Компресії 30:2 — нижня третина грудини, 5–6 см, 100–120/хв, повна декомпресія","!Підключити дефібрилятор, аналіз ритму — паузи < 10 с",
+    "ФШ / ШТ без пульсу → розряд (біфазний ≥ 150 Дж, далі ескалація) → одразу 2 хв СЛР","Асистолія / ЕАБП → СЛР 2 хв, адреналін 1 мг в/в/ІО якнайшвидше",
+    "Після 3-го розряду при ФШ/ШТ: адреналін 1 мг + аміодарон 300 мг; після 5-го — аміодарон 150 мг","Адреналін далі кожні 3–5 хв (кожен 2-й цикл)",
+    "Дихальні шляхи: мішок + маска → надгортанний пристрій (i-gel); ЕТІ — лише досвідченому без переривання компресій","Після встановлення SGA/ЕТТ — безперервні компресії, вентиляція 10/хв",
+    "Капнографія: підтвердження положення, якість СЛР, раптове ↑ ETCO₂ — ознака ROSC","Шукати й усувати 4Г/4Т: гіпоксія, гіповолемія, гіпо/гіперкаліємія, гіпотермія; тромбоз (ТЕЛА/коронарний), тампонада, токсини, напружений пневмоторакс",
+    "Змінювати виконавця компресій кожні 2 хв"],
+ d:[["Адреналін","1 мг","в/в, ІО; кожні 3–5 хв"],["Аміодарон","300 мг → 150 мг","в/в, ІО після 3-го і 5-го розряду"],["Лідокаїн (якщо немає аміодарону)","1 мг/кг → 0,5 мг/кг","в/в"],["Кальцію хлорид 10%","10 мл","при гіперкаліємії / передозуванні БКК"],["Натрію гідрокарбонат","50 ммоль","лише гіперкаліємія / ТЦА"]],
+ e:["Неглибокі компресії < 5 см","Паузи > 10 с для інтубації чи перевірки пульсу","Гіпервентиляція","Адреналін при ФШ до 3-го розряду","Відсутність пошуку оборотних причин"],
+ t:"ROSC → див. «Після ROSC». Документуй: час зупинки, початку СЛР, кожен розряд і препарат (журнал таймера СЛР).",
+ src:"ERC Guidelines 2025 (ALS, BLS); Довідник парамедика, Алг. 1"},
+
+{id:"cprkid",no:"",cat:"res",title:"Зупинка кровообігу у дітей (PLS)",keys:"СЛР діти педіатрична реанімація немовля дефібриляція",tool:"dose",
+ w:"Дитина без ознак життя: не реагує, не дихає нормально.",
+ s:["У дітей зупинка найчастіше вторинна — гіпоксична","Брадикардія < 60/хв з ознаками гіпоперфузії = починай компресії"],
+ a:["!Відкрити ДШ, 5 початкових вдихів","!Компресії: глибина ≥ ⅓ передньо-заднього розміру грудної клітки (немовля ≈ 4 см, дитина ≈ 5 см), 100–120/хв","!Співвідношення 15:2 (медики)",
+    "Немовля: 2 пальці або обхоплення двома великими пальцями; дитина: одна або дві долоні","Дефібриляція ФШ/ШТ: 4 Дж/кг (не більше дорослої дози)",
+    "Не-шоковий ритм: адреналін 10 мкг/кг в/в/ІО якнайшвидше, далі кожні 3–5 хв","Шоковий ритм: після 3-го розряду адреналін 10 мкг/кг + аміодарон 5 мг/кг; після 5-го — аміодарон 5 мг/кг",
+    "Ранній ІО-доступ, якщо в/в не вдався за 1–2 спроби","Шукати оборотні причини (4Г/4Т), глюкоза"],
+ d:[["Адреналін","10 мкг/кг (0,1 мл/кг розчину 1:10 000), макс. 1 мг","в/в, ІО"],["Аміодарон","5 мг/кг, макс. 300 мг","в/в, ІО"],["Дефібриляція","4 Дж/кг",""],["Болюс рідини","10 мл/кг кристалоїду",""]],
+ e:["Пропуск 5 початкових вдихів","Занадто неглибокі компресії","Довгі спроби периферичного доступу замість ІО"],
+ t:"Розрахунок доз — у «Дози за вагою». Транспортування в педіатричний стаціонар з попередженням.",
+ src:"ERC Guidelines 2025 (Paediatric Life Support)"},
+
+{id:"neo",no:"",cat:"res",title:"Реанімація новонародженого",keys:"новонароджений пологи NLS неонатальна апгар",
+ w:"Новонароджений не дихає, дихає неефективно або ЧСС < 100/хв після народження.",
+ s:["Оцінюй тонус, дихання, ЧСС (аускультація)","Більшості достатньо висушити, зігріти та стимулювати"],
+ a:["!Висушити, зігріти (шапочка, пелюшка, у недоношених — пакет), стимулювати","!Відкрити ДШ — нейтральне положення голови","Не дихає / гаспінг → 5 роздувальних вдихів по 2–3 с (повітря у доношених)",
+    "Перевірити ЧСС; немає підйому грудної клітки → виправити положення, маску, 2 рятувальники","Після 30 с ефективної вентиляції ЧСС < 60/хв → компресії 3:1 (≈ 120 дій/хв), кисень 100%",
+    "ЧСС < 60/хв попри СЛР → адреналін 20 мкг/кг в/в (пупкова вена) / ІО, кожні 3–5 хв","Гіповолемія → кристалоїд 10 мл/кг"],
+ d:[["Адреналін","20 мкг/кг в/в/ІО (0,2 мл/кг 1:10 000)","кожні 3–5 хв"],["Рідина","10 мл/кг NaCl 0,9%",""],["Глюкоза 10%","2 мл/кг","при гіпоглікемії"]],
+ e:["Переохолодження","Компресії до забезпечення ефективної вентиляції","Рутинна санація без показань"],
+ t:"Тепло, моніторинг SpO₂ (права рука), транспортування в неонатальний центр.",
+ src:"ERC Guidelines 2025 (Newborn Life Support)"},
+
+{id:"rosc",no:"",cat:"res",title:"Після відновлення кровообігу (ROSC)",keys:"постреанімаційна ROSC після реанімації температура",
+ w:"Після відновлення спонтанного кровообігу.",
+ s:["Раптове ↑ ETCO₂, пульс, АТ, рухи"],
+ a:["!SpO₂ 94–98% — уникай гіпероксії","!Вентиляція: ETCO₂ 35–45 мм рт. ст., без гіпервентиляції","!САТ > 100 мм рт. ст. (СерАТ ≥ 65): рідина, норадреналін",
+    "ЕКГ 12 відведень — шукай STEMI","Глюкоза — корекція гіпо/гіперглікемії","GCS ≤ 8 → захист ДШ","Уникай гарячки (> 37,7 °C); не охолоджуй великими об'ємами холодних розчинів",
+    "Шукай і лікуй причину зупинки"],
+ d:[["Норадреналін","0,05–0,5 мкг/кг/хв","в/в інфузія, титрувати"],["Рідина","250–500 мл кристалоїду","за відповіддю"]],
+ e:["Гіпервентиляція","Гіпероксія (SpO₂ 100%)","Не зняли ЕКГ"],
+ t:"При STEMI або підозрі на коронарну причину — у ПКВ-центр. Повторна зупинка можлива — дефібрилятор підключений.",
+ src:"ERC Guidelines 2025 (Post-resuscitation care); Довідник парамедика"},
+
+{id:"choke",no:"",cat:"res",title:"Обструкція ДШ стороннім тілом",keys:"сторонне тіло вдавився задуха Геймліх поштовхи",
+ w:"Раптова задуха під час їжі, неможливість говорити, хапається за шию.",
+ s:["Легка обструкція: кашляє, говорить","Тяжка: не може говорити, кашель неефективний, ціаноз"],
+ a:["!Легка → заохочувати кашель, спостерігати","!Тяжка, при свідомості → 5 ударів між лопатками, потім 5 поштовхів у живіт; чергувати",
+    "Вагітні / ожиріння → поштовхи в грудну клітку","Немовля < 1 року → 5 ударів по спині + 5 поштовхів у грудну клітку (НЕ в живіт)",
+    "!Втратив свідомість → СЛР 30:2; перед вдихами оглянь рот","Ларингоскоп + щипці Мегілла (за навичкою)"],
+ d:[],
+ e:["Поштовхи в живіт немовляті","Сліпе видалення пальцем","Не оглянули пацієнта після успішних поштовхів у живіт"],
+ t:"Після поштовхів у живіт — обов'язкова госпіталізація (ризик внутрішніх ушкоджень).",
+ src:"ERC Guidelines 2025 (BLS)"},
+
+/* ========== ОЦІНКА ========== */
+{id:"abcde",no:"",cat:"assess",title:"Первинна оцінка ABCDE",keys:"ABCDE огляд первинний SAMPLE OPQRST",
+ w:"Кожен пацієнт. Усувай загрозу одразу, як виявив; після втручання — повторна оцінка.",
+ s:["Критерії тяжкості: ЧД < 8 або > 30, SpO₂ < 90%, САТ < 90, ЧСС < 40 або > 150, GCS < 14, глюкоза < 3 або > 25 ммоль/л, t < 35 або > 40 °C"],
+ a:["!Безпека сцени, ЗІЗ, загальне враження (10 с)","!A — прохідність ДШ: розмова, стридор; закид голови / висування щелепи, ОРА/NPA, SGA","!B — ЧД, SpO₂, екскурсія, аускультація; О₂ при SpO₂ < 94%; апное → мішок 10/хв",
+    "!C — пульс, ЧКН, АТ, ЕКГ; зупини кровотечу; 2 катетери; болюс 250–500 мл при шоку","D — AVPU/GCS, зіниці, глюкоза (гіпоглікемія < 3,9 → лікуй)","E — повний огляд, температура, профілактика гіпотермії",
+    "Вторинний огляд: SAMPLE (симптоми, алергії, ліки, анамнез, остання їжа, події), OPQRST для болю"],
+ d:[["Кисень","15 л/хв маска з резервуаром","ціль SpO₂ 94–98% (ХОЗЛ 88–92%)"],["Глюкоза 40%","40–60 мл","в/в при гіпоглікемії"]],
+ e:["Перехід до наступної літери, не усунувши загрозу","Не виміряна глюкоза при зміненій свідомості","Не повторюють оцінку після втручання"],
+ t:"Передача за SBAR або MIST (травма).",src:"Довідник парамедика, розд. II; ERC 2025"},
+
+{id:"handover",no:"",cat:"assess",title:"Передача пацієнта: SBAR / MIST",keys:"передача SBAR MIST доповідь диспетчер",
+ w:"Передача в приймальне відділення, доповідь диспетчеру, попередження лікарні.",
+ s:[],
+ a:["SBAR — S: ситуація (хто, що, де); B: фон (анамнез, ліки); A: оцінка (стан, показники, підозра); R: рекомендація / що потрібно","MIST (травма) — M: механізм; I: ушкодження; S: ознаки (вітальні); T: лікування (що зроблено)",
+    "Говори коротко, ≤ 60 с, у присутності всієї приймальної команди","Передай карту виклику з часом введення препаратів і накладання турнікета"],
+ d:[],e:["Передача «в коридорі» лише одній людині","Не повідомили час накладання турнікета"],t:"",src:"Довідник парамедика, 1.4; Додаток Д"},
+
+/* ========== СЕРЦЕ І СУДИНИ ========== */
+{id:"stroke",no:"22",cat:"cardio",title:"Інсульт / ТІА",keys:"інсульт ТІА BE-FAST FAST парез мова тромболізис",tool:"befast",
+ w:"Раптовий неврологічний дефіцит: асиметрія обличчя, слабкість кінцівки, порушення мови, зору, рівноваги.",
+ s:["BE-FAST: рівновага, очі, обличчя, руки, мова, час","Час, коли пацієнта востаннє бачили здоровим — ключовий"],
+ a:["!ABCDE; SpO₂ ≥ 94% (кисень лише при SpO₂ < 94%)","!Глюкоза — виключити гіпоглікемію","!Встановити час «востаннє бачили здоровим» і телефон свідка",
+    "Оцінка за шкалою (BE-FAST / RACE: ≥ 5 балів — підозра на оклюзію великої судини)","АТ: не знижувати, якщо ≤ 220/120 мм рт. ст.","Нічого per os (ризик аспірації); головний кінець 30° при блюванні/зниженні свідомості",
+    "Не вводити аспірин і антикоагулянти","!Негайне попередження інсультного центру — «час — мозок»"],
+ d:[["Глюкоза 40%","40–60 мл","лише при глюкозі < 3,9 ммоль/л"]],
+ e:["Зниження АТ «до норми»","Аспірин на догоспітальному етапі","Не з'ясували час початку симптомів","Пропустили гіпоглікемію-імітатор"],
+ t:"Тромболізис до 4,5 год, тромбектомія до 24 год — у центр з КТ і ендоваскулярною службою. Свідок — разом із пацієнтом.",
+ src:"ESO/AHA Stroke Guidelines; Протокол МОЗ № 22"},
+
+{id:"syncope",no:"23",cat:"cardio",title:"Непритомність (синкопе)",keys:"синкопе непритомність знепритомнів колапс",
+ w:"Короткочасна втрата свідомості з самостійним швидким відновленням.",
+ s:["Червоні прапорці: під час навантаження або лежачи, серцебиття перед синкопе, раптова смерть у родині, структурна хвороба серця, зміни ЕКГ, травма, вік > 60"],
+ a:["!ABCDE, ЕКГ 12 відведень (АВ-блокади, WPW, подовжений QT, Бругада, ГЛШ)","Глюкоза, АТ лежачи/стоячи (ортостаз)","Огляд на травму, ознаки кровотечі (мелена), вагітність",
+    "Вазовагальне синкопе з типовим провокатором, норм. ЕКГ — можна не госпіталізувати за протоколом"],
+ d:[],e:["Не зняли ЕКГ","Залишили вдома пацієнта з червоними прапорцями"],
+ t:"Будь-який червоний прапорець — госпіталізація з моніторингом ЕКГ.",src:"ESC Syncope Guidelines; Протокол МОЗ № 23"},
+
+{id:"acs",no:"24",cat:"cardio",title:"Біль у грудях / ГКС / STEMI",keys:"ГКС інфаркт STEMI біль у грудях аспірин нітрогліцерин",
+ w:"Біль за грудиною > 20 хв, іррадіація, холодний піт, нудота, задишка.",
+ s:["Атипово: жінки, літні, діабет — задишка, слабкість","ЕКГ протягом 10 хв від першого контакту"],
+ a:["!ЕКГ 12 відведень ≤ 10 хв; при нижньому ІМ — V3R–V4R, при депресії V1–V3 — V7–V9","!Дефібрилятор поруч, моніторинг","!Аспірин 150–300 мг розжувати (якщо немає алергії)",
+    "Кисень лише при SpO₂ < 90%","Нітрогліцерин 0,4–0,5 мг під язик кожні 5 хв (до 3 разів) при САТ ≥ 90 і без протипоказань","Біль ≥ 7 за NRS → морфін 2–4 мг в/в, титрувати (або фентаніл)",
+    "STEMI: НФГ 70–100 ОД/кг в/в (для первинної ПКВ, за протоколом центру); P2Y12 — за погодженням з ПКВ-центром","!Повідомити ПКВ-центр заздалегідь, передати ЕКГ"],
+ d:[["Аспірин","150–300 мг","розжувати"],["Нітрогліцерин","0,4–0,5 мг","s/l, до 3 доз"],["Морфін","2–4 мг","в/в, повторно до ефекту"],["Гепарин НФГ","70–100 ОД/кг (макс. 5000 ОД — за протоколом)","в/в болюс"]],
+ e:["Нітрати при САТ < 90, ЧСС < 50 або > 100, ІМ правого шлуночка, після інгібіторів ФДЕ-5 (24–48 год)","Рутинний кисень при SpO₂ ≥ 90%","Втрата часу на місці"],
+ t:"STEMI: ПКВ ≤ 120 хв від діагнозу (ціль ≤ 90), інакше тромболізис ≤ 10 хв. Аналіз ЕКГ — у застосунку «ЕКГ Практикум».",
+ src:"ESC ACS Guidelines 2023; Довідник парамедика, Алг. 2; Протокол МОЗ № 24"},
+
+{id:"brady",no:"25",cat:"cardio",title:"Брадикардія у дорослих",keys:"брадикардія АВ-блокада атропін стимуляція",
+ w:"ЧСС < 50/хв (зазвичай < 40) з ознаками нестабільності або ризику асистолії.",
+ s:["Загрозливі ознаки: шок, синкопе, ішемія міокарда, тяжка серцева недостатність","Ризик асистолії: Мобітц II, повна АВ-блокада з широкими QRS, пауза > 3 с, нещодавня асистолія"],
+ a:["!ABCDE, ЕКГ 12 відведень, в/в доступ, О₂ при SpO₂ < 94%","!Є загрозливі ознаки → атропін 0,5 мг в/в (ERC) або 1 мг (AHA), повторювати до 3 мг",
+    "Неефективно → адреналін 2–10 мкг/хв або ізопреналін 5 мкг/хв в/в інфузія","Транскутанна стимуляція (з аналгоседацією)","Шукати причину: ліки (β-блокатори, БКК, дигоксин), гіперкаліємія, нижній ІМ, гіпотермія"],
+ d:[["Атропін","0,5–1 мг, до 3 мг","в/в"],["Адреналін","2–10 мкг/хв","в/в інфузія"],["Ізопреналін","5 мкг/хв","в/в інфузія"]],
+ e:["Атропін після трансплантації серця","Очікування ефекту атропіну при широких QRS замість стимуляції"],
+ t:"Госпіталізація з моніторингом, пацієнт на дефібриляторі-стимуляторі.",src:"ERC Guidelines 2025 (ALS); Протокол МОЗ № 25"},
+
+{id:"tachy",no:"26",cat:"cardio",title:"Тахікардія у дорослих",keys:"тахікардія НШТ ШТ ФП тріпотіння аденозин кардіоверсія верапаміл",
+ w:"ЧСС > 150/хв (або нижча з нестабільністю).",
+ s:["Нестабільність: шок, синкопе, ішемія, тяжка серцева недостатність","Синусова тахікардія — лікуй причину, не частоту"],
+ a:["!ABCDE, ЕКГ 12 відведень, в/в доступ","!Нестабільний → синхронізована кардіоверсія до 3 спроб (седація); далі аміодарон 300 мг за 10–20 хв і повтор",
+    "Вузькі регулярні QRS → вагусні проби (модиф. Вальсальва) → аденозин 6 → 12 → 18 мг швидко → верапаміл 2,5–5 мг","Широкі регулярні QRS (вважати ШТ) → аміодарон 300 мг за 10–60 хв або прокаїнамід 10–15 мг/кг",
+    "Вузькі нерегулярні (ФП) → контроль частоти: β-блокатор / верапаміл (ФВ > 40%), аміодарон або дигоксин (ФВ < 40%)","Поліморфна ШТ (Torsades) → магнію сульфат 2 г за 10 хв","ФП + WPW → НЕ давати АВ-блокатори"],
+ d:[["Аденозин","6 → 12 → 18 мг","в/в швидко + промивання"],["Верапаміл","2,5–5 мг","в/в за 2 хв"],["Аміодарон","300 мг","в/в за 10–60 хв"],["Магнію сульфат","2 г","в/в за 10 хв"],["Метопролол","2,5–5 мг, до 15 мг","в/в повільно"]],
+ e:["Медикаменти замість кардіоверсії у нестабільного","Верапаміл при широких QRS","Повільне введення аденозину"],
+ t:"Рекомендація і аналіз ЕКГ — у «ЕКГ Практикум». Госпіталізація з моніторингом.",src:"ERC Guidelines 2025; Протокол МОЗ № 26"},
+
+{id:"ahf",no:"28",cat:"cardio",title:"Набряк легень / гостра серцева недостатність",keys:"набряк легень ГСН задишка ортопное фуросемід нітрогліцерин CPAP кардіогенний шок",
+ w:"Різка задишка, ортопное, хрипи, пінисте мокротиння, SpO₂ < 90%.",
+ s:["Кардіогенний шок: САТ < 90 + ознаки гіпоперфузії (холодні кінцівки, олігурія, сплутаність)"],
+ a:["!Сидяче положення, ноги вниз","!О₂ при SpO₂ < 90%; ЧД > 25 або SpO₂ < 90% → CPAP/NIV","Нітрогліцерин 0,4–0,5 мг s/l кожні 5–10 хв при САТ > 110",
+    "Фуросемід 40 мг в/в (або 1–2,5 × домашня доза) при застої","ЕКГ — шукай ГКС, аритмію","Кардіогенний шок → норадреналін; рідина лише якщо немає застою (200–250 мл)"],
+ d:[["Нітрогліцерин","0,4–0,5 мг","s/l, повторно"],["Фуросемід","40–80 мг","в/в болюс"],["Норадреналін","0,05–0,5 мкг/кг/хв","в/в інфузія"]],
+ e:["Покласти горизонтально","Рутинний морфін","Нітрати при гіпотензії"],
+ t:"При ГКС — у ПКВ-центр.",src:"ESC Heart Failure Guidelines; Довідник парамедика, Алг. 3; Протокол МОЗ № 28"},
+
+{id:"htn",no:"39",cat:"cardio",title:"Гіпертензивний криз",keys:"гіпертензивний криз тиск АТ урапідил лабеталол",
+ w:"АТ ≥ 180/120 мм рт. ст.",
+ s:["Невідкладний стан (є ураження органів-мішеней): ГКС, набряк легень, розшарування аорти, інсульт, енцефалопатія, еклампсія","Без ураження органів — не знижувати агресивно"],
+ a:["!Визнач, чи є ураження органів-мішеней: ЕКГ, неврологія, біль, задишка","Без ураження → спокій, повторне вимірювання, пероральні засоби за місцевим протоколом, нагляд",
+    "З ураженням → знизити АТ не більше ніж на 20–25% за першу годину (в/в титровано)","Набряк легень / ГКС → нітрогліцерин","Розшарування аорти → САТ < 120 і ЧСС < 60 за 20 хв (β-блокатор + знеболення)",
+    "Інсульт → не знижувати, якщо ≤ 220/120","Еклампсія → магнію сульфат + лабеталол/ніфедипін"],
+ d:[["Лабеталол","20 мг → 20–80 мг кожні 10 хв (до 300 мг)","в/в повільно"],["Урапідил","12,5–25 мг","в/в, повторно"],["Нітрогліцерин","0,4–0,5 мг s/l або інфузія","при ГКС/набряку легень"]],
+ e:["Різке зниження АТ (ішемія мозку)","Сублінгвальний ніфедипін короткої дії у літніх","Лікування цифр без оцінки органів-мішеней"],
+ t:"Невідкладний стан — госпіталізація.",src:"ESC Hypertension Guidelines 2024; Протокол МОЗ № 39"},
+
+/* ========== ДИХАННЯ ========== */
+{id:"asthma",no:"27",cat:"resp",title:"Бронхоспазм: астма / ХОЗЛ",keys:"астма ХОЗЛ бронхоспазм сальбутамол небулайзер",
+ w:"Задишка, свистячі хрипи, подовжений видих.",
+ s:["Загроза життю: SpO₂ < 92%, «німа» легеня, ціаноз, виснаження, сплутаність, неможливість говорити"],
+ a:["!Сидяче положення; О₂: астма — ціль 94–98%, ХОЗЛ — 88–92%","!Сальбутамол 5 мг небулайзер (кисень 6–8 л/хв), повторювати кожні 15–20 хв або безперервно","Тяжка → + іпратропій 0,5 мг",
+    "Системні стероїди: преднізолон 40–50 мг per os або гідрокортизон 100 мг в/в (метилпреднізолон 40 мг)","Загроза життю → магнію сульфат 2 г в/в за 20 хв","Перед зупинкою / підозра на анафілаксію → адреналін 0,5 мг в/м",
+    "ХОЗЛ: небулізація на повітрі (або коротко на кисні), NIV при гіперкапнії"],
+ d:[["Сальбутамол","2,5–5 мг","небулайзер"],["Іпратропій","0,5 мг","небулайзер"],["Преднізолон","40–50 мг","per os"],["Гідрокортизон","100 мг","в/в"],["Магнію сульфат","2 г","в/в за 20 хв"]],
+ e:["Високий потік O₂ без контролю при ХОЗЛ","Седація збудженого пацієнта з астмою","Недооцінка «тихої» легені"],
+ t:"Тяжкий напад — госпіталізація; у дорозі — продовжуй небулізацію.",src:"GINA 2024; BTS/SIGN; Протокол МОЗ № 27"},
+
+/* ========== ЗАГАЛЬНІ ========== */
+{id:"coma",no:"29",cat:"gen",title:"Порушення свідомості",keys:"кома свідомість непритомний GCS AEIOU",tool:"gcs",
+ w:"Знижений рівень свідомості будь-якої причини.",
+ s:["Причини AEIOU-TIPS: алкоголь, ендокринні/електроліти, інсульт-інфекція, опіоїди-отруєння, уремія; травма, інфекція, психіатрія, судоми","Глюкоза — у першу хвилину"],
+ a:["!ABCDE; GCS ≤ 8 → захист ДШ","!Глюкоза: < 3,9 ммоль/л → лікуй (див. гіпоглікемію)","Опіоїдний токсидром (міоз, брадипное) → налоксон","Зіниці, ознаки травми, менінгеальні знаки, запах, сліди ін'єкцій",
+    "Алкоголізм/виснаження → тіамін 100 мг в/в (не затримуючи глюкозу)","Стабільне бічне положення, якщо ДШ не захищені і немає травми"],
+ d:[["Глюкоза 40%","40–60 мл","в/в"],["Налоксон","0,04–0,4 мг в/в титровано","або 0,4–2 мг в/м / і/н"],["Тіамін","100 мг","в/в"]],
+ e:["Не виміряли глюкозу","«П'яний» — без пошуку ЧМТ і гіпоглікемії"],t:"Госпіталізація у багатопрофільний стаціонар.",src:"Протокол МОЗ № 29; Довідник парамедика"},
+
+{id:"seiz",no:"30",cat:"gen",title:"Судоми / епістатус",keys:"судоми епілепсія епістатус мідазолам діазепам",tool:"dose",
+ w:"Судомний напад; епістатус — напад ≥ 5 хв або повторні без відновлення свідомості.",
+ s:["Вагітна > 20 тиж. із судомами = еклампсія, доки не доведено інше"],
+ a:["!Захист від травми, нічого в рот, бічне положення після нападу","!О₂, глюкоза (гіпоглікемія → лікуй)","!Напад ≥ 5 хв → бензодіазепін: мідазолам 10 мг в/м (> 40 кг), 5 мг (13–40 кг) або букально; або діазепам 10 мг в/в",
+    "Не минає через 5 хв → повторити бензодіазепін один раз","Не минає після 2 доз (≥ 20 хв) → другий ряд: леветирацетам 60 мг/кг (макс. 4500 мг) в/в за 10 хв або вальпроат 40 мг/кг (макс. 3000 мг) — за протоколом",
+    "Еклампсія → магнію сульфат 4 г в/в за 15–20 хв"],
+ d:[["Мідазолам","10 мг (> 40 кг) / 5 мг (13–40 кг)","в/м або букально"],["Діазепам","10 мг (0,15–0,2 мг/кг)","в/в повільно"],["Леветирацетам","60 мг/кг, макс. 4500 мг","в/в за 10 хв"],["Магнію сульфат","4 г","в/в при еклампсії"]],
+ e:["Більше 2 доз бензодіазепінів (пригнічення дихання)","Не виміряли глюкозу","Предмети в рот"],t:"Перший напад, епістатус, травма, вагітність — госпіталізація.",src:"ESETT; ILAE; Протокол МОЗ № 30"},
+
+{id:"shock",no:"31",cat:"gen",title:"Шок",keys:"шок гіпотензія гіповолемічний септичний кардіогенний обструктивний норадреналін",
+ w:"Ознаки гіпоперфузії: тахікардія, ЧКН > 2 с, холодна шкіра, олігурія, сплутаність; гіпотензія — пізня ознака.",
+ s:["Шоковий індекс ЧСС/САТ > 1 — тривожно","Типи: гіповолемічний, розподільний (септичний, анафілактичний), кардіогенний, обструктивний"],
+ a:["!Зупини видиму кровотечу; О₂; 2 в/в або ІО","!Визнач тип шоку","Геморагічний → дозволена гіпотензія САТ 80–90 (крім ЧМТ), ТХА, швидке транспортування","Септичний → болюси 500 мл кристалоїду до 30 мл/кг з оцінкою, норадреналін (СерАТ ≥ 65)",
+    "Анафілактичний → адреналін в/м (див. анафілаксію)","Кардіогенний → без великих об'ємів, вазопресор, ПКВ-центр","Обструктивний → напружений пневмоторакс (декомпресія), тампонада, ТЕЛА"],
+ d:[["Кристалоїд","250–500 мл болюс","повторно з оцінкою"],["Норадреналін","0,05–0,5 мкг/кг/хв","в/в"],["Транексамова кислота","1 г за 10 хв (TCCC: 2 г)","в/в ≤ 3 год від травми"]],
+ e:["Агресивна інфузія при кровотечі","Чекати гіпотензії для діагнозу шоку"],t:"Швидка доставка у стаціонар відповідного профілю з попередженням.",src:"ATLS 10; Surviving Sepsis; Протокол МОЗ № 31"},
+
+{id:"anaph",no:"32",cat:"gen",title:"Анафілаксія",keys:"анафілаксія алергія набряк Квінке адреналін кропив'янка",tool:"dose",
+ w:"Раптово (хвилини–години після алергену) проблеми з ДШ, диханням і/або кровообігом, часто зі змінами шкіри.",
+ s:["Шкіра може бути нормальною в 10–20%","Стридор, набряк язика, бронхоспазм, гіпотензія"],
+ a:["!Прибери тригер; поклади (з ногами догори) або сидячи при утрудненні дихання","!Адреналін в/м у передньобічну поверхню стегна — негайно","!Повтор через 5 хв, якщо немає покращення",
+    "О₂ 15 л/хв; в/в доступ; рідина 500–1000 мл (діти 10 мл/кг)","Бронхоспазм → сальбутамол небулайзер","Рефрактерна (після 2 доз в/м) → інфузія адреналіну (досвідчений персонал)",
+    "Антигістамінні — лише для шкірних проявів після стабілізації; стероїди не першої лінії"],
+ d:[["Адреналін 1 мг/мл","Дорослі та > 12 р.: 0,5 мг (0,5 мл)","в/м"],["Адреналін","6–12 р.: 0,3 мг; 6 міс–6 р.: 0,15 мг; < 6 міс: 0,1–0,15 мг","в/м"],["Кристалоїд","500–1000 мл / 10 мл/кг","в/в"]],
+ e:["Затримка адреналіну, антигістамінні замість адреналіну","Адреналін в/в болюсом 1 мг у пацієнта з пульсом","Різке вертикальне положення (раптова смерть)"],
+ t:"Госпіталізація: ризик двофазної реакції.",src:"Resuscitation Council UK 2021; WAO; Протокол МОЗ № 32"},
+
+{id:"pain",no:"33",cat:"gen",title:"Контроль болю",keys:"біль знеболення аналгезія морфін фентаніл кетамін NRS",tool:"dose",
+ w:"Будь-який біль; NRS ≥ 4 — розглянь аналгезію, ≥ 7 — обов'язкова.",
+ s:["Біль — п'ятий вітальний показник","Оцінюй NRS до і після"],
+ a:["!Немедикаментозно: іммобілізація, положення, охолодження","Легкий (1–3) → парацетамол 1 г","Помірний (4–6) → кеторолак 30 мг в/в (60 мг в/м) або парацетамол в/в",
+    "Сильний (7–10) → морфін 0,05–0,1 мг/кг в/в титровано або фентаніл 1–2 мкг/кг в/в (1,5 мкг/кг і/н)","Опіки, ампутації, нестабільні → кетамін 0,3–0,5 мг/кг в/в","!Після опіоїдів: SpO₂, ЧД, свідомість; налоксон напоготові"],
+ d:[["Парацетамол","1 г (15 мг/кг)","per os / в/в"],["Кеторолак","30 мг в/в / 60 мг в/м",""],["Морфін","0,05–0,1 мг/кг","в/в титровано"],["Фентаніл","1–2 мкг/кг в/в; 1,5 мкг/кг і/н",""],["Кетамін","0,3–0,5 мг/кг","в/в"]],
+ e:["Відмова від знеболення «щоб не змастити клініку»","НПЗП при кровотечі, нирковій недостатності, вагітності 3 трим."],t:"Документуй NRS і час.",src:"Довідник парамедика, 2.5; Протокол МОЗ № 33"},
+
+{id:"hyper",no:"36",cat:"gen",title:"Гіперглікемія / ДКА",keys:"гіперглікемія ДКА кетоацидоз діабет цукор",
+ w:"Глюкоза > 13,9 ммоль/л із симптомами: спрага, поліурія, блювання, біль у животі, дихання Куссмауля, дегідратація.",
+ s:["ДКА: кетони, ацидоз, запах ацетону","ГГС: глюкоза > 33, виражена дегідратація, порушення свідомості"],
+ a:["!ABCDE, глюкоза, ЕКГ (калій)","!NaCl 0,9% 1 л за першу годину (дорослі); діти — 10 мл/кг за 30–60 хв","Інсулін на догоспітальному етапі не вводити","Шукати тригер: інфекція, ГКС, пропуск інсуліну"],
+ d:[["NaCl 0,9%","1000 мл / 1 год (діти 10 мл/кг)","в/в"]],
+ e:["Швидка інфузія у дітей (набряк мозку)","Інсулін до визначення калію"],t:"Госпіталізація.",src:"ADA/JBDS; ISPAD; Протокол МОЗ № 36"},
+
+{id:"hypo",no:"37",cat:"gen",title:"Гіпоглікемія",keys:"гіпоглікемія цукор глюкоза глюкагон",tool:"dose",
+ w:"Глюкоза < 3,9 ммоль/л або симптоми (пітливість, тремор, сплутаність, судоми, кома) у діабетика.",
+ s:[],
+ a:["!При свідомості й ковтанні → 15–20 г швидких вуглеводів per os","!Без свідомості → глюкоза 40% 40–60 мл в/в (або 10% 150–200 мл); дітям 10% 2 мл/кг","Немає доступу → глюкагон 1 мг в/м (0,5 мг при масі < 25 кг)",
+    "Повторна глюкоза через 10–15 хв; після відновлення — їжа","Препарати сульфонілсечовини або інсулін тривалої дії → госпіталізація (рецидив)"],
+ d:[["Глюкоза 40%","40–60 мл","в/в"],["Глюкоза 10%","150–200 мл (діти 2 мл/кг)","в/в"],["Глюкагон","1 мг (< 25 кг: 0,5 мг)","в/м"]],
+ e:["Екстравазація 40% глюкози (некроз)","Залишили вдома після сульфонілсечовини"],t:"Відмова — лише при повному відновленні, наявності супроводу та без факторів ризику.",src:"ADA; Протокол МОЗ № 37"},
+
+{id:"hyperk",no:"40",cat:"gen",title:"Гіперкаліємія",keys:"гіперкаліємія калій ниркова діаліз кальцій",
+ w:"Підозра: ниркова недостатність, діаліз, краш, ліки (іАПФ, спіронолактон) + зміни ЕКГ.",
+ s:["ЕКГ: високі загострені T → сплощення P, ↑ PR → широкий QRS → синусоїда → ФШ/асистолія"],
+ a:["!Моніторинг ЕКГ, дефібрилятор","!Зміни ЕКГ → кальцію хлорид 10% 10 мл (або глюконат 10% 30 мл) в/в за 5–10 хв, повтор за потреби","Зсув калію в клітини: інсулін 10 ОД + глюкоза 25 г в/в; сальбутамол 10–20 мг небулайзер",
+    "Зупинка серця → кальцій + гідрокарбонат; розглянь тривалу СЛР"],
+ d:[["Кальцію хлорид 10%","10 мл","в/в повільно"],["Кальцію глюконат 10%","30 мл","в/в"],["Інсулін + глюкоза","10 ОД + 25 г",""],["Сальбутамол","10–20 мг","небулайзер"]],
+ e:["Кальцій в одну вену з гідрокарбонатом","Нормальна ЕКГ не виключає гіперкаліємію"],t:"Стаціонар з діалізом.",src:"ERC 2025 (особливі обставини); Протокол МОЗ № 40"},
+
+/* ========== ТРАВМА ========== */
+{id:"trauma",no:"",cat:"trauma",title:"Первинна оцінка травми: MARCH / <C>ABCDE",keys:"травма політравма MARCH ATLS ITLS золота година",
+ w:"Будь-яка значна травма.",
+ s:["Високоенергетичні механізми: ДТП > 60 км/год, падіння > 3 м, вибух, вогнепальне поранення тулуба, загибель інших у ТЗ"],
+ a:["!Безпека, ЗІЗ, механізм травми","!M — масивна кровотеча: турнікет / тампонування / давляча пов'язка","!A — ДШ (висування щелепи при підозрі на травму хребта)",
+    "R — дихання: оклюзійна пов'язка, декомпресія напруженого пневмотораксу","C — кровообіг: в/в/ІО, ТХА, дозволена гіпотензія, тазовий бандаж","H — гіпотермія і голова: зігрівання, профілактика вторинного ушкодження мозку",
+    "Load-and-go при нестабільності: на місці ≤ 10 хв","Знеболення, іммобілізація, повторна оцінка в дорозі"],
+ d:[["Транексамова кислота","1 г за 10 хв (+1 г інфузія 8 год) або 2 г (TCCC)","в/в/ІО ≤ 3 год"]],
+ e:["Пошук ушкоджень до зупинки масивної кровотечі","Гіпотермія → коагулопатія","Довге перебування на місці"],
+ t:"Травмоцентр; передача за MIST.",src:"ATLS 10; TCCC 2024; Довідник парамедика, розд. IV–V"},
+
+{id:"tbi",no:"41",cat:"trauma",title:"Черепно-мозкова травма",keys:"ЧМТ голова мозок травма GCS зіниці",tool:"gcs",
+ w:"Травма голови зі зміною свідомості, амнезією, неврологічним дефіцитом.",
+ s:["Ознаки дислокації: анізокорія, брадикардія + гіпертензія, екстензорна поза, падіння GCS ≥ 2","Перелом основи черепа: «окуляри», симптом Бетла, лікворея"],
+ a:["!Уникай гіпоксії (SpO₂ ≥ 94%) і гіпотензії (САТ ≥ 110; ≥ 100 у 50–69 р.)","!GCS ≤ 8 → захист ДШ; ETCO₂ 35–45","Іммобілізація шийного відділу за показаннями","Головний кінець 30° (якщо немає гіпотензії)",
+    "Глюкоза, зіниці, GCS кожні 5–10 хв","Ознаки дислокації → короткочасна гіпервентиляція до ETCO₂ 30–35 як міст до операції","Розглянь ТХА 1 г в/в у перші 3 год (легка–середня ЧМТ, за протоколом)"],
+ d:[["Транексамова кислота","1 г","в/в за 10 хв, ≤ 3 год"]],
+ e:["Гіпотензія або гіпоксія хоча б раз — подвоює летальність","Рутинна гіпервентиляція","Назоглотковий повітровід при переломі основи черепа"],
+ t:"Нейрохірургічний центр.",src:"Brain Trauma Foundation; CRASH-3; Довідник парамедика, 4.2; Протокол МОЗ № 41"},
+
+{id:"chest",no:"",cat:"trauma",title:"Травма грудної клітки",keys:"пневмоторакс гемоторакс напружений декомпресія тампонада грудна клітка",
+ w:"Травма грудей із задишкою, болем, гіпоксією, шоком.",
+ s:["Напружений пневмоторакс: відсутнє дихання з одного боку, тимпаніт, гіпотензія, набухлі вени шиї, зміщення трахеї (пізно)","Тампонада: тріада Бека"],
+ a:["!Напружений пневмоторакс → голкова декомпресія: 4–5 міжребер'я по передній пахвовій лінії (дорослі) або 2 міжребер'я по середньоключичній","!Відкритий пневмоторакс → вентильована оклюзійна наліпка (chest seal)",
+    "Флотуючий сегмент → О₂, знеболення, NIV/ШВЛ","Гемоторакс → швидке транспортування","Тампонада → швидке транспортування, обмежена інфузія, перикардіоцентез — за навичкою"],
+ d:[],e:["Голка коротка (< 5 см) у пацієнтів з товстою стінкою","Повна (не вентильована) оклюзія без контролю"],t:"Травмоцентр.",src:"ATLS 10; TCCC; Довідник парамедика, 4.3"},
+
+{id:"spine",no:"43",cat:"trauma",title:"Травма хребта",keys:"хребет шия комір іммобілізація спинний мозок",
+ w:"Механізм травми з можливим ушкодженням хребта.",
+ s:["Показання до обмеження рухів (NEXUS): змінена свідомість, інтоксикація, біль при пальпації по середній лінії, неврологічний дефіцит, відволікаюча травма"],
+ a:["!Ручна стабілізація голови до оцінки","Є критерії → комір + обмеження рухів хребта (ковшові ноші, вакуумний матрац)","Проникаюча травма без неврології → комір НЕ накладати (затримує допомогу)",
+    "Нейрогенний шок (гіпотензія + брадикардія, тепла шкіра) → рідина, вазопресор","Log roll удвох-утрьох; довгий щит — лише для витягування"],
+ d:[],e:["Транспортування на жорсткому щиті годинами (пролежні, біль)","Комір без показань"],t:"Травмоцентр зі спінальною службою.",src:"NEXUS; ATLS 10; Протокол МОЗ № 43"},
+
+{id:"limb",no:"44",cat:"trauma",title:"Травма кінцівок і таза",keys:"перелом кінцівки таз шина бандаж ампутація",
+ w:"Деформація, біль, крепітація, відкриті переломи, нестабільний таз.",
+ s:["Тазова травма з шоком — масивна внутрішня кровотеча","Перевіряй пульс, рух, чутливість (ПРЧ) до і після шини"],
+ a:["!Високоенергетична травма + шок → тазовий бандаж на рівні великих вертлюгів (не «пружинити» таз)","!Кровотеча → давлення / турнікет","Шинування в зручному положенні, фіксація суміжних суглобів; витягувальна шина при переломі стегна",
+    "Відкритий перелом → стерильна пов'язка, фото рани, антибіотик за протоколом","Ампутований сегмент → суха стерильна пов'язка, пакет, на лід (не прямо)","Знеболення"],
+ d:[],e:["Перевірка стабільності таза натисканням","Бандаж на гребенях клубових кісток"],t:"Травмоцентр.",src:"ATLS 10; Протокол МОЗ № 44"},
+
+{id:"bleed",no:"45",cat:"trauma",title:"Масивна зовнішня кровотеча",keys:"кровотеча турнікет джгут гемостатик ТХА",
+ w:"Пульсуюча чи масивна кровотеча, кров, що просочує пов'язку.",
+ s:[],
+ a:["!Пряме давлення негайно","!Кінцівка → турнікет 5–7 см вище рани («високо й туго», якщо рана не видна); затягнути до зникнення пульсу; записати час","Кровотеча триває → другий турнікет вище першого",
+    "Пахова/пахвова/шия → тампонування гемостатиком + тиск 3 хв, давляча пов'язка","ТХА в/в/ІО якнайшвидше (≤ 3 год)","Дозволена гіпотензія, зігрівання"],
+ d:[["Транексамова кислота","2 г повільно (TCCC) або 1 г + 1 г","в/в/ІО"]],
+ e:["Турнікет нижче рани або на суглобі","Послаблення турнікета для «перевірки»","Не записали час"],
+ t:"Турнікет > 2 год — лише лікар вирішує про конверсію. Передай час накладання.",src:"TCCC 2024; Довідник парамедика, 5.2; Протокол МОЗ № 45"},
+
+{id:"crush",no:"46",cat:"trauma",title:"Краш-синдром",keys:"краш синдром тривалого здавлення завали рабдоміоліз",
+ w:"Здавлення м'язового масиву (кінцівка) ≥ 1 год (часто > 4 год).",
+ s:["Після звільнення: гіперкаліємія, аритмії, шок, ниркова недостатність"],
+ a:["!До звільнення: в/в доступ, NaCl 0,9% 1–1,5 л/год (без калію)","Інфузія неможлива, звільнення невідкладне → турнікет проксимально перед звільненням","!Моніторинг ЕКГ; гіперкаліємія → кальцій, сальбутамол",
+    "Знеболення (кетамін)","Гідрокарбонат — за протоколом"],
+ d:[["NaCl 0,9%","1–1,5 л/год","в/в"],["Кальцію хлорид 10%","10 мл","при змінах ЕКГ"]],
+ e:["Звільнення без інфузії і моніторингу","Розчин Рінгера (містить калій) як перший вибір"],t:"Стаціонар з діалізом.",src:"ERC 2025; Протокол МОЗ № 46"},
+
+{id:"burn",no:"47",cat:"trauma",title:"Термічні опіки",keys:"опіки опік правило дев'яток Паркланд дихальні шляхи",tool:"burn",
+ w:"Термічне ушкодження шкіри; оцінка площі за правилом дев'яток (долоня пацієнта ≈ 1%).",
+ s:["Опік ДШ: опік обличчя, обпалені брови/вуса, кіптява в роті, захриплість, стридор","Вогонь у закритому приміщенні — CO і ціаніди"],
+ a:["!Припинити дію: зняти тліючий одяг, прикраси","!Охолодити проточною прохолодною водою 20 хв (до 3 год після опіку), уникаючи гіпотермії","!Ознаки опіку ДШ → рання інтубація досвідченим",
+    "Кисень 15 л/хв при підозрі на CO","Харчова плівка поверх опіку (не туго)","Інфузія при > 20% (діти > 10%): початково ≥ 14 р. 500 мл/год, 6–13 р. 250 мл/год, ≤ 5 р. 125 мл/год","Знеболення (кетамін, опіоїди)"],
+ d:[["Розчин Рінгера лактат","500 / 250 / 125 мл/год","за віком"],["Кетамін","0,3–0,5 мг/кг","в/в"]],
+ e:["Лід на опік","Опіки першого ступеня в розрахунку площі","Гіпотермія від охолодження"],t:"Опіковий центр: > 20% (> 10% у дітей), обличчя, кисті, промежина, ДШ, електротравма.",src:"ATLS 10; ABA; Протокол МОЗ № 47"},
+
+/* ========== ДІТИ Й ВАГІТНІ ========== */
+{id:"croup",no:"53",cat:"kids",title:"Круп у дітей",keys:"круп стридор гавкаючий кашель дексаметазон діти",tool:"dose",
+ w:"Дитина 6 міс–6 р.: гавкаючий кашель, інспіраторний стридор, захриплість, часто вночі на тлі ГРВІ.",
+ s:["Тяжкий: стридор у спокої, втяжіння, збудження/млявість, ціаноз","Епіглотит: слинотеча, висока температура, «поза штатива» — не оглядати горло!"],
+ a:["!Не лякати дитину, на руках у батьків","!Дексаметазон 0,15–0,6 мг/кг per os/в/м (макс. 10 мг) — усім","Помірний/тяжкий → небулізований адреналін 1 мг/мл 0,5 мл/кг (макс. 5 мл) нерозведеним",
+    "О₂ при SpO₂ < 92%","Після адреналіну — нагляд ≥ 2 год (ефект минає)"],
+ d:[["Дексаметазон","0,15–0,6 мг/кг, макс. 10 мг","per os / в/м"],["Адреналін 1 мг/мл","0,5 мл/кг, макс. 5 мл","небулайзер"]],
+ e:["Огляд горла шпателем при підозрі на епіглотит","Седація"],t:"Тяжкий круп або після адреналіну — госпіталізація.",src:"Протокол МОЗ № 53; APLS"},
+
+{id:"eclam",no:"",cat:"kids",title:"Еклампсія / прееклампсія",keys:"еклампсія прееклампсія вагітна судоми магнезія",
+ w:"Вагітна > 20 тиж. або до 6 тиж. після пологів: АТ ≥ 140/90 + головний біль, порушення зору, біль в епігастрії; судоми = еклампсія.",
+ s:[],
+ a:["!Положення на лівому боці (або ручне зміщення матки вліво)","!Судоми → магнію сульфат 4 г в/в за 15–20 хв, далі 1 г/год; повторні судоми — ще 2 г","АТ ≥ 160/110 → лабеталол 20 мг в/в або ніфедипін 10 мг per os",
+    "О₂, глюкоза","Передозування магнію (пригнічення дихання, зникнення рефлексів) → кальцію глюконат 10% 10 мл"],
+ d:[["Магнію сульфат","4 г → 1 г/год","в/в"],["Лабеталол","20 мг","в/в повільно"],["Кальцію глюконат 10%","10 мл","антидот магнію"]],
+ e:["Бензодіазепіни замість магнію як перший вибір","Положення на спині"],t:"Перинатальний центр.",src:"ACOG; NICE; Довідник парамедика, 6.2"},
+
+/* ========== ОТРУЄННЯ ========== */
+{id:"opioid",no:"57",cat:"tox",title:"Отруєння опіоїдами",keys:"опіоїди героїн метадон налоксон передозування міоз",tool:"dose",
+ w:"Пригнічення свідомості, ЧД < 10, міоз.",
+ s:["Метадон і фентаніли — тривала / сильна дія"],
+ a:["!Вентиляція мішком + О₂ — спочатку","!Налоксон в/в 0,04–0,4 мг титровано до ЧД ≥ 10 (не до повного пробудження)","В/м або і/н 0,4–2 мг, повтор кожні 2–3 хв (до 10 мг)",
+    "Налоксон коротший за опіоїд → рецидив; нагляд","Діти з апное: 0,1 мг/кг (макс. 2 мг)"],
+ d:[["Налоксон","0,04–0,4 мг в/в; 0,4–2 мг в/м/і/н","титровано"]],
+ e:["Великий болюс налоксону → гостра абстиненція, набряк легень","Відпустити після пробудження"],t:"Госпіталізація або нагляд ≥ 2 год (довше — метадон).",src:"Протокол МОЗ № 57"},
+
+{id:"co",no:"59",cat:"tox",title:"Отруєння чадним газом / димом",keys:"чадний газ CO дим пожежа ціаніди гідроксокобаламін",
+ w:"Пожежа, закрите приміщення, газова колонка, генератор: головний біль, нудота, сплутаність, у кількох людей одночасно.",
+ s:["Пульсоксиметр показує хибно нормальну SpO₂","Ціаніди: пожежа + порушення свідомості + гіпотензія"],
+ a:["!Безпека: вивести з зони (ЗІЗ / ДСНС)","!О₂ 100% маска з резервуаром 15 л/хв незалежно від SpO₂","SpCO-оксиметрія за наявності","Підозра на ціаніди → гідроксокобаламін 5 г в/в за 15 хв (діти 70 мг/кг)",
+    "ЕКГ (ішемія)","Тяжкі (втрата свідомості, неврологія, вагітність) → обговорити гіпербаричну оксигенацію"],
+ d:[["Кисень","15 л/хв","маска з резервуаром"],["Гідроксокобаламін","5 г (діти 70 мг/кг)","в/в за 15 хв"]],
+ e:["Орієнтуватися на SpO₂","Входити в задимлене приміщення без ЗІЗ"],t:"Госпіталізація при симптомах.",src:"Протокол МОЗ № 59"},
+
+{id:"op",no:"61",cat:"tox",title:"Органофосфати / нервово-паралітичні агенти",keys:"ФОС органофосфати пестициди зарин атропін пралідоксим",
+ w:"Контакт з пестицидами або бойовими ОР: міоз, слинотеча, бронхорея, бронхоспазм, брадикардія, фасцикуляції, судоми.",
+ s:["SLUDGE + «вбивчі B»: брадикардія, бронхорея, бронхоспазм"],
+ a:["!ЗІЗ, дезактивація (зняти одяг, змити шкіру водою з милом)","!Атропін 1–2 мг в/в (діти 0,02 мг/кг), подвоювати кожні 5 хв до «сухих» легень, ЧСС > 80, САТ > 80","Пралідоксим 30 мг/кг в/в за 20 хв (за наявності)",
+    "Судоми → бензодіазепіни","О₂, санація, ШВЛ"],
+ d:[["Атропін","1–2 мг, подвоювати","в/в до атропінізації"],["Пралідоксим","30 мг/кг","в/в за 20 хв"],["Діазепам / мідазолам","10 мг","при судомах"]],
+ e:["Недостатні дози атропіну","Сукцинілхолін для RSI"],t:"Токсикологічний центр.",src:"Протокол МОЗ № 61; WHO"},
+
+/* ========== ДОВКІЛЛЯ ========== */
+{id:"heat",no:"67",cat:"env",title:"Тепловий удар (гіпертермія)",keys:"тепловий удар гіпертермія перегрівання",
+ w:"Температура тіла > 40 °C + порушення ЦНС (сплутаність, судоми, кома) після спеки або навантаження.",
+ s:[],
+ a:["!Спочатку охолодити, потім транспортувати: занурення в холодну воду — найефективніше","Інакше: змочування + обдування, лід на шию/пахви/пах","Припинити охолодження при 38,5–39 °C",
+    "О₂, рідина в/в, глюкоза, судоми → бензодіазепіни","Жарознижувальні не ефективні"],
+ d:[],e:["Парацетамол замість фізичного охолодження","Затримка охолодження заради транспортування"],t:"Госпіталізація.",src:"Протокол МОЗ № 67; ACSM"},
+
+{id:"hypoth",no:"68",cat:"env",title:"Гіпотермія",keys:"гіпотермія переохолодження холод",
+ w:"Температура тіла < 35 °C.",
+ s:["Помірна 32–28 °C, тяжка < 28 °C: брадикардія, аритмії, кома","Перевірка пульсу до 1 хв"],
+ a:["!Обережне поводження — горизонтально (ризик ФШ)","!Зняти мокрий одяг, ізолювати, тепле середовище, теплі розчини","Зупинка серця: при t < 30 °C — до 3 розрядів, адреналін не вводити; 30–35 °C — інтервали адреналіну подвоїти",
+    "Тривала СЛР, механічні компресії","Не констатувати смерть до зігрівання (крім явних незворотних ознак)"],
+ d:[],e:["Активне розтирання кінцівок","Груба транспортна іммобілізація"],t:"Зупинка серця або нестабільність → центр з ЕКМО.",src:"ERC 2025 (особливі обставини); Протокол МОЗ № 68"},
+
+{id:"drown",no:"69",cat:"env",title:"Утоплення",keys:"утоплення вода потопання",
+ w:"Порушення дихання внаслідок занурення у воду.",
+ s:[],
+ a:["!Безпека рятувальника","!Не дихає → 5 початкових вдихів, далі СЛР 30:2","О₂ високим потоком, рання ШВЛ/PEEP","Не «виливати воду» (прийом Геймліха)",
+    "Іммобілізація хребта лише при ознаках травми (стрибок у воду)","Зігрівання"],
+ d:[],e:["Спроби видалити воду з легень","Відмова від госпіталізації при симптомах"],t:"Усі з симптомами після занурення — госпіталізація (відстрочений набряк легень).",src:"ERC 2025; Протокол МОЗ № 69"}
+];
+
+/* Кейси: [id протоколу, ситуація/питання, [правильна, хибна, хибна, хибна], пояснення] */
+const CASES=[
+["cpr","Чоловік 58 р. впав на вулиці, не реагує, дихання агональне. Перший крок після оцінки безпеки і виклику допомоги?",["Почати компресії 30:2 і принести АЕД","Перевіряти пульс 30 с","Покласти в стабільне бічне положення","Дати 5 рятувальних вдихів"],"Агональне дихання = зупинка кровообігу. Компресії починають негайно; перевірка пульсу не довше 10 с."],
+["cpr","На моніторі ФШ, дано 3-й розряд. Що вводиш?",["Адреналін 1 мг + аміодарон 300 мг","Лише адреналін 1 мг","Аміодарон 150 мг","Атропін 1 мг"],"При шокових ритмах адреналін 1 мг і аміодарон 300 мг — після 3-го розряду (ERC 2025)."],
+["cpr","Асистолія. Коли вводити перший адреналін?",["Якнайшвидше після встановлення ритму","Після 3-го циклу СЛР","Лише після інтубації","Не вводити при асистолії"],"При не-шокових ритмах раннє введення адреналіну покращує прогноз (ERC 2025)."],
+["cpr","Під час СЛР ETCO₂ раптово зріс з 15 до 45 мм рт. ст. Що це найімовірніше означає?",["Відновлення спонтанного кровообігу (ROSC)","Інтубація в стравохід","Гіпервентиляція","Помилка датчика — ігнорувати"],"Різке підвищення ETCO₂ — найнадійніша рання ознака ROSC: перевір пульс у наступну паузу."],
+["cpr","Що з переліченого НЕ належить до 4Г/4Т?",["Гіпоглікемія","Тампонада серця","Гіпотермія","Напружений пневмоторакс"],"4Г: гіпоксія, гіповолемія, гіпо/гіперкаліємія, гіпотермія; 4Т: тромбоз (ТЕЛА, коронарний), тампонада, токсини, напружений пневмоторакс."],
+["cprkid","Дитина 20 кг, зупинка, асистолія. Доза адреналіну?",["0,2 мг (10 мкг/кг)","1 мг","0,02 мг","2 мг"],"10 мкг/кг × 20 кг = 200 мкг = 0,2 мг (2 мл розчину 1:10 000)."],
+["cprkid","Співвідношення компресій і вдихів для двох медиків при СЛР дитини?",["15:2","30:2","5:1","3:1"],"У дітей медичні працівники використовують 15:2; 3:1 — у новонароджених."],
+["neo","Новонароджений не дихає після висушування і стимуляції. Наступний крок?",["5 роздувальних вдихів по 2–3 с","Компресії 3:1","Адреналін у пупкову вену","Санація трахеї"],"Спочатку ефективна вентиляція — 5 роздувальних вдихів; компресії лише при ЧСС < 60 після 30 с ефективної вентиляції."],
+["rosc","Після ROSC SpO₂ 100% на кисні 15 л/хв. Що робиш?",["Знижуєш FiO₂ до SpO₂ 94–98%","Залишаєш як є","Збільшуєш ЧД вентиляції","Вводиш адреналін"],"Гіпероксія після ROSC шкідлива; ціль 94–98%."],
+["choke","Жінка в ресторані не може говорити, кашель неефективний, при свідомості. Тактика?",["5 ударів між лопатками, потім 5 поштовхів у живіт","Одразу СЛР","Сліпо видалити пальцем","Дати попити води"],"Тяжка обструкція при свідомості: чергувати 5 ударів по спині і 5 поштовхів у живіт."],
+["choke","Немовля 8 міс. подавилося, неефективний кашель. Що НЕ робимо?",["Поштовхи в живіт","Удари по спині","Поштовхи в грудну клітку","Оглянути рот"],"У немовлят поштовхи в живіт протипоказані — тільки удари по спині + поштовхи в грудну клітку."],
+["abcde","Під час оцінки «A» виявлено хропіння у непритомного після падіння з висоти. Перша дія?",["Висування нижньої щелепи зі стабілізацією шиї","Закид голови","Перейти до оцінки B","Інтубація без оцінки"],"При підозрі на травму хребта — висування щелепи, без розгинання шиї. Проблему A усувають до переходу до B."],
+["abcde","Пацієнт зі зміненою свідомістю. Що обов'язково виміряти в «D»?",["Глюкозу крові","Температуру","SpO₂","Сатурацію венозної крові"],"Глюкоза — обов'язкова при будь-якій зміні свідомості: гіпоглікемія легко імітує інсульт, отруєння, психоз."],
+["handover","Що означає «I» у MIST?",["Injuries — виявлені ушкодження","Intubation","Infusion","Intensity of pain"],"MIST: Mechanism, Injuries, Signs, Treatment."],
+["stroke","Чоловік 67 р., раптова слабкість правої руки й афазія 40 хв тому, АТ 190/105, глюкоза 6,2. Що робиш з АТ?",["Не знижуєш, транспортуєш в інсультний центр","Урапідил до 140/90","Ніфедипін під язик","Магнезія в/в"],"До 220/120 АТ при інсульті не знижують на догоспітальному етапі — це погіршує перфузію пенумбри."],
+["stroke","Що з переліченого критично важливо з'ясувати при підозрі на інсульт?",["Час, коли пацієнта востаннє бачили здоровим","Рівень холестерину","Групу крові","Наявність щеплень"],"Від часу залежить можливість тромболізису (до 4,5 год) і тромбектомії (до 24 год)."],
+["stroke","Жінка 72 р. з геміпарезом, глюкоза 2,1 ммоль/л. Перша дія?",["Глюкоза в/в і повторна оцінка неврології","Аспірин 300 мг","Негайна транспортація без корекції","Нітрогліцерин"],"Гіпоглікемія — найчастіший імітатор інсульту. Після корекції дефіцит може зникнути."],
+["syncope","Юнак 17 р. знепритомнів під час бігу. ЕКГ — QTc 520 мс. Тактика?",["Госпіталізація з моніторингом","Відпустити — вазовагальне синкопе","Рекомендувати пити більше води","Призначити β-блокатор і залишити вдома"],"Синкопе при навантаженні + подовжений QT — червоні прапорці аритмогенної причини."],
+["acs","Біль за грудиною 40 хв, ЕКГ: елевація ST II, III, aVF; АТ 85/60. Що НЕ можна?",["Нітрогліцерин","Аспірин","ЕКГ у V3R–V4R","Повідомити ПКВ-центр"],"Нижній ІМ з гіпотензією — можливе ураження правого шлуночка; нітрати протипоказані."],
+["acs","Пацієнт з ГКС, SpO₂ 96% на повітрі. Кисень?",["Не потрібен","15 л/хв через маску","4 л/хв через канюлі всім","Лише під час транспортування"],"Рутинна оксигенотерапія при SpO₂ ≥ 90% не корисна і може шкодити."],
+["acs","Ціль часу від діагнозу STEMI до проведення провідника (первинна ПКВ)?",["≤ 120 хв (бажано ≤ 90)","≤ 6 год","≤ 24 год","Не має значення"],"Якщо ПКВ неможлива за 120 хв — тромболізис протягом 10 хв від діагнозу."],
+["brady","ЧСС 32/хв, повна АВ-блокада з широкими QRS, АТ 70/40, сплутаність. Атропін 0,5 мг без ефекту. Далі?",["Транскутанна стимуляція / інфузія адреналіну","Чекати 30 хв","Аміодарон","Аденозин"],"При широких QRS атропін часто неефективний; переходь до стимуляції або адреналіну 2–10 мкг/хв."],
+["tachy","Регулярна вузькокомплексна тахікардія 190/хв, АТ 120/80, свідомість ясна. Перший крок?",["Модифікований прийом Вальсальви","Кардіоверсія 200 Дж","Аміодарон 300 мг","Дигоксин"],"Стабільна НШТ: вагусні проби → аденозин 6–12–18 мг → верапаміл."],
+["tachy","Ширококомплексна тахікардія 180/хв, АТ 70/40, біль у грудях. Тактика?",["Синхронізована кардіоверсія","Аденозин","Верапаміл","Спостереження"],"Нестабільність (шок, ішемія) — показання до синхронізованої кардіоверсії до 3 спроб."],
+["tachy","ФП з широкими різними QRS, ЧСС 240, відомий WPW. Що протипоказано?",["Верапаміл","Кардіоверсія","Прокаїнамід","Консультація кардіолога"],"АВ-блокатори при передзбудженні прискорюють проведення по додатковому шляху → ФШ."],
+["ahf","Задишка, пінисте мокротиння, АТ 190/110, SpO₂ 85%. Положення і перші кроки?",["Сидячи, ноги вниз; CPAP; нітрогліцерин","Лежачи з піднятими ногами; інфузія","Лежачи на спині; морфін 10 мг","Стоячи; фуросемід per os"],"Гіпертензивний набряк легень: сидяче положення, NIV/CPAP, нітрати — основа терапії."],
+["htn","АТ 200/115, скарг немає, ЕКГ і неврологія без змін. Тактика?",["Без агресивного зниження; повторне вимірювання, пероральна терапія за протоколом","Урапідил в/в до 120/80","Ніфедипін s/l","Негайна госпіталізація в реанімацію"],"Без ураження органів-мішеней — це не невідкладний стан; різке зниження АТ небезпечне."],
+["htn","Розшарування аорти: цільові показники?",["САТ < 120, ЧСС < 60 за 20 хв","САТ < 160 за 24 год","Не знижувати","САТ < 90"],"При розшаруванні аорти — швидкий контроль ЧСС і АТ разом зі знеболенням."],
+["asthma","Астма: SpO₂ 89%, не може говорити, «німа» легеня. Що додаєш до сальбутамолу й іпратропію?",["Магнію сульфат 2 г в/в і стероїд","Седацію діазепамом","Фуросемід","Аміодарон"],"Загрозлива астма: магній 2 г за 20 хв, системні стероїди; при наближенні зупинки — адреналін в/м."],
+["asthma","Цільова SpO₂ при загостренні ХОЗЛ?",["88–92%","94–98%","100%","> 85%"],"У пацієнтів з ризиком гіперкапнії — 88–92%."],
+["coma","Непритомний чоловік, міоз, ЧД 6/хв, сліди ін'єкцій. Перша дія?",["Вентиляція мішком + О₂, потім налоксон","Налоксон 2 мг в/в болюс одразу","Глюкоза 40%","Флумазеніл"],"Спочатку оксигенація і вентиляція; налоксон титрувати до ЧД ≥ 10."],
+["seiz","Тоніко-клонічні судоми тривають 6 хв, маса 70 кг, в/в доступу немає. Що вводиш?",["Мідазолам 10 мг в/м","Діазепам 10 мг per os","Магнію сульфат","Чекаєш 20 хв"],"Напад ≥ 5 хв — епістатус: мідазолам 10 мг в/м так само ефективний, як в/в лоразепам (RAMPART)."],
+["seiz","Вагітна 34 тиж., судоми, АТ 170/110. Препарат вибору?",["Магнію сульфат 4 г в/в","Діазепам 10 мг","Леветирацетам","Фенобарбітал"],"Еклампсія: магнію сульфат — перша лінія і для лікування, і для профілактики повторних судом."],
+["shock","Чоловік з ножовим пораненням живота: ЧСС 130, АТ 80/50. Цільовий САТ?",["80–90 мм рт. ст. (дозволена гіпотензія)","120 мм рт. ст.","Не має значення","≥ 140 мм рт. ст."],"До хірургічного гемостазу — дозволена гіпотензія; агресивна інфузія посилює кровотечу."],
+["shock","Шоковий індекс у пацієнта з ЧСС 120 і САТ 100?",["1,2 — тривожно","0,8 — норма","120","Не застосовується"],"ШІ = ЧСС / САТ; > 1 вказує на значну гіповолемію / шок."],
+["anaph","Набряк обличчя, стридор, АТ 80/50 після укусу оси. Перший препарат?",["Адреналін 0,5 мг в/м у стегно","Дексаметазон 8 мг в/в","Антигістамінний в/в","Адреналін 1 мг в/в болюс"],"Адреналін в/м — перша лінія. В/в болюс 1 мг пацієнту з пульсом небезпечний (аритмії)."],
+["anaph","Дитина 8 р., анафілаксія. Доза адреналіну в/м?",["0,3 мг","0,5 мг","0,15 мг","1 мг"],"6–12 р.: 0,3 мг; > 12 р.: 0,5 мг; 6 міс–6 р.: 0,15 мг (RCUK 2021)."],
+["anaph","Через 5 хв після першої дози адреналіну немає покращення. Що робиш?",["Повторюєш адреналін в/м","Чекаєш 30 хв","Даєш антигістамінний","Відміняєш адреналін"],"Повторні дози кожні 5 хв; після 2 доз без ефекту — інфузія адреналіну."],
+["pain","Відкритий перелом стегна, NRS 9, АТ 100/60. Найкращий вибір знеболення?",["Кетамін 0,3–0,5 мг/кг в/в","Кеторолак 60 мг в/м","Парацетамол per os","Без знеболення до лікарні"],"Кетамін не знижує АТ і ефективний при сильному травматичному болю."],
+["hypo","Діабетик без свідомості, глюкоза 1,8, вену знайти не вдається. Що вводиш?",["Глюкагон 1 мг в/м","Глюкоза per os","Інсулін","Нічого — до лікарні"],"Без в/в доступу — глюкагон в/м; рідка глюкоза per os протипоказана при порушенні свідомості."],
+["hyperk","Пацієнт на гемодіалізі пропустив сеанс; ЕКГ — загострені T, широкий QRS. Перший препарат?",["Кальцію хлорид 10% 10 мл в/в","Фуросемід","Аміодарон","Аденозин"],"Кальцій стабілізує мембрану кардіоміоцитів за хвилини; далі — інсулін + глюкоза, сальбутамол."],
+["trauma","Вибухове поранення: масивна кровотеча з культі стегна, хрип у диханні. Що першим?",["Турнікет на стегно","Інтубація","Оцінка дихання","Комір"],"MARCH / <C>ABC: масивну кровотечу зупиняють до відновлення ДШ."],
+["trauma","Скільки часу оптимально перебувати на місці з нестабільним травмованим?",["≤ 10 хв","30 хв","До повної стабілізації","Не має значення"],"Нестабільний травмований потребує операції — принцип «load and go»."],
+["tbi","ЧМТ, GCS 7, SpO₂ 88%, АТ 85/50. Що найбільше погіршує прогноз?",["Гіпоксія і гіпотензія","Головний біль","Нудота","Брадипное 12/хв"],"Навіть один епізод гіпоксії чи гіпотензії суттєво збільшує летальність при ЧМТ."],
+["tbi","Ознаки дислокації (анізокорія, падіння GCS). Цільовий ETCO₂ як тимчасовий захід?",["30–35 мм рт. ст.","20–25 мм рт. ст.","45–50 мм рт. ст.","Не контролювати"],"Коротка помірна гіпервентиляція — лише міст до нейрохірургії; рутинно — 35–45."],
+["chest","Травма грудей: справа дихання відсутнє, тимпаніт, АТ 70/40, набухлі вени шиї. Дія?",["Голкова декомпресія справа","Оклюзійна пов'язка","Інфузія 2 л","Транспортування без втручань"],"Напружений пневмоторакс — клінічний діагноз, декомпресія негайно."],
+["spine","Ножове поранення шиї без неврологічного дефіциту. Шийний комір?",["Не накладати","Накласти обов'язково","Лише жорсткий щит","Комір + мішки з піском"],"При проникаючій травмі без дефіциту комір не покращує результати, але затримує допомогу і маскує ушкодження."],
+["limb","ДТП, пацієнт у шоці, біль у тазі. Де накладають тазовий бандаж?",["На рівні великих вертлюгів","На гребенях клубових кісток","На талії","На стегнах вище колін"],"Лише на рівні великих вертлюгів бандаж зменшує об'єм тазу."],
+["bleed","Турнікет накладено, але кровотеча з рани триває. Дія?",["Затягнути сильніше / накласти другий вище","Зняти і перекласти нижче","Послабити","Чекати"],"Другий турнікет проксимальніше першого; ніколи не послаблюй для перевірки."],
+["bleed","Коли найефективніша транексамова кислота при травмі?",["Протягом 1–3 год після травми","Через 6 год","Лише в лікарні після КТ","Через 24 год"],"Після 3 год ефект зникає і можлива шкода (CRASH-2)."],
+["crush","Ногу затиснуто плитою 6 год. Що зробити до звільнення?",["Інфузія NaCl 0,9% і моніторинг ЕКГ","Швидко звільнити","Ввести калій","Нічого"],"Після звільнення можливі гіперкаліємія і аритмії — інфузія і моніторинг до звільнення."],
+["burn","Опіки обох нижніх кінцівок повністю (дорослий). Площа?",["≈ 36%","≈ 18%","≈ 9%","≈ 27%"],"Правило дев'яток: кожна нижня кінцівка — 18%."],
+["burn","Перша допомога при свіжому термічному опіку?",["Проточна прохолодна вода 20 хв","Лід","Олія","Мазь з антибіотиком"],"Охолодження протягом 20 хв у перші 3 год зменшує глибину опіку; лід шкодить."],
+["croup","Дитина 2 р., гавкаючий кашель, стридор у спокої, втяжіння. Терапія?",["Дексаметазон + небулізований адреналін","Огляд горла шпателем","Антибіотик","Седація"],"Помірний/тяжкий круп: стероїд усім і небулізований адреналін 0,5 мл/кг (макс. 5 мл)."],
+["co","Сім'я з головним болем після ночі з газовою колонкою, SpO₂ 99%. Тактика?",["О₂ 100% через маску з резервуаром, госпіталізація","Нічого — SpO₂ нормальна","Аналгетики вдома","Провітрити і залишити"],"Пульсоксиметр не відрізняє карбоксигемоглобін — SpO₂ хибно нормальна."],
+["op","Фермер після обприскування: міоз, слинотеча, бронхорея, ЧСС 42. Антидот і ціль?",["Атропін до «сухих» легень","Налоксон","Флумазеніл","Адреналін"],"Атропін подвоюють кожні 5 хв до припинення бронхореї (ЧСС > 80, САТ > 80)."],
+["heat","Марафонець, t 41,2 °C, сплутаний. Найефективніше охолодження?",["Занурення в холодну воду","Парацетамол в/в","Транспортування без охолодження","Тепла ковдра"],"«Охолодь першим, транспортуй другим»; жарознижувальні неефективні."],
+["hypoth","Зупинка серця при t 27 °C, ФШ, дано 3 розряди. Адреналін?",["Не вводити до зігрівання ≥ 30 °C","1 мг кожні 3 хв","1 мг кожні 10 хв","5 мг одноразово"],"Нижче 30 °C адреналін неефективний і накопичується; розряди — максимум 3."],
+["drown","Витягли з води, не дихає. Перший крок?",["5 рятувальних вдихів","Поштовхи в живіт, щоб вилити воду","Тільки компресії","Повернути на живіт"],"Зупинка при утопленні гіпоксична — спершу 5 вдихів, потім 30:2."]
+];
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const catName=Object.fromEntries(CATS);
+const CATI={res:"❤️",assess:"🩺",cardio:"💓",resp:"🫁",gen:"⚕️",trauma:"🩹",kids:"👶",tox:"☠️",env:"🌡"};
+
+/* ---------- навігація ---------- */
+const VIEWS=["protocols","tools","quiz","about"];
+function route(){
+  const h=(location.hash||"").slice(1);
+  if(h.startsWith("p-")){const p=P.find(x=>x.id===h.slice(2));if(p){if(!curView)showView("protocols");openProto(p.id,true);return}}
+  if(h.startsWith("t-")){if(!curView)showView("tools");openTool(h.slice(2),true);return}
+  closeSheet(true);showView(VIEWS.includes(h)?h:"protocols");
+}
+let curView=null;
+function showView(v){curView=v;document.querySelectorAll(".view").forEach(x=>x.classList.toggle("on",x.id==="v-"+v));document.querySelectorAll("nav.tabs a").forEach(a=>a.classList.toggle("on",a.dataset.v===v));if(v==="quiz"&&!quiz)quizStart()}
+window.addEventListener("hashchange",route);
+let sheetBack=null;
+function openSheet(title,html,hash){$("sh-t").textContent=title;$("sh-b").innerHTML=html;const s=$("sheet");s.classList.add("on");s.scrollTop=0;if(hash&&location.hash!=="#"+hash){sheetBack=location.hash||"#protocols";history.pushState(null,"","#"+hash)}}
+function closeSheet(silent){const s=$("sheet");if(!s.classList.contains("on"))return;s.classList.remove("on");stopMetro();if(!silent){if(sheetBack){history.back()}}sheetBack=null}
+$("sh-x").onclick=()=>{const s=$("sheet");s.classList.remove("on");stopMetro();if(location.hash.startsWith("#p-")||location.hash.startsWith("#t-")){history.replaceState(null,"",sheetBack||"#protocols")}sheetBack=null};
+
+/* ---------- список протоколів ---------- */
+let cat="all";
+const QUICK=[["cpr","❤️","СЛР таймер","r","t"],["dose","⚖️","Дози за вагою","","t"],["anaph","🐝","Анафілаксія","r","p"],["bleed","🩸","Кровотеча","r","p"],["acs","💔","ГКС / STEMI","","p"],["stroke","🧠","Інсульт","","p"],["seiz","⚡","Судоми","","p"],["tachy","📈","Тахікардія","","p"]];
+$("quick").innerHTML=QUICK.map(q=>`<button class="${q[3]}" data-k="${q[4]}" data-id="${q[0]}"><span>${q[1]}</span>${q[2]}</button>`).join("");
+$("quick").onclick=e=>{const b=e.target.closest("button");if(!b)return;b.dataset.k==="t"?openTool(b.dataset.id):openProto(b.dataset.id)};
+function renderCats(){$("cats").innerHTML=[["all","Усі"],...CATS].map(([k,v])=>`<button class="chip ${k===cat?"on":""}" data-c="${k}">${v}</button>`).join("")}
+$("cats").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;cat=b.dataset.c;renderCats();renderList()};
+const norm=s=>String(s).toLowerCase().replace(/[’'`]/g,"'");
+function hay(p){return norm([p.title,p.no,p.keys,p.w,(p.s||[]).join(" "),(p.a||[]).join(" "),(p.d||[]).map(x=>x.join(" ")).join(" "),catName[p.cat]].join(" "))}
+const HAY=Object.fromEntries(P.map(p=>[p.id,hay(p)]));
+function renderList(){
+  const q=norm($("q").value.trim());const words=q.split(/\s+/).filter(Boolean);
+  let L=P.filter(p=>(cat==="all"||p.cat===cat)&&words.every(w=>HAY[p.id].includes(w)));
+  if(q){L.sort((a,b)=>(norm(b.title).includes(words[0])?1:0)-(norm(a.title).includes(words[0])?1:0))}
+  $("quick").style.display=q?"none":"grid";
+  $("list").innerHTML=L.length?L.map(p=>`<div class="item" data-id="${p.id}"><div class="no ${p.cat==="res"?"x":""}">${p.no?("№"+p.no):CATI[p.cat]}</div><div><b>${esc(p.title)}</b><small>${catName[p.cat]}${q?" · "+esc(snippet(p,words[0])):""}</small></div></div>`).join(""):`<div class="empty">Нічого не знайдено. Спробуйте інше слово.</div>`;
+}
+function snippet(p,w){const h=[...(p.a||[]),...(p.d||[]).map(x=>x.join(" ")),p.w].find(t=>norm(t).includes(w));if(!h)return"";const s=String(h).replace(/^!/,"");return s.length>70?s.slice(0,70)+"…":s}
+$("q").addEventListener("input",renderList);
+$("list").onclick=e=>{const it=e.target.closest(".item");if(it)openProto(it.dataset.id)};
+
+/* ---------- сторінка протоколу ---------- */
+const TOOLNAMES={cpr:"❤️ Таймер СЛР",dose:"⚖️ Дози за вагою",gcs:"🧠 Шкала Глазго",befast:"🧠 BE-FAST",burn:"🔥 Площа опіку і рідина",start:"🚑 START-тріаж"};
+function openProto(id,fromHash){
+  const p=P.find(x=>x.id===id);if(!p)return;
+  const key="pm-done-"+id;let done={};try{done=JSON.parse(store.get(key)||"{}")}catch(e){}
+  const html=`
+   <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px"><span class="tag">${catName[p.cat]}</span>${p.no?`<span class="tag" style="background:var(--red-soft);color:var(--red)">Протокол № ${p.no}</span>`:""}</div>
+   <div class="box blue"><h4>Коли</h4><p style="margin:0">${esc(p.w)}</p></div>
+   ${p.s&&p.s.length?`<div class="box warn"><h4>Ключові ознаки</h4><ul class="clean">${p.s.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`:""}
+   <div class="card" style="padding:12px 14px"><div style="display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">Алгоритм дій</h3><button class="btn sec" id="pr-reset" style="padding:6px 10px;font-size:12px">Скинути ✓</button></div>
+     <p class="hint" style="margin:2px 0 6px">Торкніться кроку, щоб позначити виконаним. <span style="color:var(--red);font-weight:700">●</span> — критичний крок.</p>
+     <ol class="steps" id="pr-steps">${p.a.map((s,i)=>`<li class="${s[0]==="!"?"crit":""} ${done[i]?"done":""}" data-i="${i}">${esc(s.replace(/^!/,""))}</li>`).join("")}</ol></div>
+   ${p.d&&p.d.length?`<div class="card" style="padding:12px 14px"><h3>Препарати і дози (дорослі, якщо не вказано)</h3><table>${p.d.map(d=>`<tr><td><b>${esc(d[0])}</b></td><td class="mono">${esc(d[1])}</td><td style="color:var(--mute);font-size:13px">${esc(d[2])}</td></tr>`).join("")}</table></div>`:""}
+   ${p.e&&p.e.length?`<div class="box red"><h4>Типові помилки</h4><ul class="clean">${p.e.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`:""}
+   ${p.t?`<div class="box ok"><h4>Транспортування / передача</h4><p style="margin:0">${esc(p.t)}</p></div>`:""}
+   ${p.tool?`<button class="btn navy full" id="pr-tool" style="margin-bottom:10px">${TOOLNAMES[p.tool]} →</button>`:""}
+   ${CASES.some(c=>c[0]===id)?`<button class="btn sec full" id="pr-quiz" style="margin-bottom:10px">🎯 Кейси з цієї теми (${CASES.filter(c=>c[0]===id).length})</button>`:""}
+   <p class="hint">Джерела: ${esc(p.src||"")}</p>`;
+  if(fromHash){sheetBack="#"+(curView||"protocols");$("sh-t").textContent=p.title;$("sh-b").innerHTML=html;$("sheet").classList.add("on");$("sheet").scrollTop=0}else openSheet(p.title,html,"p-"+id);
+  $("pr-steps").onclick=e=>{const li=e.target.closest("li");if(!li)return;li.classList.toggle("done");done[li.dataset.i]=li.classList.contains("done");store.set(key,JSON.stringify(done))};
+  $("pr-reset").onclick=()=>{done={};store.set(key,"{}");document.querySelectorAll("#pr-steps li").forEach(l=>l.classList.remove("done"))};
+  if(p.tool)$("pr-tool").onclick=()=>openTool(p.tool);
+  const qb=$("pr-quiz");if(qb)qb.onclick=()=>{$("sheet").classList.remove("on");history.replaceState(null,"","#quiz");route();newQuiz(CASES.filter(c=>c[0]===id).map(c=>c),id)};
+}
+
+/* ---------- інструменти ---------- */
+const TOOLS=[["cpr","❤️","Таймер СЛР","метроном, цикли, журнал"],["dose","⚖️","Дози за вагою","діти й дорослі"],["gcs","🧠","Шкала Глазго","GCS-калькулятор"],["befast","👁","BE-FAST","скринінг інсульту"],["start","🚑","START-тріаж","масові втрати"],["burn","🔥","Опіки","площа і рідина"],["vitals","📊","Норми за віком","ЧСС, ЧД, АТ"],["shock","💧","Шоковий індекс","ЧСС / САТ"]];
+$("tgrid").innerHTML=TOOLS.map(t=>`<button class="tile" data-t="${t[0]}"><i>${t[1]}</i><b>${t[2]}</b><span>${t[3]}</span></button>`).join("");
+$("tgrid").onclick=e=>{const b=e.target.closest(".tile");if(b)openTool(b.dataset.t)};
+function openTool(t,fromHash){
+  const def=TOOLS.find(x=>x[0]===t);if(!def)return;
+  const html=({cpr:cprHTML,dose:doseHTML,gcs:gcsHTML,befast:befastHTML,start:startHTML,burn:burnHTML,vitals:vitalsHTML,shock:shockHTML})[t]();
+  if(fromHash){sheetBack="#"+(curView||"tools");$("sh-t").textContent=def[2];$("sh-b").innerHTML=html;$("sheet").classList.add("on");$("sheet").scrollTop=0}else openSheet(def[2],html,"t-"+t);
+  ({cpr:cprInit,dose:doseInit,gcs:gcsInit,befast:befastInit,start:startInit,burn:burnInit,vitals:()=>{},shock:shockInit})[t]();
+}
+
+/* --- Таймер СЛР --- */
+let cpr=null,ac=null,metroT=null,wake=null;
+function cprHTML(){return `
+  <div class="cpr-top"><div style="font-size:12px;opacity:.8;font-weight:700">ЗАГАЛЬНИЙ ЧАС</div><div class="big" id="c-tot">00:00</div><div class="cyc" id="c-cyc">Цикл 2:00</div></div>
+  <div class="cpr-hint" id="c-hint">Натисніть «Старт» на початку компресій.</div>
+  <div class="row" style="margin-bottom:10px"><button class="btn full" id="c-start">▶ Старт</button><button class="btn sec" id="c-metro">🔊 Метроном 110</button></div>
+  <div class="cpr-grid">
+    <button class="b-rh" data-e="rh-s">Ритм: ФШ / ШТ<small>шоковий</small></button>
+    <button class="b-rh" data-e="rh-n">Ритм: асистолія / ЕАБП<small>не-шоковий</small></button>
+    <button class="b-shock" data-e="shock">⚡ Розряд<small id="c-ns">0</small></button>
+    <button class="b-adr" data-e="adr">💉 Адреналін 1 мг<small id="c-na">0</small></button>
+    <button class="b-amio" data-e="amio">Аміодарон<small id="c-am">300 мг</small></button>
+    <button class="b-air" data-e="air">ДШ: SGA / ЕТТ<small>безперервні компресії</small></button>
+    <button class="b-rh" data-e="cycle">↻ Новий цикл<small>зміна виконавця</small></button>
+    <button class="b-rosc" data-e="rosc">✓ ROSC<small>стоп</small></button>
+  </div>
+  <div class="card" style="padding:12px 14px"><div style="display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">Журнал</h3><button class="btn sec" id="c-copy" style="padding:6px 10px;font-size:12px">Копіювати</button></div><div class="log" id="c-log"><div class="empty" style="display:block">Подій ще немає</div></div></div>
+  <button class="btn sec full" id="c-reset">Скинути таймер</button>
+  <p class="hint">Цикл 2 хв: аналіз ритму і зміна виконавця. Адреналін: не-шоковий ритм — одразу, шоковий — після 3-го розряду; далі кожні 3–5 хв. Аміодарон 300 мг після 3-го розряду, 150 мг після 5-го.</p>`}
+function fmt(ms){const s=Math.max(0,Math.floor(ms/1000));return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function beep(f=880,d=.06,v=.25){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;g.gain.value=v;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+d)}catch(e){}}
+function stopMetro(){if(metroT){clearInterval(metroT);metroT=null;const b=$("c-metro");if(b)b.textContent="🔊 Метроном 110"}}
+function cprInit(){
+  if(!cpr)cpr={t0:null,c0:null,shocks:0,adr:0,lastAdr:null,amio:0,rhythm:null,log:[],tick:null};
+  const ev=(txt)=>{const t=cpr.t0?Date.now()-cpr.t0:0;cpr.log.push([fmt(t),txt]);drawLog()};
+  function drawLog(){$("c-log").innerHTML=cpr.log.length?cpr.log.slice().reverse().map(l=>`<div><span>${l[0]}</span><span>${esc(l[1])}</span></div>`).join(""):`<div class="empty" style="display:block">Подій ще немає</div>`;$("c-ns").textContent=cpr.shocks;$("c-na").textContent=cpr.adr;$("c-am").textContent=cpr.amio===0?"300 мг":cpr.amio===1?"150 мг":"введено ×"+cpr.amio}
+  function hint(){
+    if(!cpr.t0){$("c-hint").textContent="Натисніть «Старт» на початку компресій.";return}
+    const now=Date.now(),sinceA=cpr.lastAdr?now-cpr.lastAdr:null;let h=[];
+    if(cpr.rhythm==="n"&&!cpr.adr)h.push("Не-шоковий ритм: адреналін 1 мг ЗАРАЗ");
+    if(cpr.rhythm==="s"&&cpr.shocks>=3&&!cpr.adr)h.push("Після 3-го розряду: адреналін 1 мг");
+    if(cpr.rhythm==="s"&&cpr.shocks>=3&&cpr.amio===0)h.push("Аміодарон 300 мг");
+    if(cpr.rhythm==="s"&&cpr.shocks>=5&&cpr.amio===1)h.push("Аміодарон 150 мг");
+    if(sinceA!==null&&sinceA>=180000)h.push(`Адреналін: минуло ${fmt(sinceA)} — час для наступної дози`);
+    else if(sinceA!==null)h.push(`Наступний адреналін через ${fmt(180000-sinceA)}–${fmt(300000-sinceA)}`);
+    $("c-hint").textContent=h.join(" · ")||"Якісні компресії: 5–6 см, 100–120/хв, мінімальні паузи. Шукай 4Г/4Т.";
+  }
+  function tick(){if(!cpr.t0||!$("c-tot"))return;const now=Date.now();$("c-tot").textContent=fmt(now-cpr.t0);const left=120000-(now-cpr.c0);const el=$("c-cyc");
+    if(left<=0){el.textContent="⏱ АНАЛІЗ РИТМУ / ЗМІНА";el.classList.add("alert");if(!cpr.alerted){cpr.alerted=true;beep(660,.25,.4);setTimeout(()=>beep(660,.25,.4),350);try{navigator.vibrate&&navigator.vibrate([300,150,300])}catch(e){}}}
+    else{el.textContent="Цикл "+fmt(left);el.classList.remove("alert")}hint()}
+  function newCycle(){cpr.c0=Date.now();cpr.alerted=false}
+  $("c-start").onclick=async()=>{if(cpr.t0)return;cpr.t0=Date.now();newCycle();ev("Початок СЛР");$("c-start").textContent="● Триває";$("c-start").disabled=true;try{wake=await navigator.wakeLock.request("screen")}catch(e){}};
+  if(cpr.t0){$("c-start").textContent="● Триває";$("c-start").disabled=true}
+  $("c-metro").onclick=()=>{if(metroT){stopMetro();return}beep(1000,.03,.01);metroT=setInterval(()=>beep(1000,.035,.3),60000/110);$("c-metro").textContent="🔇 Вимкнути"};
+  document.querySelector(".cpr-grid").onclick=e=>{const b=e.target.closest("button");if(!b)return;const k=b.dataset.e;
+    if(!cpr.t0&&k!=="rh-s"&&k!=="rh-n"){$("c-start").click()}
+    if(k==="rh-s"){cpr.rhythm="s";ev("Ритм: ФШ/ШТ без пульсу")}
+    if(k==="rh-n"){cpr.rhythm="n";ev("Ритм: асистолія/ЕАБП")}
+    if(k==="shock"){cpr.shocks++;ev(`Розряд №${cpr.shocks}`);newCycle()}
+    if(k==="adr"){cpr.adr++;cpr.lastAdr=Date.now();ev(`Адреналін 1 мг (№${cpr.adr})`)}
+    if(k==="amio"){cpr.amio++;ev(`Аміодарон ${cpr.amio===1?"300":"150"} мг`)}
+    if(k==="air"){ev("Встановлено SGA/ЕТТ, вентиляція 10/хв")}
+    if(k==="cycle"){ev("Новий цикл / зміна виконавця");newCycle()}
+    if(k==="rosc"){ev("ROSC");stopMetro();cpr.t0&&($("c-hint").textContent="ROSC: SpO₂ 94–98%, ETCO₂ 35–45, САТ > 100, ЕКГ 12 відведень.");clearInterval(cpr.tick);cpr.tick=null;try{wake&&wake.release()}catch(e){}return}
+    tick()};
+  $("c-copy").onclick=async()=>{const t="Журнал СЛР\n"+cpr.log.map(l=>l.join("  ")).join("\n");try{await navigator.clipboard.writeText(t);$("c-copy").textContent="Скопійовано ✓"}catch(e){$("c-copy").textContent="Не вдалося"}};
+  $("c-reset").onclick=()=>{if(cpr.log.length&&!document.getElementById("c-reset").dataset.sure){$("c-reset").dataset.sure=1;$("c-reset").textContent="Натисніть ще раз, щоб скинути";return}clearInterval(cpr.tick);stopMetro();cpr=null;try{wake&&wake.release()}catch(e){}openTool("cpr",true)};
+  clearInterval(cpr.tick);cpr.tick=setInterval(tick,500);drawLog();tick();
+}
+
+/* --- Дози за вагою --- */
+function doseHTML(){return `
+  <div class="card"><div class="row">
+   <div><label class="f">Вік</label><select id="d-age"><option value="">— або вкажіть масу —</option>${["0 міс (новонароджений)","3 міс","6 міс","9 міс","1 рік","2 роки","3 роки","4 роки","5 років","6 років","7 років","8 років","9 років","10 років","11 років","12 років"].map((a,i)=>`<option value="${i}">${a}</option>`).join("")}<option value="adult">Дорослий (≥ 13)</option></select></div>
+   <div><label class="f">Маса, кг</label><input type="number" id="d-kg" inputmode="decimal" placeholder="напр. 18"></div></div>
+   <p class="hint" id="d-est">Маса за віком (APLS): до 1 р. — 0,5×міс+4; 1–5 р. — 2×вік+8; 6–12 р. — 3×вік+7. Зважена маса точніша.</p></div>
+  <div id="d-out"></div>`}
+const AGEV=[[0,3.5],[0.25,5.5],[0.5,7],[0.75,8.5],[1,10],[2,12],[3,14],[4,16],[5,18],[6,25],[7,28],[8,31],[9,34],[10,37],[11,40],[12,43]];
+function r1(x){const v=x>=10?Math.round(x):x>=1?Math.round(x*10)/10:Math.round(x*100)/100;return String(v).replace(".",",")}
+function doseInit(){
+  const upd=()=>{const kg=parseFloat(String($("d-kg").value).replace(",","."));const ai=$("d-age").value;const age=ai===""?null:ai==="adult"?18:AGEV[+ai][0];if(!kg||kg<=0){$("d-out").innerHTML="";return}
+    const kid=kg<40&&(age===null||age<13);const L=(drug,dose,max,unit,route,note)=>{let v=dose*kg;let capped=false;if(max&&v>max){v=max;capped=true}return `<tr><td><b>${drug}</b><div style="font-size:12px;color:var(--mute)">${route}${note?" · "+note:""}</div></td><td class="mono" style="white-space:nowrap">${r1(v)} ${unit}${capped?" <span style='color:var(--red)'>(макс.)</span>":""}</td></tr>`};
+    let ett="";if(age!==null&&age>=1&&age<13){ett=`<div class="box blue"><h4>Дихальні шляхи</h4>ЕТТ з манжетою: <b>${(age/4+3.5).toFixed(1)}</b> мм; без манжети: <b>${(age/4+4).toFixed(1)}</b> мм; глибина ≈ <b>${Math.round(age/2+12)}</b> см (до губ).</div>`}
+    if(!kid){const F=(d,v,r)=>`<tr><td><b>${d}</b><div style="font-size:12px;color:var(--mute)">${r}</div></td><td class="mono">${v}</td></tr>`;
+      $("d-out").innerHTML=`<div class="box red"><h4>Дорослий · ${r1(kg)} кг</h4><table>
+       ${F("Адреналін (зупинка)","1 мг","в/в, ІО кожні 3–5 хв")}${F("Аміодарон","300 → 150 мг","після 3-го і 5-го розряду")}${F("Дефібриляція","≥ 150 Дж","біфазний, ескалація")}
+       ${F("Адреналін в/м (анафілаксія)","0,5 мг","1 мг/мл, стегно")}${F("Атропін","0,5–1 мг (до 3 мг)","в/в")}${F("Аденозин","6 → 12 → 18 мг","в/в швидко")}
+       ${F("Мідазолам","10 мг","в/м / букально")}${F("Діазепам","10 мг","в/в повільно")}${F("Глюкоза 40% / 10%","40–60 мл / 150–200 мл","в/в")}${F("Глюкагон","1 мг","в/м")}${F("Налоксон","0,04–0,4 мг титровано","в/в; 0,4–2 мг в/м/і/н")}</table></div>
+       <div class="box blue"><h4>Розрахунок на масу</h4><table>
+       ${F("Морфін 0,05–0,1 мг/кг",r1(kg*0.05)+"–"+r1(Math.min(kg*0.1,10))+" мг","в/в титровано")}${F("Фентаніл 1–2 мкг/кг",Math.round(kg)+"–"+Math.round(Math.min(kg*2,200))+" мкг","в/в")}
+       ${F("Кетамін аналгезія 0,3–0,5 мг/кг",r1(kg*0.3)+"–"+r1(kg*0.5)+" мг","в/в")}${F("Кетамін індукція 1–2 мг/кг",r1(kg)+"–"+r1(kg*2)+" мг","в/в (RSI)")}
+       ${F("Рокуроній 1,2 мг/кг",r1(kg*1.2)+" мг","в/в (RSI)")}${F("Гепарин НФГ 70–100 ОД/кг",Math.round(kg*70)+"–"+Math.round(kg*100)+" ОД","STEMI, первинна ПКВ")}
+       ${F("Леветирацетам 60 мг/кг",Math.min(Math.round(kg*60),4500)+" мг","в/в за 10 хв")}${F("Транексамова кислота","1 г (TCCC 2 г)","в/в за 10 хв")}
+       ${F("Норадреналін 0,05–0,5 мкг/кг/хв",r1(kg*0.05)+"–"+r1(kg*0.5)+" мкг/хв","в/в інфузія")}</table></div><p class="hint">Перевіряйте концентрацію препарату і місцевий протокол.</p>`;return}
+    const adrIM=kg>=40?0.5:age!==null?(age>=6?0.3:age>=0.5?0.15:0.1):(kg>=25?0.3:kg>=7?0.15:0.1);
+    $("d-out").innerHTML=`
+     <div class="box red"><h4>Реанімація · ${r1(kg)} кг</h4><table>
+      ${L("Адреналін (зупинка)",0.01,1,"мг","в/в, ІО","= "+r1(Math.min(kg*0.1,10))+" мл розчину 0,1 мг/мл")}
+      ${L("Аміодарон (ФШ/ШТ)",5,300,"мг","в/в, ІО після 3-го і 5-го розряду")}
+      ${L("Дефібриляція",4,kid?150:200,"Дж","")}
+      ${L("Болюс рідини",kid?10:500/kg,kid?500:500,"мл","кристалоїд, з оцінкою")}
+      ${L("Атропін (брадикардія)",0.02,kid?0.5:3,"мг","в/в","")}
+      ${L("Аденозин (НШТ), 1-ша доза",0.1,6,"мг","в/в швидко","2-га: "+r1(Math.min(kg*0.2,12))+" мг")}
+     </table></div>
+     <div class="box warn"><h4>Анафілаксія, судоми, глюкоза</h4><table>
+      <tr><td><b>Адреналін в/м (анафілаксія)</b><div style="font-size:12px;color:var(--mute)">1 мг/мл, передньобічна поверхня стегна</div></td><td class="mono">${r1(adrIM)} мг = ${r1(adrIM)} мл</td></tr>
+      ${L("Мідазолам букально",0.3,10,"мг","судоми ≥ 5 хв")}
+      ${L("Мідазолам в/м",0.2,10,"мг","")}
+      ${L("Діазепам в/в",0.2,10,"мг","повільно")}
+      ${L("Глюкоза 10%",2,kid?100:200,"мл","в/в при гіпоглікемії")}
+      ${L("Глюкагон",kg<25?0.5/kg:1/kg,1,"мг","в/м")}
+      ${L("Налоксон (апное)",0.1,2,"мг","в/в, в/м, і/н")}
+     </table></div>
+     <div class="box blue"><h4>Знеболення, круп, інше</h4><table>
+      ${L("Парацетамол",15,1000,"мг","per os / в/в")}
+      ${L("Ібупрофен",10,400,"мг","per os")}
+      ${L("Морфін",0.1,10,"мг","в/в титровано")}
+      ${L("Фентаніл і/н",1.5,100,"мкг","інтраназально")}
+      ${L("Кетамін (аналгезія)",0.3,30,"мг","в/в","до 0,5 мг/кг")}
+      ${L("Дексаметазон (круп)",0.6,10,"мг","per os / в/м","легкий: 0,15 мг/кг")}
+      ${L("Адреналін небулайзер (круп)",0.5,5,"мл","1 мг/мл нерозведений")}
+      ${L("Сальбутамол небулайзер",kid?(kg<20?2.5/kg:5/kg):5/kg,5,"мг","")}
+      ${L("Транексамова кислота",15,1000,"мг","в/в за 10 хв")}
+      ${L("Гідроксокобаламін",70,5000,"мг","в/в за 15 хв (ціаніди)")}
+     </table></div>${ett}
+     <p class="hint">Округлено. Перевіряйте концентрацію препарату і місцевий протокол.</p>`};
+  $("d-age").onchange=()=>{const v=$("d-age").value;if(v===""){return}if(v==="adult"){if(!$("d-kg").value)$("d-kg").value=70}else{$("d-kg").value=AGEV[+v][1]}$("d-est").textContent=v==="adult"?"Дорослий: вкажіть фактичну масу.":`Орієнтовна маса для віку: ${$("d-kg").value} кг (APLS). Зважена маса точніша.`;upd()};
+  $("d-kg").oninput=upd;
+}
+
+/* --- GCS --- */
+function gcsHTML(){const E=[[4,"Спонтанно"],[3,"На голос"],[2,"На біль / тиск"],[1,"Відсутнє"]],V=[[5,"Орієнтований"],[4,"Сплутана мова"],[3,"Окремі слова"],[2,"Звуки"],[1,"Відсутня"]],M=[[6,"Виконує команди"],[5,"Локалізує біль"],[4,"Відсмикує (норм. згинання)"],[3,"Патологічне згинання"],[2,"Розгинання"],[1,"Відсутня"]];
+ const S=(n,t,a)=>`<label class="f">${t}</label><select id="g-${n}">${a.map(x=>`<option value="${x[0]}">${x[0]} — ${x[1]}</option>`).join("")}</select>`;
+ return `<div class="card">${S("e","E — відкривання очей",E)}${S("v","V — мовна відповідь",V)}${S("m","M — рухова відповідь",M)}<div class="res" id="g-res"></div></div><p class="hint">Записуйте компоненти окремо (напр. E3V4M5). GCS ≤ 8 — захист дихальних шляхів.</p>`}
+function gcsInit(){const u=()=>{const e=+$("g-e").value,v=+$("g-v").value,m=+$("g-m").value,t=e+v+m;$("g-res").innerHTML=`<div class="big">GCS ${t}</div><div class="hint" style="margin:0">E${e}V${v}M${m} · ${t>=13?"легке порушення / норма":t>=9?"помірне порушення":"тяжке (кома) — захист ДШ"}</div>`};["e","v","m"].forEach(k=>$("g-"+k).onchange=u);u()}
+
+/* --- BE-FAST --- */
+function befastHTML(){const I=[["B","Balance — раптова втрата рівноваги, хиткість"],["E","Eyes — раптова втрата/двоїння зору"],["F","Face — асиметрія обличчя (посміхнутися)"],["A","Arms — слабкість руки (витягнути обидві)"],["S","Speech — порушення мови / розуміння"]];
+ return `<div class="card"><div class="checks" style="grid-template-columns:1fr">${I.map(i=>`<label><input type="checkbox" data-b="${i[0]}"><span><b>${i[0]}</b> — ${i[1]}</span></label>`).join("")}</div>
+ <label class="f">T — Time: востаннє бачили здоровим (год:хв)</label><input type="time" id="bf-t" style="width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;font:500 16px Manrope,sans-serif"><div class="res" id="bf-res"></div></div>`}
+function befastInit(){const u=()=>{const n=document.querySelectorAll("[data-b]:checked").length;const t=$("bf-t").value;let el="";if(t){const [h,m]=t.split(":").map(Number);const d=new Date();d.setHours(h,m,0,0);let mins=(Date.now()-d)/60000;if(mins<0)mins+=1440;el=` · минуло ${Math.floor(mins/60)} год ${Math.round(mins%60)} хв${mins<=270?" — вікно тромболізису (≤ 4,5 год)":mins<=1440?" — можлива тромбектомія (≤ 24 год)":""}`}
+  $("bf-res").innerHTML=n?`<div style="color:var(--red);font-weight:800">⚠ Підозра на інсульт (${n} ознак)</div><div class="hint" style="margin:0">Глюкоза, АТ не знижувати до 220/120, негайне попередження інсультного центру${el}</div>`:`<div class="hint" style="margin:0">Ознак не відмічено${el}</div>`};
+ document.querySelectorAll("[data-b]").forEach(c=>c.onchange=u);$("bf-t").oninput=u;u()}
+
+/* --- START --- */
+function startHTML(){return `<div class="card" id="st"></div><p class="hint">START для дорослих. Оцінка одного постраждалого ≤ 60 с; на етапі тріажу — лише відкриття ДШ і зупинка масивної кровотечі.</p>`}
+function startInit(){const C={g:["#1f7a4d","ЗЕЛЕНИЙ — відкладена допомога"],y:["#d39e00","ЖОВТИЙ — термінова"],r:["#c62828","ЧЕРВОНИЙ — невідкладна"],b:["#222","ЧОРНИЙ — загиблий / очікувальна"]};
+ const Q={q1:["Може ходити?",[["Так","g"],["Ні","q2"]]],q2:["Дихає?",[["Так","q3"],["Ні","q2a"]]],q2a:["Відкрий дихальні шляхи. Почав дихати?",[["Так","r"],["Ні","b"]]],q3:["ЧД > 30/хв?",[["Так","r"],["Ні","q4"]]],q4:["Радіальний пульс відсутній або ЧКН > 2 с?",[["Так","r"],["Ні","q5"]]],q5:["Виконує прості команди?",[["Так","y"],["Ні","r"]]]};
+ const show=k=>{const el=$("st");if(C[k]){el.innerHTML=`<div class="tr-res" style="background:${C[k][0]}">${C[k][1]}</div><button class="btn sec full" style="margin-top:10px" id="st-again">Наступний постраждалий</button>`;$("st-again").onclick=()=>show("q1");return}
+  el.innerHTML=`<div class="tr-q">${Q[k][0]}</div><div class="triage">${Q[k][1].map(o=>`<button class="btn ${o[0]==="Так"?"navy":"sec"} full" data-n="${o[1]}">${o[0]}</button>`).join("")}</div>`;el.querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>show(b.dataset.n))};show("q1")}
+
+/* --- Опіки --- */
+function burnHTML(){const A=[["Голова і шия",9,18],["Тулуб спереду",18,18],["Тулуб ззаду",18,18],["Права рука",9,9],["Ліва рука",9,9],["Права нога",18,14],["Ліва нога",18,14],["Промежина",1,1]];
+ return `<div class="card"><div class="row"><div><label class="f">Пацієнт</label><select id="b-who"><option value="a">Дорослий</option><option value="c">Дитина < 10 р.</option></select></div><div><label class="f">Маса, кг</label><input type="number" id="b-kg" inputmode="decimal" placeholder="70"></div></div>
+ <label class="f">Уражені ділянки (повністю, II–III ступінь)</label><div class="checks">${A.map((a,i)=>`<label><input type="checkbox" data-i="${i}" data-a="${a[1]}" data-c="${a[2]}"><span>${a[0]} <b class="pct">${a[1]}%</b></span></label>`).join("")}</div>
+ <label class="f">Додатково (долоня пацієнта ≈ 1%), %</label><input type="number" id="b-add" inputmode="numeric" placeholder="0"><div class="res" id="b-res"></div></div>
+ <p class="hint">Опіки I ступеня не враховують. Початкова швидкість — ATLS 10; добовий об'єм — 2 мл × кг × % (дорослі), 3 мл (діти), половина за перші 8 год від моменту опіку.</p>`}
+function burnInit(){const u=()=>{const c=$("b-who").value==="c";document.querySelectorAll("[data-i]").forEach(x=>x.parentElement.querySelector(".pct").textContent=(c?x.dataset.c:x.dataset.a)+"%");
+  let s=[...document.querySelectorAll("[data-i]:checked")].reduce((a,x)=>a+(+(c?x.dataset.c:x.dataset.a)),0)+(+$("b-add").value||0);s=Math.min(100,s);const kg=parseFloat($("b-kg").value);
+  const rate=c?(kg&&kg<20?"125":"250"):"500";let h=`<div class="big">${s}% ППТ</div>`;
+  if(s>=(c?10:20))h+=`<div>Початкова інфузія: <b>${rate} мл/год</b> (розчин Рінгера лактат)</div>`;else h+=`<div class="hint" style="margin:0">Інфузія за опіковим протоколом зазвичай не потрібна (< ${c?10:20}%)</div>`;
+  if(kg&&s)h+=`<div class="hint" style="margin:4px 0 0">Добовий об'єм ≈ ${Math.round((c?3:2)*kg*s)} мл; за перші 8 год — ${Math.round((c?3:2)*kg*s/2)} мл</div>`;
+  if(s>=(c?10:20)||s>=10)h+=`<div style="color:var(--red);font-weight:700;margin-top:4px">→ Опіковий центр</div>`;$("b-res").innerHTML=h};
+ document.querySelectorAll("#sh-b input,#sh-b select").forEach(x=>x.oninput=x.onchange=u);u()}
+
+/* --- Норми --- */
+function vitalsHTML(){const R=[["Новонароджений","3–5","100–160","40–60","60–80"],["Немовля 1–12 міс","5–10","100–160","30–60","70–100"],["1–5 років","10–18","80–130","20–30","80–110"],["5–12 років","18–35","70–110","15–20","90–120"],["12–17 років","35–65","60–100","12–18","100–130"],["Дорослий","—","60–100","12–20","90–140"]];
+ return `<div class="card"><table><tr><th>Вік</th><th>Маса</th><th>ЧСС</th><th>ЧД</th><th>САТ</th></tr>${R.map(r=>`<tr>${r.map((c,i)=>`<td class="${i?"mono":""}">${c}</td>`).join("")}</tr>`).join("")}</table></div>
+ <div class="card"><h3>Тривожні значення (дорослі)</h3><ul class="clean"><li>ЧД < 8 або > 30/хв</li><li>SpO₂ < 90% на кисні</li><li>САТ < 90 мм рт. ст.</li><li>ЧСС < 40 або > 150/хв</li><li>GCS < 14 або падіння ≥ 2 бали</li><li>Глюкоза < 3,0 або > 25 ммоль/л</li><li>t < 35 °C або > 40 °C</li></ul><p class="hint">Мінімальний САТ у дітей 1–10 р. ≈ 70 + 2 × вік.</p></div>`}
+
+/* --- Шоковий індекс --- */
+function shockHTML(){return `<div class="card"><div class="row"><div><label class="f">ЧСС</label><input type="number" id="s-hr" inputmode="numeric"></div><div><label class="f">САТ</label><input type="number" id="s-sbp" inputmode="numeric"></div></div><div class="res" id="s-res"><div class="hint" style="margin:0">ШІ = ЧСС / САТ. Норма 0,5–0,7.</div></div></div>`}
+function shockInit(){const u=()=>{const h=+$("s-hr").value,s=+$("s-sbp").value;if(!h||!s)return;const i=h/s;$("s-res").innerHTML=`<div class="big">${i.toFixed(2)}</div><div>${i<0.7?"Норма":i<1?"Підвищений — можлива прихована гіповолемія":i<1.4?"> 1 — шок, ймовірна значна крововтрата":"≥ 1,4 — тяжкий шок, ризик масивної трансфузії"}</div>`};$("s-hr").oninput=$("s-sbp").oninput=u}
+
+/* ---------- тест ---------- */
+let quiz=null,qLen=10;
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function quizStart(){const best=store.get("pm-best-"+qLen);
+ $("quiz").innerHTML=`<div class="card"><h3>Кількість кейсів</h3><div class="chips" id="qz-len">${[10,20,30].map(n=>`<button class="chip ${n===qLen?"on":""}" data-n="${n}">${n}</button>`).join("")}</div>
+  <h3>Тема</h3><select id="qz-cat"><option value="">Усі теми (${CASES.length} кейсів)</option>${CATS.map(([k,v])=>{const n=CASES.filter(c=>(P.find(p=>p.id===c[0])||{}).cat===k).length;return n?`<option value="${k}">${v} (${n})</option>`:""}).join("")}</select>
+  <p class="hint">${best?`Найкращий результат (${qLen}): ${best}/${qLen}`:"Кейси щоразу перемішуються."}</p><button class="btn full" id="qz-go" style="margin-top:8px">Почати</button></div>`;
+ $("qz-len").onclick=e=>{const b=e.target.closest(".chip");if(b){qLen=+b.dataset.n;quizStart()}};
+ $("qz-go").onclick=()=>{const c=$("qz-cat").value;newQuiz(c?CASES.filter(x=>(P.find(p=>p.id===x[0])||{}).cat===c):CASES)}}
+function newQuiz(pool,topic){const qs=shuffle(pool).slice(0,topic?pool.length:qLen).map(c=>{const idx=shuffle([0,1,2,3]);return{pid:c[0],q:c[1],opts:idx.map(i=>c[2][i]),ans:idx.indexOf(0),exp:c[3]}});quiz={qs,i:0,score:0,wrong:[]};renderQuiz();window.scrollTo(0,0)}
+function renderQuiz(){const el=$("quiz"),N=quiz.qs.length;
+ if(quiz.i>=N){const k="pm-best-"+N,best=Math.max(quiz.score,+(store.get(k)||0));store.set(k,best);const pct=quiz.score/N;
+  el.innerHTML=`<div class="card" style="text-align:center"><div class="res" style="background:none"><div class="big" style="font-size:44px">${quiz.score}/${N}</div><div class="hint">${Math.round(pct*100)}% · найкращий: ${best}/${N}</div></div><p>${pct>=.9?"Відмінно!":pct>=.7?"Добре. Перегляньте помилки нижче.":"Повторіть протоколи і спробуйте ще раз."}</p><div class="row"><button class="btn" id="qz-again">Ще раз</button><button class="btn sec" id="qz-set">Налаштування</button></div></div>
+  ${quiz.wrong.length?`<div class="card"><h3>Помилки (${quiz.wrong.length})</h3>${quiz.wrong.map(w=>`<div style="padding:10px 0;border-bottom:1px solid var(--line)"><div style="font-size:14px">${esc(w.q)}</div><div style="font-size:13px">Ваша: <span style="color:var(--red)">${esc(w.given)}</span></div><div style="font-size:13px">Правильно: <b style="color:var(--ok)">${esc(w.opts[w.ans])}</b></div><a href="#p-${w.pid}" style="font-size:13px;color:var(--blue)">Протокол: ${esc((P.find(p=>p.id===w.pid)||{}).title||"")} →</a></div>`).join("")}</div>`:""}`;
+  $("qz-again").onclick=()=>{newQuiz(CASES)};$("qz-set").onclick=quizStart;return}
+ const Q=quiz.qs[quiz.i],pr=P.find(p=>p.id===Q.pid);
+ el.innerHTML=`<div class="stat"><span>Кейс ${quiz.i+1} з ${N}</span><span>Правильно: ${quiz.score}</span></div><div class="progress"><i style="width:${quiz.i/N*100}%"></i></div>
+  <div class="card"><span class="tag">${esc(catName[pr.cat])}</span><p style="margin:10px 0 0;font-weight:700;font-size:16px">${esc(Q.q)}</p></div>
+  <div id="qz-o">${Q.opts.map((o,i)=>`<button class="opt" data-i="${i}">${esc(o)}</button>`).join("")}</div><div id="qz-e"></div>`;
+ let done=false;$("qz-o").onclick=e=>{const b=e.target.closest(".opt");if(!b||done)return;done=true;const i=+b.dataset.i,ok=i===Q.ans;if(ok)quiz.score++;else quiz.wrong.push({...Q,given:Q.opts[i]});
+  document.querySelectorAll(".opt").forEach(o=>{if(+o.dataset.i===Q.ans)o.classList.add("right");else if(o===b)o.classList.add("wrong")});
+  $("qz-e").innerHTML=`<div class="box ${ok?"ok":"red"}"><h4>${ok?"Правильно":"Правильна відповідь: "+esc(Q.opts[Q.ans])}</h4><p style="margin:0 0 6px">${esc(Q.exp)}</p><a href="#p-${Q.pid}" style="font-size:13px;color:var(--blue)">Відкрити протокол «${esc(pr.title)}» →</a></div><button class="btn full" id="qz-n">${quiz.i===N-1?"Результат":"Далі"}</button>`;
+  $("qz-n").onclick=()=>{quiz.i++;renderQuiz();window.scrollTo(0,0)};$("qz-e").scrollIntoView({behavior:"smooth",block:"nearest"})}}
+
+renderCats();renderList();route();
+if(!(window.Capacitor)&&"serviceWorker" in navigator&&location.protocol==="https:"){navigator.serviceWorker.register("sw.js").catch(()=>{})}
+</script>
+</body>
+</html>

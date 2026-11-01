@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Довідник парамедика</string>
+    <string name="title_activity_main">Довідник парамедика</string>
+    <string name="package_name">ua.bogven.paramedyk</string>
+    <string name="custom_url_scheme">ua.bogven.paramedyk</string>
+</resources>

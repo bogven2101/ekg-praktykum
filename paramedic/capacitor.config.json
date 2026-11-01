@@ -1,0 +1,6 @@
+{
+  "appId": "ua.bogven.paramedyk",
+  "appName": "Довідник парамедика",
+  "webDir": "www",
+  "android": { "backgroundColor": "#14213d" }
+}

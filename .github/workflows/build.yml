@@ -13,6 +13,15 @@ permissions:
 jobs:
   android:
     runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        app:
+          - { dir: ".", name: "EKG-Praktykum" }
+          - { dir: "paramedic", name: "Paramedyk" }
+    defaults:
+      run:
+        working-directory: ${{ matrix.app.dir }}
     steps:
       - uses: actions/checkout@v5
 
@@ -26,10 +35,7 @@ jobs:
           java-version: 21
 
       - name: Підключити Android SDK
-        run: |
-          echo "ANDROID_HOME=$ANDROID_HOME"
-          ls "$ANDROID_HOME"
-          echo "sdk.dir=$ANDROID_HOME" > android/local.properties
+        run: echo "sdk.dir=$ANDROID_HOME" > android/local.properties
 
       - name: Встановити залежності і синхронізувати веб-частину
         run: |
@@ -41,12 +47,12 @@ jobs:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
         run: |
           if [ -z "$KEYSTORE_BASE64" ]; then
-            echo "::error::Не додано секрет KEYSTORE_BASE64 (див. ІНСТРУКЦІЯ.md, крок 3)"; exit 1
+            echo "::error::Не додано секрет KEYSTORE_BASE64"; exit 1
           fi
           echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/upload.jks"
 
       - name: Зібрати AAB (для Google Play) і APK (для встановлення вручну)
-        working-directory: android
+        working-directory: ${{ matrix.app.dir }}/android
         env:
           KEYSTORE_FILE: ${{ runner.temp }}/upload.jks
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
@@ -59,10 +65,10 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: EKG-Praktykum-1.0.${{ github.run_number }}
+          name: ${{ matrix.app.name }}-1.0.${{ github.run_number }}
           path: |
-            android/app/build/outputs/bundle/release/*.aab
-            android/app/build/outputs/apk/release/*.apk
+            ${{ matrix.app.dir }}/android/app/build/outputs/bundle/release/*.aab
+            ${{ matrix.app.dir }}/android/app/build/outputs/apk/release/*.apk
 
   site:
     runs-on: ubuntu-24.04
@@ -71,11 +77,15 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v5
+      - name: Зібрати сайт (ЕКГ Практикум + Довідник парамедика)
+        run: |
+          mkdir -p _site
+          cp -r www/. _site/
+          mkdir -p _site/paramedic
+          cp -r paramedic/www/. _site/paramedic/
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: www
+          path: _site
       - id: deploy
         uses: actions/deploy-pages@v4
