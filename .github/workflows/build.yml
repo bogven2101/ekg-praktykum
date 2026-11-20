@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -64,12 +64,38 @@ jobs:
           chmod +x gradlew
           ./gradlew bundleRelease assembleRelease --no-daemon
 
+      - name: Перейменувати файли
+        run: |
+          mkdir -p out
+          cp android/app/build/outputs/apk/release/app-release.apk "out/${{ matrix.app.name }}.apk"
+          cp android/app/build/outputs/bundle/release/app-release.aab "out/${{ matrix.app.name }}.aab"
+
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.app.name }}-1.0.${{ github.run_number }}
-          path: |
-            ${{ matrix.app.dir }}/android/app/build/outputs/bundle/release/*.aab
-            ${{ matrix.app.dir }}/android/app/build/outputs/apk/release/*.apk
+          path: ${{ matrix.app.dir }}/out/*
+
+  release:
+    needs: android
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - name: Опублікувати в Releases (прямі посилання на .apk)
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.${{ github.run_number }}
+          name: Версія 1.0.${{ github.run_number }}
+          make_latest: true
+          body: |
+            Прямі посилання (завжди найновіша версія):
+            • ЕКГ Практикум — https://github.com/${{ github.repository }}/releases/latest/download/EKG-Praktykum.apk
+            • Довідник парамедика — https://github.com/${{ github.repository }}/releases/latest/download/Paramedyk.apk
+            • Темний Бункер — https://github.com/${{ github.repository }}/releases/latest/download/Temnyi-Bunker.apk
+            Файли .aab — для завантаження в Google Play.
+          files: dist/*
 
   site:
     runs-on: ubuntu-24.04
