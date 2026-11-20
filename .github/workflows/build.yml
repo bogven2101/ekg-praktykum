@@ -19,6 +19,7 @@ jobs:
         app:
           - { dir: ".", name: "EKG-Praktykum" }
           - { dir: "paramedic", name: "Paramedyk" }
+          - { dir: "bunker", name: "Temnyi-Bunker" }
     defaults:
       run:
         working-directory: ${{ matrix.app.dir }}
@@ -83,6 +84,8 @@ jobs:
           cp -r www/. _site/
           mkdir -p _site/paramedic
           cp -r paramedic/www/. _site/paramedic/
+          mkdir -p _site/bunker
+          cp -r bunker/www/. _site/bunker/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
