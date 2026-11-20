@@ -82,6 +82,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           path: dist
+          pattern: "*-1.0.*"
           merge-multiple: true
       - name: Опублікувати в Releases (прямі посилання на .apk)
         uses: softprops/action-gh-release@v2
